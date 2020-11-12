@@ -1,0 +1,5 @@
+rootProject.name = "Wij maken de Wijk"
+
+include(":ui")
+include(":domain")
+include(":app")
