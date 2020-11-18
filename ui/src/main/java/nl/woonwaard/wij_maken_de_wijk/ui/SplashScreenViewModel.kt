@@ -16,7 +16,7 @@ class SplashScreenViewModel : ViewModel() {
     fun onSplashScreenShown() {
         mutableShouldShowSplashScreen.postValue(SplashScreenState.SHOWN)
         viewModelScope.launch {
-            delay(1000)
+            delay(2000)
             mutableShouldShowSplashScreen.postValue(SplashScreenState.SHOULD_DISMISS)
         }
     }

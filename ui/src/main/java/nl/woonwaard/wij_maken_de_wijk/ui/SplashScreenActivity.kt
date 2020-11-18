@@ -1,5 +1,6 @@
 package nl.woonwaard.wij_maken_de_wijk.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -20,7 +21,7 @@ class SplashScreenActivity : AppCompatActivity() {
                     viewModel.onSplashScreenShown()
                 }
                 SplashScreenViewModel.SplashScreenState.SHOULD_DISMISS -> {
-                    // startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, MainActivity::class.java))
                     viewModel.onDismissed()
                 }
                 SplashScreenViewModel.SplashScreenState.DISMISSED -> {
