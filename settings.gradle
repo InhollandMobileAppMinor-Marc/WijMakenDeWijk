@@ -2,4 +2,5 @@ rootProject.name = "Wij maken de Wijk"
 
 include(":ui")
 include(":domain")
+include(":fake_api")
 include(":app")
