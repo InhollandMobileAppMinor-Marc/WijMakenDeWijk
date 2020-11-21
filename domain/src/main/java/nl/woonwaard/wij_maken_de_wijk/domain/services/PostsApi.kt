@@ -6,7 +6,7 @@ import nl.woonwaard.wij_maken_de_wijk.domain.models.PostType
 interface PostsApi {
     suspend fun getPosts(
         types: List<PostType> = listOf(PostType.SERVICE, PostType.SUSTAINABILITY, PostType.EVENT)
-    ): List<Post>
+    ): Set<Post>
 
     suspend fun getPostById(id: Int): Post?
 }
