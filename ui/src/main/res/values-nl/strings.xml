@@ -3,4 +3,6 @@
     <string name="app_name">Wij maken de Wijk</string>
     <string name="start">Start</string>
     <string name="pinboard">Babbel</string>
+    <string name="neighborhood_mediation">Buurtbemiddeling</string>
+    <string name="repairs">Reparaties</string>
 </resources>
