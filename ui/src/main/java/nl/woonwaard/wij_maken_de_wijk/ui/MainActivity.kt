@@ -22,11 +22,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.content.repairsButton.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, "https://www.woonwaard.nl/voor-huurders/reparaties-en-onderhoud/reparatieverzoek".toUri()))
+            startActivity(Intent(Intent.ACTION_VIEW, WOONWAARD_REPAIR_URL.toUri()))
         }
 
         binding.content.neighborhoodMediationButton.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, "https://www.woonwaard.nl/overlast".toUri()))
+            startActivity(Intent(Intent.ACTION_VIEW, WOONWAARD_NEIGHBORHOOD_MEDIATION_URL.toUri()))
         }
+    }
+
+    companion object {
+        const val WOONWAARD_REPAIR_URL = "https://www.woonwaard.nl/voor-huurders/reparaties-en-onderhoud/reparatieverzoek"
+
+        const val WOONWAARD_NEIGHBORHOOD_MEDIATION_URL = "https://www.woonwaard.nl/overlast"
     }
 }

@@ -16,7 +16,7 @@ class SplashScreenViewModel : ViewModel() {
     fun onSplashScreenShown() {
         mutableShouldShowSplashScreen.postValue(SplashScreenState.SHOWN)
         viewModelScope.launch {
-            delay(2000)
+            delay(DELAY)
             mutableShouldShowSplashScreen.postValue(SplashScreenState.SHOULD_DISMISS)
         }
     }
@@ -27,5 +27,9 @@ class SplashScreenViewModel : ViewModel() {
 
     enum class SplashScreenState {
         SHOULD_SHOW, SHOWN, SHOULD_DISMISS, DISMISSED
+    }
+
+    companion object {
+        const val DELAY = 2000L
     }
 }
