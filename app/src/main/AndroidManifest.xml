@@ -32,6 +32,13 @@
         <activity
             android:name=".ui.PinboardOverviewActivity"
             android:label="@string/pinboard"
+            android:parentActivityName=".ui.MainActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.PostDetailsActivity"
+            android:parentActivityName=".ui.PinboardOverviewActivity"
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

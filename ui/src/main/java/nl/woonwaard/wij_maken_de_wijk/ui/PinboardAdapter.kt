@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
+import nl.woonwaard.wij_maken_de_wijk.ui.PostDetailsActivity.Companion.navigateToPostDetails
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.PinboardListItemBinding
 
 class PinboardAdapter(private val posts: LiveData<Set<Post>>) : RecyclerView.Adapter<PinboardAdapter.PinboardViewHolder>() {
@@ -18,11 +19,15 @@ class PinboardAdapter(private val posts: LiveData<Set<Post>>) : RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: PinboardViewHolder, position: Int) {
-        val article = posts.value!!.elementAt(position)
+        val post = posts.value!!.elementAt(position)
 
-        holder.binding.title.text = article.title
+        holder.binding.cardView.setOnClickListener {
+            it.context.navigateToPostDetails(post)
+        }
 
-        holder.binding.content.text = article.body.replace('\n', ' ')
+        holder.binding.title.text = post.title
+
+        holder.binding.content.text = post.body.replace('\n', ' ')
     }
 
     override fun getItemCount() = posts.value?.size ?: 0

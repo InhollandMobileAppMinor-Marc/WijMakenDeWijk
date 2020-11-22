@@ -7,17 +7,18 @@
     android:layout_height="match_parent"
     android:focusable="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".PinboardOverviewActivity"
+    tools:context=".PostDetailsActivity"
     tools:theme="@style/AppTheme.NoActionBar">
 
     <requestFocus />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/body"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/pinboard_list_item" />
+        android:padding="16dp"
+        android:textAppearance="?attr/textAppearanceBody2"
+        android:textColor="?android:attr/textColorSecondary"
+        tools:text="@tools:sample/lorem/random" />
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

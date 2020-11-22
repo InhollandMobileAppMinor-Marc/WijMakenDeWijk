@@ -5,35 +5,35 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
+import nl.woonwaard.wij_maken_de_wijk.domain.services.CommentsApi
 import nl.woonwaard.wij_maken_de_wijk.domain.services.PostsApi
 
-class PinboardOverviewViewModel(
-    private val postsApi: PostsApi
+class PostDetailsViewModel(
+    private val commentsApi: CommentsApi
 ) : ViewModel() {
-    private val mutablePosts = MutableLiveData(emptySet<Post>())
+    val post = MutableLiveData<Post?>()
 
-    val posts: LiveData<Set<Post>>
-        get() = mutablePosts
+    private val mutableComments = MutableLiveData(emptySet<Comment>())
+
+    val comments: LiveData<Set<Comment>>
+        get() = mutableComments
 
     private val mutableIsLoading = MutableLiveData(false)
 
     val isLoading: LiveData<Boolean>
         get() = mutableIsLoading
 
-    init {
-        loadPosts()
-    }
-
-    fun loadPosts() {
-        // Don't load new posts if we're already doing so
+    fun loadPostData() {
+        // Don't load new post data if we're already doing so
         if(isLoading.value == true) return
 
         mutableIsLoading.postValue(true)
 
         viewModelScope.launch {
-            val posts = postsApi.getPosts()
-            mutablePosts.postValue(posts)
+            val comments = commentsApi.getCommentsForPost(post.value!!)
+            mutableComments.postValue(comments)
             mutableIsLoading.postValue(false)
         }
     }
