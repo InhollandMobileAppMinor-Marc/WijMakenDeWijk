@@ -5,5 +5,4 @@ import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 
 interface CommentsApi {
     suspend fun getCommentsForPost(post: Post): Set<Comment>
-    suspend fun getCommentsForPost(postId: Int): Set<Comment>
 }

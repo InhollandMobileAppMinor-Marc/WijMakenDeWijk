@@ -22,8 +22,12 @@ class PostDetailsActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val adapter = PostDetailsAdapter(viewModel.post, viewModel.comments)
+
+        binding.content.recyclerView.adapter = adapter
+
         binding.content.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.loadPostData()
+            viewModel.reloadPostData()
         }
 
         viewModel.isLoading.observe(this) {
@@ -33,12 +37,16 @@ class PostDetailsActivity : AppCompatActivity() {
         viewModel.post.observe(this) {
             if(it != null) {
                 title = it.title
-                binding.content.body.text = it.body
             }
+            adapter.notifyDataSetChanged()
+        }
+
+        viewModel.comments.observe(this) {
+            adapter.notifyDataSetChanged()
         }
 
         val post = intent.getSerializableExtra(EXTRA_POST) as? Post
-        viewModel.post.postValue(post)
+        if(post != null) viewModel.loadPostData(post)
     }
 
     companion object {

@@ -13,7 +13,10 @@ import nl.woonwaard.wij_maken_de_wijk.domain.services.PostsApi
 class PostDetailsViewModel(
     private val commentsApi: CommentsApi
 ) : ViewModel() {
-    val post = MutableLiveData<Post?>()
+    private val mutablePost = MutableLiveData<Post>()
+
+    val post: LiveData<Post>
+        get() = mutablePost
 
     private val mutableComments = MutableLiveData(emptySet<Comment>())
 
@@ -25,14 +28,22 @@ class PostDetailsViewModel(
     val isLoading: LiveData<Boolean>
         get() = mutableIsLoading
 
-    fun loadPostData() {
+    fun loadPostData(post: Post) {
+        // Don't load new post data if we're already doing so
+        if(isLoading.value == true) return
+
+        mutablePost.postValue(post)
+        reloadPostData(post)
+    }
+
+    fun reloadPostData(post: Post = this.post.value!!) {
         // Don't load new post data if we're already doing so
         if(isLoading.value == true) return
 
         mutableIsLoading.postValue(true)
 
         viewModelScope.launch {
-            val comments = commentsApi.getCommentsForPost(post.value!!)
+            val comments = commentsApi.getCommentsForPost(post)
             mutableComments.postValue(comments)
             mutableIsLoading.postValue(false)
         }

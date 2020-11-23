@@ -11,19 +11,19 @@ import java.util.*
 class FakePostsApi : PostsApi {
     override suspend fun getPosts(types: List<PostType>): Set<Post> {
         return withContext(Dispatchers.IO) {
-            delay(500)
+            delay(1000)
             setOf(
                 Post(
-                    id = 0,
+                    id = 10,
                     "WiFi defect, hulp nodig!",
                     PostType.SERVICE,
                     "Mijn WiFi is zojuist stuk gegaan, is er iemand die mij hiermee kan helpen? " +
                             "Ik heb er geen verstand van en heb het morgen nodig \uD83D\uDE30",
-                    creatorAccountId = 0,
+                    creatorAccountId = FakeUsers.ANITA.id,
                     Date(),
-                    emptySet()
+                    setOf(11)
                 ), Post(
-                    id = 1,
+                    id = 20,
                     "Kookclub",
                     PostType.EVENT,
                     "Hoi iedereen,\n\n" +
@@ -31,11 +31,11 @@ class FakePostsApi : PostsApi {
                             "zou mijn passie graag willen delen met andere mensen. " +
                             "Ik zou daarom een kookclub willen starten. " +
                             "Geef aan of je hier aan mee ze wou willen doen.",
-                    creatorAccountId = 1,
+                    creatorAccountId = FakeUsers.ANJA.id,
                     Date(),
-                    emptySet()
+                    setOf(21)
                 ), Post(
-                    id = 2,
+                    id = 30,
                     "Elektrisch koken",
                     PostType.SUSTAINABILITY,
                     "Hoi iedereen,\n" +
@@ -49,19 +49,19 @@ class FakePostsApi : PostsApi {
                             "Tip 4: zet hem eerder uit\n" +
                             "Tip 5: de pit blijft heet\n" +
                             "Tip 6: geniet van het schoonmaken\n",
-                    creatorAccountId = 1,
+                    creatorAccountId = FakeUsers.ANJA.id,
                     Date(),
-                    emptySet()
+                    setOf(31)
                 ), Post(
-                    id = 3,
+                    id = 40,
                     "Figuurzaag nodig",
                     PostType.SERVICE,
                     "Hoi iedereen,\n\n" +
                             "Voor een schoolproject heeft mijn zoon een figuurzaag nodig. " +
                             "Is er iemand die dit kan uitlenen? Alvast bedankt!",
-                    creatorAccountId = 2,
+                    creatorAccountId = FakeUsers.ROB.id,
                     Date(),
-                    emptySet()
+                    setOf(41)
                 )
             ).filter {
                 it.type in types
