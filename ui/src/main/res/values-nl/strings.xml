@@ -5,4 +5,5 @@
     <string name="pinboard">Babbel</string>
     <string name="neighborhood_mediation">Buurtbemiddeling</string>
     <string name="repairs">Reparaties</string>
+    <string name="comment_placeholder">Typ hier jouw bericht</string>
 </resources>

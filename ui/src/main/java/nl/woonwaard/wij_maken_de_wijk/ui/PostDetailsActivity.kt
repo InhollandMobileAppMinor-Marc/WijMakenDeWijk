@@ -30,7 +30,13 @@ class PostDetailsActivity : AppCompatActivity() {
             viewModel.reloadPostData()
         }
 
+        binding.content.sendButton.setOnClickListener {
+            viewModel.addComment(binding.content.commentInputField.text.toString())
+            binding.content.commentInputField.setText("")
+        }
+
         viewModel.isLoading.observe(this) {
+            binding.content.sendButton.isEnabled = !it
             binding.content.swipeRefreshLayout.isRefreshing = it
         }
 

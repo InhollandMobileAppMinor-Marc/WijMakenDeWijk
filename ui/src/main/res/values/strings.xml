@@ -4,4 +4,5 @@
     <string name="pinboard">Pinboard</string>
     <string name="neighborhood_mediation">Neighborhood mediation</string>
     <string name="repairs">Repairs</string>
+    <string name="comment_placeholder">Enter your message here</string>
 </resources>

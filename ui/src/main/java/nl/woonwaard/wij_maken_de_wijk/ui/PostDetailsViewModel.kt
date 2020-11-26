@@ -7,7 +7,9 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
+import nl.woonwaard.wij_maken_de_wijk.domain.models.User
 import nl.woonwaard.wij_maken_de_wijk.domain.services.CommentsRepository
+import java.util.*
 
 class PostDetailsViewModel(
     private val commentsRepository: CommentsRepository
@@ -44,6 +46,22 @@ class PostDetailsViewModel(
         viewModelScope.launch {
             val comments = commentsRepository.getCommentsForPost(post)
             mutableComments.postValue(comments)
+            mutableIsLoading.postValue(false)
+        }
+    }
+
+    fun addComment(text: String) {
+        mutableIsLoading.postValue(true)
+
+        viewModelScope.launch {
+            val comment = Comment(
+                id = text.hashCode(),
+                body = text,
+                creator = User(5, "Jeffrey"),
+                creationDate = Date()
+            )
+            commentsRepository.addCommentToPost(post.value!!, comment)
+            mutableComments.postValue(comments.value!! + comment)
             mutableIsLoading.postValue(false)
         }
     }
