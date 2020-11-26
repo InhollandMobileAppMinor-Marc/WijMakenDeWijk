@@ -3,6 +3,6 @@ package nl.woonwaard.wij_maken_de_wijk.domain.services
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 
-interface CommentsApi {
+interface CommentsRepository {
     suspend fun getCommentsForPost(post: Post): Set<Comment>
 }

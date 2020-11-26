@@ -41,11 +41,14 @@ class PostDetailsAdapter(
     override fun onBindViewHolder(holder: PostDetailsViewHolder, position: Int) {
         when (holder) {
             is PostDetailsViewHolder.HeaderViewHolder -> {
-                holder.binding.body.text = post.value!!.body
+                val post = post.value!!
+                holder.binding.body.text = post.body
+                holder.binding.user.text = post.creator.name
             }
             is PostDetailsViewHolder.CommentViewHolder -> {
                 val comment = comments.value!!.elementAt(position - 1)
                 holder.binding.body.text = comment.body
+                holder.binding.user.text = comment.creator.name
             }
         }
     }

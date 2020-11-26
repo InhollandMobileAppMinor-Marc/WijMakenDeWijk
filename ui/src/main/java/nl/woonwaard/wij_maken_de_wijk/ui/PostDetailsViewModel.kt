@@ -7,11 +7,10 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
-import nl.woonwaard.wij_maken_de_wijk.domain.services.CommentsApi
-import nl.woonwaard.wij_maken_de_wijk.domain.services.PostsApi
+import nl.woonwaard.wij_maken_de_wijk.domain.services.CommentsRepository
 
 class PostDetailsViewModel(
-    private val commentsApi: CommentsApi
+    private val commentsRepository: CommentsRepository
 ) : ViewModel() {
     private val mutablePost = MutableLiveData<Post>()
 
@@ -43,7 +42,7 @@ class PostDetailsViewModel(
         mutableIsLoading.postValue(true)
 
         viewModelScope.launch {
-            val comments = commentsApi.getCommentsForPost(post)
+            val comments = commentsRepository.getCommentsForPost(post)
             mutableComments.postValue(comments)
             mutableIsLoading.postValue(false)
         }

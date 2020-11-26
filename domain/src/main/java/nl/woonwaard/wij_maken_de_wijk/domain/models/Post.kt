@@ -8,7 +8,7 @@ data class Post(
     val title: String,
     val type: PostType,
     val body: String,
-    val creatorAccountId: Int,
+    val creator: User,
     val creationDate: Date,
     val commentIds: Set<Int>
 ) : Serializable

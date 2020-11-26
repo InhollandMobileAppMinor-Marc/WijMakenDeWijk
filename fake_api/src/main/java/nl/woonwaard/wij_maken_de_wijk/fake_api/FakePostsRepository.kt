@@ -5,10 +5,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 import nl.woonwaard.wij_maken_de_wijk.domain.models.PostType
-import nl.woonwaard.wij_maken_de_wijk.domain.services.PostsApi
+import nl.woonwaard.wij_maken_de_wijk.domain.services.PostsRepository
 import java.util.*
 
-class FakePostsApi : PostsApi {
+class FakePostsRepository : PostsRepository {
     override suspend fun getPosts(types: List<PostType>): Set<Post> {
         return withContext(Dispatchers.IO) {
             delay(1000)
@@ -19,8 +19,8 @@ class FakePostsApi : PostsApi {
                     PostType.SERVICE,
                     "Mijn WiFi is zojuist stuk gegaan, is er iemand die mij hiermee kan helpen? " +
                             "Ik heb er geen verstand van en heb het morgen nodig \uD83D\uDE30",
-                    creatorAccountId = FakeUsers.ANITA.id,
-                    Date(),
+                    creator = FakeUsers.ANITA.user,
+                    Date(2020, 11, 26, 9, 0),
                     setOf(11)
                 ), Post(
                     id = 20,
@@ -31,8 +31,8 @@ class FakePostsApi : PostsApi {
                             "zou mijn passie graag willen delen met andere mensen. " +
                             "Ik zou daarom een kookclub willen starten. " +
                             "Geef aan of je hier aan mee ze wou willen doen.",
-                    creatorAccountId = FakeUsers.ANJA.id,
-                    Date(),
+                    creator = FakeUsers.ANJA.user,
+                    Date(2020, 11, 25, 14, 0),
                     setOf(21)
                 ), Post(
                     id = 30,
@@ -49,8 +49,8 @@ class FakePostsApi : PostsApi {
                             "Tip 4: zet hem eerder uit\n" +
                             "Tip 5: de pit blijft heet\n" +
                             "Tip 6: geniet van het schoonmaken\n",
-                    creatorAccountId = FakeUsers.ANJA.id,
-                    Date(),
+                    creator = FakeUsers.ANJA.user,
+                    Date(2020, 11, 25, 10, 30),
                     setOf(31)
                 ), Post(
                     id = 40,
@@ -59,8 +59,8 @@ class FakePostsApi : PostsApi {
                     "Hoi iedereen,\n\n" +
                             "Voor een schoolproject heeft mijn zoon een figuurzaag nodig. " +
                             "Is er iemand die dit kan uitlenen? Alvast bedankt!",
-                    creatorAccountId = FakeUsers.ROB.id,
-                    Date(),
+                    creator = FakeUsers.ROB.user,
+                    Date(2020, 11, 22, 17, 45),
                     setOf(41)
                 )
             ).filter {

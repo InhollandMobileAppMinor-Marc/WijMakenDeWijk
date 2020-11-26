@@ -5,6 +5,6 @@ import java.util.*
 data class Comment(
     val id: Int,
     val body: String,
-    val creatorAccountId: Int,
+    val creator: User,
     val creationDate: Date
 )
