@@ -10,5 +10,5 @@ data class Post(
     val body: String,
     val creator: User,
     val creationDate: Date,
-    val commentIds: Set<Int>
+    val commentIds: MutableSet<Int>
 ) : Serializable

@@ -1,5 +1,6 @@
 package nl.woonwaard.wij_maken_de_wijk.ui
 
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,10 +8,12 @@ import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
+import nl.woonwaard.wij_maken_de_wijk.domain.utils.toSentenceCasing
 import nl.woonwaard.wij_maken_de_wijk.ui.PostDetailsActivity.Companion.navigateToPostDetails
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.CommentBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.PinboardListItemBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.PostHeaderBinding
+import java.util.*
 
 class PostDetailsAdapter(
     private val post: LiveData<Post>,
@@ -44,11 +47,22 @@ class PostDetailsAdapter(
                 val post = post.value!!
                 holder.binding.body.text = post.body
                 holder.binding.user.text = post.creator.name
+                holder.binding.category.text = post.type.name.toSentenceCasing()
+                holder.binding.time.text = DateUtils.getRelativeTimeSpanString(
+                    post.creationDate.time,
+                    System.currentTimeMillis(),
+                    DateUtils.MINUTE_IN_MILLIS
+                )
             }
             is PostDetailsViewHolder.CommentViewHolder -> {
                 val comment = comments.value!!.elementAt(position - 1)
                 holder.binding.body.text = comment.body
                 holder.binding.user.text = comment.creator.name
+                holder.binding.time.text = DateUtils.getRelativeTimeSpanString(
+                    comment.creationDate.time,
+                    System.currentTimeMillis(),
+                    DateUtils.MINUTE_IN_MILLIS
+                )
             }
         }
     }

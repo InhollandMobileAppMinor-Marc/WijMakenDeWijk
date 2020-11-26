@@ -9,4 +9,6 @@ interface PostsRepository {
     ): Set<Post>
 
     suspend fun getPostById(id: Int): Post?
+
+    suspend fun addPost(post: Post)
 }
