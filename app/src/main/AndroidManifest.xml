@@ -49,6 +49,12 @@
             android:parentActivityName=".ui.PinboardOverviewActivity"
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.CreatePostActivity"
+            android:parentActivityName=".ui.PinboardOverviewActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
