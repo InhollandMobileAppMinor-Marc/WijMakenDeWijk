@@ -1,9 +1,9 @@
 package nl.woonwaard.wij_maken_de_wijk.ui
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import nl.woonwaard.wij_maken_de_wijk.ui.LoginActivity.Companion.navigateToLogin
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivitySplashScreenBinding
 
 class SplashScreenActivity : AppCompatActivity() {
@@ -21,7 +21,7 @@ class SplashScreenActivity : AppCompatActivity() {
                     viewModel.onSplashScreenShown()
                 }
                 SplashScreenViewModel.SplashScreenState.SHOULD_DISMISS -> {
-                    startActivity(Intent(this, MainActivity::class.java))
+                    navigateToLogin()
                     viewModel.onDismissed()
                 }
                 SplashScreenViewModel.SplashScreenState.DISMISSED -> {

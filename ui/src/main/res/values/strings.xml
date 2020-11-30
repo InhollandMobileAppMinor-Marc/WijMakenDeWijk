@@ -5,4 +5,8 @@
     <string name="neighborhood_mediation">Neighborhood mediation</string>
     <string name="repairs">Repairs</string>
     <string name="comment_placeholder">Enter your message here</string>
+    <string name="login">Login</string>
+    <string name="log_in">Log in</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
 </resources>

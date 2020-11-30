@@ -1,14 +1,17 @@
 package nl.woonwaard.wij_maken_de_wijk.domain.models
 
-import java.io.Serializable
+import kotlinx.serialization.Serializable
+import nl.woonwaard.wij_maken_de_wijk.domain.utils.DateSerializer
 import java.util.*
 
+@Serializable
 data class Post(
-    val id: Int,
+    val id: String,
     val title: String,
-    val type: PostType,
+    val category: String,
     val body: String,
-    val creator: User,
-    val creationDate: Date,
-    val commentIds: MutableSet<Int>
-) : Serializable
+    val author: User,
+    @Serializable(with = DateSerializer::class)
+    val timestamp: Date,
+    val comments: Set<String>
+) : java.io.Serializable

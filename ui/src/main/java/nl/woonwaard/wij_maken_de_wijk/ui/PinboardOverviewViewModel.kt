@@ -32,7 +32,7 @@ class PinboardOverviewViewModel(
         mutableIsLoading.postValue(true)
 
         viewModelScope.launch {
-            val posts = postsRepository.getPosts()
+            val posts = postsRepository.getAllPosts()
             mutablePosts.postValue(posts)
             mutableIsLoading.postValue(false)
         }

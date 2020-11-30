@@ -1,5 +1,6 @@
 package nl.woonwaard.wij_maken_de_wijk.ui
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -34,5 +35,9 @@ class MainActivity : AppCompatActivity() {
         const val WOONWAARD_REPAIR_URL = "https://www.woonwaard.nl/voor-huurders/reparaties-en-onderhoud/reparatieverzoek"
 
         const val WOONWAARD_NEIGHBORHOOD_MEDIATION_URL = "https://www.woonwaard.nl/overlast"
+
+        fun Context.navigateToMain() {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
     }
 }

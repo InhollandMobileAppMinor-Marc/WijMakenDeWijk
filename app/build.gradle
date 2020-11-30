@@ -45,7 +45,6 @@ android {
 
 dependencies {
     implementation(project(":ui"))
-    implementation(project(":fake_api"))
     implementation(project(":api"))
     implementation(project(":domain"))
 

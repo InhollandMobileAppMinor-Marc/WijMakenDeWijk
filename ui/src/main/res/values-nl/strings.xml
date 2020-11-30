@@ -6,4 +6,8 @@
     <string name="neighborhood_mediation">Buurtbemiddeling</string>
     <string name="repairs">Reparaties</string>
     <string name="comment_placeholder">Typ hier jouw bericht</string>
+    <string name="login">Login</string>
+    <string name="log_in">Log in</string>
+    <string name="email">E-mail</string>
+    <string name="password">Wachtwoord</string>
 </resources>

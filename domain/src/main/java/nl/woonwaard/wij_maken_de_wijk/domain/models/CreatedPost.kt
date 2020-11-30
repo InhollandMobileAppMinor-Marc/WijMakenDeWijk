@@ -5,11 +5,10 @@ import nl.woonwaard.wij_maken_de_wijk.domain.utils.DateSerializer
 import java.util.*
 
 @Serializable
-data class Comment(
-    val id: String,
+data class CreatedPost(
+    val title: String,
+    val category: String,
     val body: String,
-    val author: User,
     @Serializable(with = DateSerializer::class)
-    val timestamp: Date,
-    val post: String
+    val timestamp: Date
 ) : java.io.Serializable

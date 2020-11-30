@@ -4,9 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
-import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityPinboardOverviewBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityPostDetailsBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 import nl.woonwaard.wij_maken_de_wijk.domain.utils.toSentenceCasing
-import nl.woonwaard.wij_maken_de_wijk.ui.PostDetailsActivity.Companion.navigateToPostDetails
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.CommentBinding
-import nl.woonwaard.wij_maken_de_wijk.ui.databinding.PinboardListItemBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.PostHeaderBinding
 import java.util.*
 
@@ -46,10 +44,10 @@ class PostDetailsAdapter(
             is PostDetailsViewHolder.HeaderViewHolder -> {
                 val post = post.value!!
                 holder.binding.body.text = post.body
-                holder.binding.user.text = post.creator.name
-                holder.binding.category.text = post.type.name.toSentenceCasing()
+                holder.binding.user.text = "${post.author.name} (${post.author.houseNumber})"
+                holder.binding.category.text = post.category.toSentenceCasing()
                 holder.binding.time.text = DateUtils.getRelativeTimeSpanString(
-                    post.creationDate.time,
+                    post.timestamp.time,
                     System.currentTimeMillis(),
                     DateUtils.MINUTE_IN_MILLIS
                 )
@@ -57,9 +55,9 @@ class PostDetailsAdapter(
             is PostDetailsViewHolder.CommentViewHolder -> {
                 val comment = comments.value!!.elementAt(position - 1)
                 holder.binding.body.text = comment.body
-                holder.binding.user.text = comment.creator.name
+                holder.binding.user.text = "${comment.author.name} (${comment.author.houseNumber})"
                 holder.binding.time.text = DateUtils.getRelativeTimeSpanString(
-                    comment.creationDate.time,
+                    comment.timestamp.time,
                     System.currentTimeMillis(),
                     DateUtils.MINUTE_IN_MILLIS
                 )
