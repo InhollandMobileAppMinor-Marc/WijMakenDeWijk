@@ -46,6 +46,7 @@ android {
 dependencies {
     implementation(project(":ui"))
     implementation(project(":fake_api"))
+    implementation(project(":api"))
     implementation(project(":domain"))
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
