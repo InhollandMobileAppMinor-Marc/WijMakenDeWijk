@@ -2,7 +2,6 @@ package nl.woonwaard.wij_maken_de_wijk.ui
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.net.toUri

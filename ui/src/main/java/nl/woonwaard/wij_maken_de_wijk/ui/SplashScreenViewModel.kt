@@ -6,12 +6,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import nl.woonwaard.wij_maken_de_wijk.domain.services.AccountManager
 
-class SplashScreenViewModel : ViewModel() {
+class SplashScreenViewModel(
+    val accountManager: AccountManager
+) : ViewModel() {
     private val mutableShouldShowSplashScreen = MutableLiveData(SplashScreenState.SHOULD_SHOW)
 
     val shouldShowSplashScreen: LiveData<SplashScreenState>
         get() = mutableShouldShowSplashScreen
+
+    val isLoggedIn: Boolean
+        get() = accountManager.token != null
 
     fun onSplashScreenShown() {
         mutableShouldShowSplashScreen.postValue(SplashScreenState.SHOWN)

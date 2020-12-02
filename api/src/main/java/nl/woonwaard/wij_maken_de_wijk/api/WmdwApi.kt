@@ -1,5 +1,6 @@
 package nl.woonwaard.wij_maken_de_wijk.api
 
+import android.content.Context
 import nl.woonwaard.wij_maken_de_wijk.domain.services.PostsRepository
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
@@ -16,8 +17,10 @@ import nl.woonwaard.wij_maken_de_wijk.domain.services.UsersRepository
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-class WmdwApi : PostsRepository, CommentsRepository, UsersRepository, AccountManager {
+class WmdwApi(context: Context) : PostsRepository, CommentsRepository, UsersRepository, AccountManager {
     override var token: String? = null
+
+    private val preferences = context.getSharedPreferences("account", Context.MODE_PRIVATE)
 
     private val api by lazy {
         Retrofit.Builder()
@@ -32,6 +35,10 @@ class WmdwApi : PostsRepository, CommentsRepository, UsersRepository, AccountMan
             .addConverterFactory(Json.asConverterFactory(MediaType.get("application/json")))
             .build()
             .create(WmdwApiSpecification::class.java)
+    }
+
+    init {
+        token = preferences.getString(PREFERENCES_TOKEN, null)
     }
 
     private suspend inline fun <T> api(crossinline block: suspend WmdwApiSpecification.() -> T): T? {
@@ -103,10 +110,13 @@ class WmdwApi : PostsRepository, CommentsRepository, UsersRepository, AccountMan
 
         token = if (response?.isSuccessful == true) response.body()?.token else null
 
+        preferences.edit().putString(PREFERENCES_TOKEN, token).apply()
+
         return token != null
     }
 
     override suspend fun logout() {
+        preferences.edit().remove(PREFERENCES_TOKEN).apply()
         token = null
     }
 
@@ -124,5 +134,9 @@ class WmdwApi : PostsRepository, CommentsRepository, UsersRepository, AccountMan
         }
 
         return if (response?.isSuccessful == true) response.body() else null
+    }
+
+    companion object {
+        const val PREFERENCES_TOKEN = "TOKEN"
     }
 }
