@@ -2,7 +2,7 @@ package nl.woonwaard.wij_maken_de_wijk.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import nl.woonwaard.wij_maken_de_wijk.ui.LoginActivity.Companion.navigateToLogin
+import nl.woonwaard.wij_maken_de_wijk.ui.authentication.LoginActivity.Companion.navigateToLogin
 import nl.woonwaard.wij_maken_de_wijk.ui.MainActivity.Companion.navigateToMain
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivitySplashScreenBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel

@@ -1,37 +1,40 @@
-package nl.woonwaard.wij_maken_de_wijk.ui
+package nl.woonwaard.wij_maken_de_wijk.ui.forums
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import nl.woonwaard.wij_maken_de_wijk.domain.models.CreatedPost
-import nl.woonwaard.wij_maken_de_wijk.domain.models.Credentials
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
-import nl.woonwaard.wij_maken_de_wijk.domain.services.AccountManager
 import nl.woonwaard.wij_maken_de_wijk.domain.services.PostsRepository
-import java.util.*
 
-class CreatePostViewModel(
+class PinboardOverviewViewModel(
     private val postsRepository: PostsRepository
 ) : ViewModel() {
+    private val mutablePosts = MutableLiveData(emptySet<Post>())
+
+    val posts: LiveData<Set<Post>>
+        get() = mutablePosts
+
     private val mutableIsLoading = MutableLiveData(false)
 
     val isLoading: LiveData<Boolean>
         get() = mutableIsLoading
 
-    private val mutableCreatedPost = MutableLiveData<Post>()
+    init {
+        loadPosts()
+    }
 
-    val createdPost: LiveData<Post>
-        get() = mutableCreatedPost
+    fun loadPosts() {
+        // Don't load new posts if we're already doing so
+        if(isLoading.value == true) return
 
-    fun createPost(title: String, type: String, message: String) {
         mutableIsLoading.postValue(true)
 
         viewModelScope.launch {
-            val result = postsRepository.addPost(CreatedPost(title, type, message, Date()))
+            val posts = postsRepository.getAllPosts()
+            mutablePosts.postValue(posts)
             mutableIsLoading.postValue(false)
-            mutableCreatedPost.postValue(result)
         }
     }
 }

@@ -18,4 +18,9 @@
     <string name="gathering">Samenkomst</string>
     <string name="sustainability">Duurzaamheid</string>
     <string name="type">Type</string>
+    <string name="signup">Registreren</string>
+    <string name="sign_up">Registreer</string>
+    <string name="name">Naam</string>
+    <string name="code">Code</string>
+    <string name="code_format_help">Voorbeeldcodes: XX-XX-XX of XX-XX-XXXX</string>
 </resources>

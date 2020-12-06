@@ -1,4 +1,4 @@
-package nl.woonwaard.wij_maken_de_wijk.ui
+package nl.woonwaard.wij_maken_de_wijk.ui.forums
 
 import android.content.Context
 import android.content.Intent

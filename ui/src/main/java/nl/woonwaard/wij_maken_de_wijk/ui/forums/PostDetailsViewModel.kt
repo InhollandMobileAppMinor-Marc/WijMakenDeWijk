@@ -1,4 +1,4 @@
-package nl.woonwaard.wij_maken_de_wijk.ui
+package nl.woonwaard.wij_maken_de_wijk.ui.forums
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

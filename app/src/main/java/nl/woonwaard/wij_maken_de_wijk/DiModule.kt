@@ -6,6 +6,11 @@ import nl.woonwaard.wij_maken_de_wijk.domain.services.CommentsRepository
 import nl.woonwaard.wij_maken_de_wijk.domain.services.PostsRepository
 import nl.woonwaard.wij_maken_de_wijk.domain.services.UsersRepository
 import nl.woonwaard.wij_maken_de_wijk.ui.*
+import nl.woonwaard.wij_maken_de_wijk.ui.authentication.LoginViewModel
+import nl.woonwaard.wij_maken_de_wijk.ui.authentication.RegistrationViewModel
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.CreatePostViewModel
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.PinboardOverviewViewModel
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.PostDetailsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -48,5 +53,9 @@ val weMakeTheDistrictModule = module {
 
     viewModel {
         CreatePostViewModel(get())
+    }
+
+    viewModel {
+        RegistrationViewModel(get())
     }
 }

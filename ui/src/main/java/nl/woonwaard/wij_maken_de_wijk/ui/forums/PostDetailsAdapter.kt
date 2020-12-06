@@ -1,4 +1,4 @@
-package nl.woonwaard.wij_maken_de_wijk.ui
+package nl.woonwaard.wij_maken_de_wijk.ui.forums
 
 import android.text.format.DateUtils
 import android.view.LayoutInflater

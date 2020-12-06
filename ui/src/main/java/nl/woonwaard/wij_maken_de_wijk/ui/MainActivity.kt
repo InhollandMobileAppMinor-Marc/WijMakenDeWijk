@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.net.toUri
-import nl.woonwaard.wij_maken_de_wijk.ui.PinboardOverviewActivity.Companion.navigateToPinboardOverview
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.PinboardOverviewActivity.Companion.navigateToPinboardOverview
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

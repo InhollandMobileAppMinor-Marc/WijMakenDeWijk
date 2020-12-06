@@ -26,8 +26,14 @@
         </activity>
 
         <activity
-            android:name=".ui.LoginActivity"
-            android:label="@string/start"
+            android:name=".ui.authentication.LoginActivity"
+            android:label="@string/login"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.authentication.RegistrationActivity"
+            android:label="@string/signup"
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -38,21 +44,21 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".ui.PinboardOverviewActivity"
+            android:name=".ui.forums.PinboardOverviewActivity"
             android:label="@string/pinboard"
             android:parentActivityName=".ui.MainActivity"
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".ui.PostDetailsActivity"
-            android:parentActivityName=".ui.PinboardOverviewActivity"
+            android:name=".ui.forums.PostDetailsActivity"
+            android:parentActivityName=".ui.forums.PinboardOverviewActivity"
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".ui.CreatePostActivity"
-            android:parentActivityName=".ui.PinboardOverviewActivity"
+            android:name=".ui.forums.CreatePostActivity"
+            android:parentActivityName=".ui.forums.PinboardOverviewActivity"
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

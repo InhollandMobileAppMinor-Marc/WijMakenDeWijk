@@ -1,4 +1,4 @@
-package nl.woonwaard.wij_maken_de_wijk.ui
+package nl.woonwaard.wij_maken_de_wijk.ui.authentication
 
 import android.content.Context
 import android.content.Intent
@@ -8,30 +8,33 @@ import android.view.inputmethod.InputMethodManager
 import android.view.View
 import nl.woonwaard.wij_maken_de_wijk.ui.MainActivity.Companion.navigateToMain
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityLoginBinding
+import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityRegistrationBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LoginActivity : AppCompatActivity() {
-    private val viewModel by viewModel<LoginViewModel>()
+class RegistrationActivity : AppCompatActivity() {
+    private val viewModel by viewModel<RegistrationViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = ActivityLoginBinding.inflate(layoutInflater)
+        val binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
 
-        binding.content.login.setOnClickListener {
+        binding.content.signup.setOnClickListener {
             hideKeyboard()
 
-            viewModel.login(
+            viewModel.signup(
+                binding.content.codeInputField.text.toString(),
+                binding.content.nameInputField.text.toString(),
                 binding.content.emailInputField.text.toString(),
                 binding.content.passwordInputField.text.toString()
             )
         }
 
         viewModel.isLoading.observe(this) {
-            binding.content.login.isEnabled = !it
+            binding.content.signup.isEnabled = !it
         }
 
         viewModel.isLoggedIn.observe(this) {
@@ -51,8 +54,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     companion object {
-        fun Context.navigateToLogin() {
-            startActivity(Intent(this, LoginActivity::class.java))
+        fun Context.navigateToRegistration() {
+            startActivity(Intent(this, RegistrationActivity::class.java))
         }
     }
 }
