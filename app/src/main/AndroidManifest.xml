@@ -44,6 +44,13 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:label="@string/settings"
+            android:parentActivityName=".ui.MainActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
             android:name=".ui.forums.PinboardOverviewActivity"
             android:label="@string/pinboard"
             android:parentActivityName=".ui.MainActivity"

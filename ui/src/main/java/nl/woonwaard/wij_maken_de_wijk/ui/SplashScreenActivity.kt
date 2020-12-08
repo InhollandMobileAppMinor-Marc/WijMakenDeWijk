@@ -30,10 +30,17 @@ class SplashScreenActivity : AppCompatActivity() {
                 SplashScreenViewModel.SplashScreenState.DISMISSED -> {
                     finish()
                 }
+                SplashScreenViewModel.SplashScreenState.CANCELLED -> {
+                    finishAndRemoveTask()
+                }
                 else -> {
                     // Do nothing
                 }
             }
         }
+    }
+
+    override fun onBackPressed() {
+        viewModel.onCancelled()
     }
 }

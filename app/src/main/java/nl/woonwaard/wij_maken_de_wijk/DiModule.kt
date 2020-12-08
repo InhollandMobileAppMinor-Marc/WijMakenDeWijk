@@ -11,6 +11,7 @@ import nl.woonwaard.wij_maken_de_wijk.ui.authentication.RegistrationViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.CreatePostViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.PinboardOverviewViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.PostDetailsViewModel
+import nl.woonwaard.wij_maken_de_wijk.ui.settings.SettingsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -57,5 +58,9 @@ val weMakeTheDistrictModule = module {
 
     viewModel {
         RegistrationViewModel(get())
+    }
+
+    viewModel {
+        SettingsViewModel(get())
     }
 }

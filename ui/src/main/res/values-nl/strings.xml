@@ -23,4 +23,6 @@
     <string name="name">Naam</string>
     <string name="code">Code</string>
     <string name="code_format_help">Voorbeeldcodes: XX-XX-XX of XX-XX-XXXX</string>
+    <string name="settings">Instellingen</string>
+    <string name="log_out">Log uit</string>
 </resources>

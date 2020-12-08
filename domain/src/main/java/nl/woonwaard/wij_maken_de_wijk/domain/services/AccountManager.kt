@@ -11,5 +11,5 @@ interface AccountManager {
 
     suspend fun login(credentials: Credentials): Boolean
 
-    suspend fun logout()
+    fun logout()
 }

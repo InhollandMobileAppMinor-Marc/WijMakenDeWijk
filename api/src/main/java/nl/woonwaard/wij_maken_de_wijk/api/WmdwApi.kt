@@ -115,7 +115,7 @@ class WmdwApi(context: Context) : PostsRepository, CommentsRepository, UsersRepo
         return token != null
     }
 
-    override suspend fun logout() {
+    override fun logout() {
         preferences.edit().remove(PREFERENCES_TOKEN).apply()
         token = null
     }

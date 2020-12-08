@@ -48,6 +48,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        finishAndRemoveTask()
+    }
+
     private fun hideKeyboard() {
         currentFocus?.clearFocus()
 

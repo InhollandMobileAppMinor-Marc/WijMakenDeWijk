@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".settings.SettingsActivity"
     tools:theme="@style/AppTheme.NoActionBar">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -17,14 +17,13 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:menu="@menu/menu_home_screen"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="@string/start" />
+            app:title="@string/settings" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <include
         android:id="@+id/content"
-        layout="@layout/activity_main_content" />
+        layout="@layout/activity_settings_content" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

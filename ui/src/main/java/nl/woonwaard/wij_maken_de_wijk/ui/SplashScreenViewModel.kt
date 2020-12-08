@@ -31,8 +31,12 @@ class SplashScreenViewModel(
         mutableShouldShowSplashScreen.postValue(SplashScreenState.DISMISSED)
     }
 
+    fun onCancelled() {
+        mutableShouldShowSplashScreen.postValue(SplashScreenState.CANCELLED)
+    }
+
     enum class SplashScreenState {
-        SHOULD_SHOW, SHOWN, SHOULD_DISMISS, DISMISSED
+        SHOULD_SHOW, SHOWN, SHOULD_DISMISS, DISMISSED, CANCELLED
     }
 
     companion object {
