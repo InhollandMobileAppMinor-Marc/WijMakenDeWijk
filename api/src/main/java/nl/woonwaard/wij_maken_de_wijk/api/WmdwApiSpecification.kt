@@ -20,6 +20,7 @@ interface WmdwApiSpecification {
     @GET("posts")
     suspend fun getPosts(
         @Header("Authorization") authorization: String,
+        @Query("categories") categories: String? = null,
         @Query("inlineAuthor") inlineAuthor: Boolean = true,
         @Query("inlineComments") inlineComments: Boolean = false
     ): Response<Set<Post>>

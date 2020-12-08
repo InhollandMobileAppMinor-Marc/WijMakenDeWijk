@@ -55,9 +55,9 @@ class WmdwApi(context: Context) : PostsRepository, CommentsRepository, UsersRepo
         }
     }
 
-    override suspend fun getAllPosts(): Set<Post> {
+    override suspend fun getAllPosts(categories: List<String>?): Set<Post> {
         val response = api {
-            getPosts("Bearer $token")
+            getPosts("Bearer $token", categories?.joinToString(","))
         }
 
         return if (response?.isSuccessful == true) response.body() ?: emptySet() else emptySet()
