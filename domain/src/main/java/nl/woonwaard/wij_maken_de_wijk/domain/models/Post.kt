@@ -13,5 +13,7 @@ data class Post(
     val author: User,
     @Serializable(with = DateSerializer::class)
     val timestamp: Date,
-    val comments: Set<String>
+    val comments: Set<String>,
+    val hallway: String,
+    val location: String
 ) : java.io.Serializable
