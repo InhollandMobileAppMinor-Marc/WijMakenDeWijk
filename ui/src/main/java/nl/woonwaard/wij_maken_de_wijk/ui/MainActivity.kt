@@ -2,14 +2,15 @@ package nl.woonwaard.wij_maken_de_wijk.ui
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
-import nl.woonwaard.wij_maken_de_wijk.ui.forums.PinboardOverviewActivity.Companion.navigateToPinboardOverview
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityMainBinding
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.PinboardOverviewActivity.Companion.navigateToPinboardOverview
 import nl.woonwaard.wij_maken_de_wijk.ui.settings.SettingsActivity.Companion.navigateToSettings
+import nl.woonwaard.wij_maken_de_wijk.ui.utils.terminateApplication
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        finishAndRemoveTask()
+        terminateApplication()
     }
 
     companion object {

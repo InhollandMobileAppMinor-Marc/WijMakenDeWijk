@@ -1,10 +1,11 @@
 package nl.woonwaard.wij_maken_de_wijk.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import nl.woonwaard.wij_maken_de_wijk.ui.authentication.LoginActivity.Companion.navigateToLogin
+import androidx.appcompat.app.AppCompatActivity
 import nl.woonwaard.wij_maken_de_wijk.ui.MainActivity.Companion.navigateToMain
+import nl.woonwaard.wij_maken_de_wijk.ui.authentication.LoginActivity.Companion.navigateToLogin
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivitySplashScreenBinding
+import nl.woonwaard.wij_maken_de_wijk.ui.utils.terminateApplication
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashScreenActivity : AppCompatActivity() {
@@ -31,7 +32,7 @@ class SplashScreenActivity : AppCompatActivity() {
                     finish()
                 }
                 SplashScreenViewModel.SplashScreenState.CANCELLED -> {
-                    finishAndRemoveTask()
+                    terminateApplication()
                 }
                 else -> {
                     // Do nothing
