@@ -11,7 +11,6 @@ import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 import nl.woonwaard.wij_maken_de_wijk.domain.utils.toSentenceCasing
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.CommentBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.PostHeaderBinding
-import java.util.*
 
 class PostDetailsAdapter(
     private val post: LiveData<Post>,

@@ -2,14 +2,9 @@ package nl.woonwaard.wij_maken_de_wijk.ui.settings
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
-import android.view.View
-import nl.woonwaard.wij_maken_de_wijk.ui.MainActivity.Companion.navigateToMain
+import androidx.appcompat.app.AppCompatActivity
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.LoginActivity.Companion.navigateToLogin
-import nl.woonwaard.wij_maken_de_wijk.ui.authentication.RegistrationActivity.Companion.navigateToRegistration
-import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityLoginBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivitySettingsBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

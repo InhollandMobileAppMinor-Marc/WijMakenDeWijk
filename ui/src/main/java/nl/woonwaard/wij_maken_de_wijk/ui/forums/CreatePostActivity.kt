@@ -2,12 +2,12 @@ package nl.woonwaard.wij_maken_de_wijk.ui.forums
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
 import android.view.View
-import nl.woonwaard.wij_maken_de_wijk.ui.forums.PostDetailsActivity.Companion.navigateToPostDetails
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityCreatePostBinding
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.PostDetailsActivity.Companion.navigateToPostDetails
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreatePostActivity : AppCompatActivity() {

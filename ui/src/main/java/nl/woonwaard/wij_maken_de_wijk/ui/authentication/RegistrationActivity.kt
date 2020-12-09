@@ -2,12 +2,11 @@ package nl.woonwaard.wij_maken_de_wijk.ui.authentication
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import nl.woonwaard.wij_maken_de_wijk.ui.MainActivity.Companion.navigateToMain
-import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityLoginBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityRegistrationBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

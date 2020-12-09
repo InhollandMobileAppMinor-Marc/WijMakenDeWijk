@@ -1,11 +1,6 @@
 package nl.woonwaard.wij_maken_de_wijk.api
 
 import android.content.Context
-import nl.woonwaard.wij_maken_de_wijk.domain.services.PostsRepository
-import okhttp3.MediaType
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import java.util.concurrent.TimeUnit
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -13,9 +8,14 @@ import kotlinx.serialization.json.Json
 import nl.woonwaard.wij_maken_de_wijk.domain.models.*
 import nl.woonwaard.wij_maken_de_wijk.domain.services.AccountManager
 import nl.woonwaard.wij_maken_de_wijk.domain.services.CommentsRepository
+import nl.woonwaard.wij_maken_de_wijk.domain.services.PostsRepository
 import nl.woonwaard.wij_maken_de_wijk.domain.services.UsersRepository
+import okhttp3.MediaType
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import java.util.concurrent.TimeUnit
 
 class WmdwApi(context: Context) : PostsRepository, CommentsRepository, UsersRepository, AccountManager {
     override var token: String? = null

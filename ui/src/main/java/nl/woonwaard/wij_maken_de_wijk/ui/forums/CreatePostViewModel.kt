@@ -6,9 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import nl.woonwaard.wij_maken_de_wijk.domain.models.CreatedPost
-import nl.woonwaard.wij_maken_de_wijk.domain.models.Credentials
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
-import nl.woonwaard.wij_maken_de_wijk.domain.services.AccountManager
 import nl.woonwaard.wij_maken_de_wijk.domain.services.PostsRepository
 import java.util.*
 

@@ -2,10 +2,10 @@ package nl.woonwaard.wij_maken_de_wijk.ui.forums
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import nl.woonwaard.wij_maken_de_wijk.ui.forums.CreatePostActivity.Companion.navigateToPostCreation
+import androidx.appcompat.app.AppCompatActivity
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityPinboardOverviewBinding
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.CreatePostActivity.Companion.navigateToPostCreation
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PinboardOverviewActivity : AppCompatActivity() {

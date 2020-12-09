@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
-import nl.woonwaard.wij_maken_de_wijk.ui.forums.PostDetailsActivity.Companion.navigateToPostDetails
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.PinboardListItemBinding
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.PostDetailsActivity.Companion.navigateToPostDetails
 
 class PinboardAdapter(private val posts: LiveData<Set<Post>>) : RecyclerView.Adapter<PinboardAdapter.PinboardViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PinboardViewHolder {

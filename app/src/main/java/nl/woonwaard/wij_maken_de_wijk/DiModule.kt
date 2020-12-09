@@ -5,7 +5,7 @@ import nl.woonwaard.wij_maken_de_wijk.domain.services.AccountManager
 import nl.woonwaard.wij_maken_de_wijk.domain.services.CommentsRepository
 import nl.woonwaard.wij_maken_de_wijk.domain.services.PostsRepository
 import nl.woonwaard.wij_maken_de_wijk.domain.services.UsersRepository
-import nl.woonwaard.wij_maken_de_wijk.ui.*
+import nl.woonwaard.wij_maken_de_wijk.ui.SplashScreenViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.LoginViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.RegistrationViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.CreatePostViewModel
