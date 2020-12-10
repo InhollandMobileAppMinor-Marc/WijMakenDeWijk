@@ -9,9 +9,11 @@ import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.CreatedComment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 import nl.woonwaard.wij_maken_de_wijk.domain.services.CommentsRepository
+import nl.woonwaard.wij_maken_de_wijk.domain.services.PostsRepository
 import java.util.*
 
 class PostDetailsViewModel(
+    private val postsRepository: PostsRepository,
     private val commentsRepository: CommentsRepository
 ) : ViewModel() {
     private val mutablePost = MutableLiveData<Post>()
@@ -28,6 +30,16 @@ class PostDetailsViewModel(
 
     val isLoading: LiveData<Boolean>
         get() = mutableIsLoading
+
+    fun loadPostData(postId: String) {
+        // Don't load new post data if we're already doing so
+        if(isLoading.value == true) return
+
+        viewModelScope.launch {
+            val post = postsRepository.getPostById(postId) ?: return@launch
+            loadPostData(post)
+        }
+    }
 
     fun loadPostData(post: Post) {
         // Don't load new post data if we're already doing so

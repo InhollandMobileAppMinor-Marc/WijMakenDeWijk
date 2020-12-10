@@ -1,15 +1,16 @@
 package nl.woonwaard.wij_maken_de_wijk
 
 import nl.woonwaard.wij_maken_de_wijk.api.WmdwApi
-import nl.woonwaard.wij_maken_de_wijk.domain.services.AccountManager
-import nl.woonwaard.wij_maken_de_wijk.domain.services.CommentsRepository
-import nl.woonwaard.wij_maken_de_wijk.domain.services.PostsRepository
-import nl.woonwaard.wij_maken_de_wijk.domain.services.UsersRepository
+import nl.woonwaard.wij_maken_de_wijk.domain.services.*
+import nl.woonwaard.wij_maken_de_wijk.notifications.NotificationWorkSchedulerImpl
+import nl.woonwaard.wij_maken_de_wijk.notifications.NotificationWorker
+import nl.woonwaard.wij_maken_de_wijk.notifications.UiClasses
 import nl.woonwaard.wij_maken_de_wijk.ui.SplashScreenViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.LoginViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.RegistrationViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.CreatePostViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.PinboardOverviewViewModel
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.PostDetailsActivity
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.PostDetailsViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.settings.SettingsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -36,8 +37,23 @@ val weMakeTheDistrictModule = module {
         get<WmdwApi>()
     }
 
+    single<NotificationsRepository> {
+        get<WmdwApi>()
+    }
+
+    single<UiClasses> {
+        object : UiClasses {
+            override val postDetails: Class<*>
+                get() = PostDetailsActivity::class.java
+        }
+    }
+
+    single<NotificationWorkScheduler> {
+        NotificationWorkSchedulerImpl(get())
+    }
+
     viewModel {
-        SplashScreenViewModel(get())
+        SplashScreenViewModel(get(), get())
     }
 
     viewModel {
@@ -45,7 +61,7 @@ val weMakeTheDistrictModule = module {
     }
 
     viewModel {
-        PostDetailsViewModel(get())
+        PostDetailsViewModel(get(), get())
     }
 
     viewModel {

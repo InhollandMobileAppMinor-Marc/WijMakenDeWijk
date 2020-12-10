@@ -6,10 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import nl.woonwaard.wij_maken_de_wijk.domain.models.*
-import nl.woonwaard.wij_maken_de_wijk.domain.services.AccountManager
-import nl.woonwaard.wij_maken_de_wijk.domain.services.CommentsRepository
-import nl.woonwaard.wij_maken_de_wijk.domain.services.PostsRepository
-import nl.woonwaard.wij_maken_de_wijk.domain.services.UsersRepository
+import nl.woonwaard.wij_maken_de_wijk.domain.services.*
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -17,7 +14,7 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import java.util.concurrent.TimeUnit
 
-class WmdwApi(context: Context) : PostsRepository, CommentsRepository, UsersRepository, AccountManager {
+class WmdwApi(context: Context) : PostsRepository, CommentsRepository, UsersRepository, NotificationsRepository, AccountManager {
     override var token: String? = null
 
     private val preferences = context.getSharedPreferences("account", Context.MODE_PRIVATE)
@@ -134,6 +131,14 @@ class WmdwApi(context: Context) : PostsRepository, CommentsRepository, UsersRepo
         }
 
         return if (response?.isSuccessful == true) response.body() else null
+    }
+
+    override suspend fun getNewNotifications(): Set<Notification> {
+        val response = api {
+            getNewNotifications("Bearer $token")
+        }
+
+        return if (response?.isSuccessful == true) response.body() ?: emptySet() else emptySet()
     }
 
     companion object {

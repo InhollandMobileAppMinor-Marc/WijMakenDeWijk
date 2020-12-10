@@ -30,7 +30,7 @@ interface WmdwApiSpecification {
         @Header("Authorization") authorization: String,
         @Path("id") id: String,
         @Query("inlineAuthor") inlineAuthor: Boolean = true,
-        @Query("inlineComments") inlineComments: Boolean = true
+        @Query("inlineComments") inlineComments: Boolean = false
     ): Response<Post>
 
     @POST("posts")
@@ -73,4 +73,11 @@ interface WmdwApiSpecification {
         @Header("Authorization") authorization: String,
         @Path("id") id: String
     ): Response<User>
+
+    @DELETE("notifications")
+    suspend fun getNewNotifications(
+        @Header("Authorization") authorization: String,
+        @Query("inlineComments") inlineComments: Boolean = true,
+        @Query("inlineAuthor") inlineAuthor: Boolean = true
+    ): Response<Set<Notification>>
 }

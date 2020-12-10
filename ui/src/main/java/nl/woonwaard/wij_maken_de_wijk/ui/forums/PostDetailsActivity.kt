@@ -51,10 +51,15 @@ class PostDetailsActivity : AppCompatActivity() {
 
         val post = intent.getSerializableExtra(EXTRA_POST) as? Post
         if(post != null) viewModel.loadPostData(post)
+        else {
+            val postId = intent.getStringExtra(EXTRA_POST_ID)
+            if(postId != null) viewModel.loadPostData(postId)
+        }
     }
 
     companion object {
         const val EXTRA_POST = "EXTRA_POST"
+        const val EXTRA_POST_ID = "EXTRA_POST_ID"
 
         fun Context.navigateToPostDetails(post: Post) {
             val intent = Intent(this, PostDetailsActivity::class.java)

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_title">Nieuwe reactie(s) op je bericht</string>
+    <string name="notification_content">Klik om te bekijken</string>
+    <string name="notification_replies_channel">Reacties op jouw berichten</string>
+</resources>

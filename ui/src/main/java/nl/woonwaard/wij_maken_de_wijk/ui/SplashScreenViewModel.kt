@@ -7,9 +7,11 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import nl.woonwaard.wij_maken_de_wijk.domain.services.AccountManager
+import nl.woonwaard.wij_maken_de_wijk.domain.services.NotificationWorkScheduler
 
 class SplashScreenViewModel(
-    val accountManager: AccountManager
+    private val accountManager: AccountManager,
+    notificationWorkScheduler: NotificationWorkScheduler
 ) : ViewModel() {
     private val mutableShouldShowSplashScreen = MutableLiveData(SplashScreenState.SHOULD_SHOW)
 
@@ -18,6 +20,10 @@ class SplashScreenViewModel(
 
     val isLoggedIn: Boolean
         get() = accountManager.token != null
+
+    init {
+        notificationWorkScheduler.schedule()
+    }
 
     fun onSplashScreenShown() {
         mutableShouldShowSplashScreen.postValue(SplashScreenState.SHOWN)

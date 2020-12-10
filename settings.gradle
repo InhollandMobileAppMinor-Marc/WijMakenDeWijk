@@ -1,3 +1,4 @@
+include ':notifications'
 rootProject.name = "Wij maken de Wijk"
 
 include(":ui")
