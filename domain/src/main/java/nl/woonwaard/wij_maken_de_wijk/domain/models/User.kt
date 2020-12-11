@@ -10,4 +10,7 @@ data class User(
     val houseNumber: String,
     val hallway: String,
     val location: String
-) : java.io.Serializable
+) : java.io.Serializable {
+    val nameWithLocation: String
+        get() = "$name ($houseNumber)"
+}

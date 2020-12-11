@@ -8,10 +8,7 @@ import nl.woonwaard.wij_maken_de_wijk.notifications.UiClasses
 import nl.woonwaard.wij_maken_de_wijk.ui.SplashScreenViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.LoginViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.RegistrationViewModel
-import nl.woonwaard.wij_maken_de_wijk.ui.forums.CreatePostViewModel
-import nl.woonwaard.wij_maken_de_wijk.ui.forums.PinboardOverviewViewModel
-import nl.woonwaard.wij_maken_de_wijk.ui.forums.PostDetailsActivity
-import nl.woonwaard.wij_maken_de_wijk.ui.forums.PostDetailsViewModel
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.*
 import nl.woonwaard.wij_maken_de_wijk.ui.settings.SettingsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -45,6 +42,9 @@ val weMakeTheDistrictModule = module {
         object : UiClasses {
             override val postDetails: Class<*>
                 get() = PostDetailsActivity::class.java
+
+            override val postDetailsBubble: Class<*>
+                get() = PostDetailsBubbleActivity::class.java
         }
     }
 

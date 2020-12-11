@@ -12,11 +12,12 @@ class NotificationWorkSchedulerImpl(
     private val context: Context
 ) : NotificationWorkScheduler {
     override fun schedule() {
-        val workRequest = PeriodicWorkRequest.Builder(NotificationWorker::class.java, 15, TimeUnit.MINUTES)
-            .setInitialDelay(5, TimeUnit.MINUTES)
+        // Only check every 5 hours because of free back-end limitations.
+        val workRequest = PeriodicWorkRequest.Builder(NotificationWorker::class.java, 5, TimeUnit.HOURS)
+            .setInitialDelay(45, TimeUnit.SECONDS)
             .build()
 
         val workManager = WorkManager.getInstance(context)
-        workManager.enqueueUniquePeriodicWork(NotificationWorker.WORKER_ID, ExistingPeriodicWorkPolicy.KEEP, workRequest)
+        workManager.enqueueUniquePeriodicWork(NotificationWorker.WORKER_ID, ExistingPeriodicWorkPolicy.REPLACE, workRequest)
     }
 }

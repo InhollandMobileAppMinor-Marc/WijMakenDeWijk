@@ -9,19 +9,20 @@ import android.media.AudioAttributes
 import android.media.RingtoneManager
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
+import androidx.annotation.WorkerThread
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.app.Person
+import androidx.core.graphics.drawable.IconCompat
 import androidx.work.CoroutineWorker
-import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkerParameters
-import nl.woonwaard.wij_maken_de_wijk.domain.models.Notification
+import nl.woonwaard.wij_maken_de_wijk.domain.models.*
 import nl.woonwaard.wij_maken_de_wijk.domain.services.NotificationsRepository
-import nl.woonwaard.wij_maken_de_wijk.domain.services.PostsRepository
-import nl.woonwaard.wij_maken_de_wijk.notifications.utils.vectorToBitmap
+import nl.woonwaard.wij_maken_de_wijk.notifications.utils.putExtra
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import java.util.concurrent.TimeUnit
+import java.io.Serializable
+import java.util.*
 
 class NotificationWorker(context: Context, params: WorkerParameters) : CoroutineWorker(context, params), KoinComponent {
     private val uiClasses by inject<UiClasses>()
@@ -36,33 +37,67 @@ class NotificationWorker(context: Context, params: WorkerParameters) : Coroutine
         return Result.success()
     }
 
+    @WorkerThread
     private fun sendNotification(notification: Notification) {
-        val intent = Intent(applicationContext, uiClasses.postDetails)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        intent.putExtra(EXTRA_POST_ID, notification.post)
+        val postDetailsIntent = Intent(applicationContext, uiClasses.postDetails)
+            .setAction(Intent.ACTION_VIEW)
+            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY)
+            .putExtra(EXTRA_POST, notification.post)
+            .putExtra(EXTRA_FROM_NOTIFICATION, true)
+            .putExtra(EXTRA_COMMENTS, notification.comments)
+
+        val postDetailsPendingIntent = PendingIntent.getActivity(applicationContext, notification.id.hashCode(), postDetailsIntent, PendingIntent.FLAG_CANCEL_CURRENT)
+
+        val postDetailsBubbleIntent = Intent(applicationContext, uiClasses.postDetailsBubble)
+            .setAction(Intent.ACTION_VIEW)
+            .setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY)
+            .putExtra(EXTRA_POST, notification.post)
+            .putExtra(EXTRA_FROM_NOTIFICATION, true)
+            .putExtra(EXTRA_COMMENTS, notification.comments)
+
+        val postDetailsBubblePendingIntent = PendingIntent.getActivity(applicationContext, notification.id.hashCode() + 1, postDetailsBubbleIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
         val notificationManager = NotificationManagerCompat.from(applicationContext)
 
-        val bitmap = applicationContext.vectorToBitmap(R.drawable.ic_notification_post)
         val titleNotification = applicationContext.getString(R.string.notification_title)
-        val subtitleNotification = applicationContext.getString(R.string.notification_content)
-        val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, 0)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             createNotificationChannel(notificationManager)
 
+        val selfUser = notification.post.author
+
+        var style = NotificationCompat.MessagingStyle(
+            Person.Builder().setName(selfUser.nameWithLocation).build()
+        )
+            .setGroupConversation(true)
+            .setConversationTitle(notification.post.title)
+
+        for(comment in notification.comments) {
+            val person = Person.Builder().setName(comment.author.nameWithLocation).build()
+            style = style.addMessage(comment.body, comment.timestamp.time, if(selfUser == comment.author) null else person)
+        }
+
+        val bubbleData = NotificationCompat.BubbleMetadata.Builder()
+            .setIntent(postDetailsBubblePendingIntent)
+            .setIcon(IconCompat.createWithResource(applicationContext, R.drawable.ic_notification_post))
+            .setDesiredHeight(applicationContext.resources.getDimensionPixelSize(R.dimen.bubble_height))
+            .build()
+
         notificationManager.notify(
             notification.id.hashCode(),
             NotificationCompat.Builder(applicationContext, NOTIFICATION_CHANNEL)
-                .setLargeIcon(bitmap)
+                .setBubbleMetadata(bubbleData)
                 .setSmallIcon(R.drawable.ic_notification_post)
                 .setContentTitle(titleNotification)
-                .setContentText(subtitleNotification)
+                .setStyle(style)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
-                .setContentIntent(pendingIntent)
+                .setContentIntent(postDetailsPendingIntent)
                 .setAutoCancel(true)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setChannelId(NOTIFICATION_CHANNEL)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setShowWhen(true)
+                .setWhen(notification.comments.last().timestamp.time)
                 .build()
         )
     }
@@ -78,7 +113,7 @@ class NotificationWorker(context: Context, params: WorkerParameters) : Coroutine
         val channel = NotificationChannel(
             NOTIFICATION_CHANNEL,
             applicationContext.getString(R.string.notification_replies_channel),
-            NotificationManager.IMPORTANCE_DEFAULT
+            NotificationManager.IMPORTANCE_HIGH
         )
         channel.enableLights(true)
         channel.enableVibration(true)
@@ -88,6 +123,9 @@ class NotificationWorker(context: Context, params: WorkerParameters) : Coroutine
 
     companion object {
         const val EXTRA_POST_ID = "EXTRA_POST_ID"
+        const val EXTRA_POST = "EXTRA_POST"
+        const val EXTRA_COMMENTS = "EXTRA_COMMENTS"
+        const val EXTRA_FROM_NOTIFICATION = "EXTRA_FROM_NOTIFICATION"
         const val WORKER_ID = "nl.woonwaard.wij_maken_de_wijk.notifications"
         const val NOTIFICATION_CHANNEL = "nl.woonwaard.wij_maken_de_wijk.notifications.replies"
     }

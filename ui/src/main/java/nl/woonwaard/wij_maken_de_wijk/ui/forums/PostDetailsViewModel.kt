@@ -31,6 +31,8 @@ class PostDetailsViewModel(
     val isLoading: LiveData<Boolean>
         get() = mutableIsLoading
 
+    var isFromNotification = false
+
     fun loadPostData(postId: String) {
         // Don't load new post data if we're already doing so
         if(isLoading.value == true) return
@@ -47,6 +49,14 @@ class PostDetailsViewModel(
 
         mutablePost.postValue(post)
         reloadPostData(post)
+    }
+
+    fun loadPostData(post: Post, comments: Set<Comment>) {
+        // Don't load new post data if we're already doing so
+        if(isLoading.value == true) return
+
+        mutablePost.postValue(post)
+        mutableComments.postValue(comments)
     }
 
     fun reloadPostData(post: Post = this.post.value!!) {

@@ -14,7 +14,8 @@ import nl.woonwaard.wij_maken_de_wijk.ui.databinding.PostHeaderBinding
 
 class PostDetailsAdapter(
     private val post: LiveData<Post>,
-    private val comments: LiveData<Set<Comment>>
+    private val comments: LiveData<Set<Comment>>,
+    private val showTitleInHeader: Boolean = false
 ) : RecyclerView.Adapter<PostDetailsAdapter.PostDetailsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostDetailsViewHolder {
         when (viewType) {
@@ -42,8 +43,10 @@ class PostDetailsAdapter(
         when (holder) {
             is PostDetailsViewHolder.HeaderViewHolder -> {
                 val post = post.value!!
+                holder.binding.title.visibility = if(showTitleInHeader) View.VISIBLE else View.GONE
+                holder.binding.title.text = post.title
                 holder.binding.body.text = post.body
-                holder.binding.user.text = "${post.author.name} (${post.author.houseNumber})"
+                holder.binding.user.text = post.author.nameWithLocation
                 holder.binding.category.text = post.category.toSentenceCasing()
                 holder.binding.time.text = DateUtils.getRelativeTimeSpanString(
                     post.timestamp.time,
@@ -54,7 +57,7 @@ class PostDetailsAdapter(
             is PostDetailsViewHolder.CommentViewHolder -> {
                 val comment = comments.value!!.elementAt(position - 1)
                 holder.binding.body.text = comment.body
-                holder.binding.user.text = "${comment.author.name} (${comment.author.houseNumber})"
+                holder.binding.user.text = comment.author.nameWithLocation
                 holder.binding.time.text = DateUtils.getRelativeTimeSpanString(
                     comment.timestamp.time,
                     System.currentTimeMillis(),

@@ -7,36 +7,36 @@ import androidx.appcompat.app.AppCompatActivity
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityPostDetailsBinding
+import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityPostDetailsBubbleBinding
+import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityPostDetailsContentBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.utils.terminateApplication
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PostDetailsActivity : AppCompatActivity() {
+class PostDetailsBubbleActivity : AppCompatActivity() {
     private val viewModel by viewModel<PostDetailsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = ActivityPostDetailsBinding.inflate(layoutInflater)
+        val binding = ActivityPostDetailsBubbleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
+        val adapter = PostDetailsAdapter(viewModel.post, viewModel.comments, true)
 
-        val adapter = PostDetailsAdapter(viewModel.post, viewModel.comments)
+        binding.recyclerView.adapter = adapter
 
-        binding.content.recyclerView.adapter = adapter
-
-        binding.content.swipeRefreshLayout.setOnRefreshListener {
+        binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.reloadPostData()
         }
 
-        binding.content.sendButton.setOnClickListener {
-            viewModel.addComment(binding.content.commentInputField.text.toString())
-            binding.content.commentInputField.setText("")
+        binding.sendButton.setOnClickListener {
+            viewModel.addComment(binding.commentInputField.text.toString())
+            binding.commentInputField.setText("")
         }
 
         viewModel.isLoading.observe(this) {
-            binding.content.sendButton.isEnabled = !it
-            binding.content.swipeRefreshLayout.isRefreshing = it
+            binding.sendButton.isEnabled = !it
+            binding.swipeRefreshLayout.isRefreshing = it
         }
 
         viewModel.post.observe(this) {
@@ -51,10 +51,6 @@ class PostDetailsActivity : AppCompatActivity() {
         }
 
         viewModel.isFromNotification = intent.getBooleanExtra(EXTRA_FROM_NOTIFICATION, true)
-
-        if(!viewModel.isFromNotification) {
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        }
 
         val post = intent.getSerializableExtra(EXTRA_POST) as? Post
         if(post != null) {
@@ -80,11 +76,5 @@ class PostDetailsActivity : AppCompatActivity() {
         const val EXTRA_POST_ID = "EXTRA_POST_ID"
         const val EXTRA_COMMENTS = "EXTRA_COMMENTS"
         const val EXTRA_FROM_NOTIFICATION = "EXTRA_FROM_NOTIFICATION"
-
-        fun Context.navigateToPostDetails(post: Post) {
-            val intent = Intent(this, PostDetailsActivity::class.java)
-            intent.putExtra(EXTRA_POST, post)
-            startActivity(intent)
-        }
     }
 }
