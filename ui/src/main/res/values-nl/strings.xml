@@ -25,4 +25,6 @@
     <string name="code_format_help">Voorbeeldcodes: XX-XX-XX of XX-XX-XXXX</string>
     <string name="settings">Instellingen</string>
     <string name="log_out">Log uit</string>
+    <string name="idea">Idee</string>
+    <string name="unknown">Onbekend</string>
 </resources>

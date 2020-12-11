@@ -60,6 +60,12 @@
             android:text="@string/gathering" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/idea_radio_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/idea" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/sustainability_radio_button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

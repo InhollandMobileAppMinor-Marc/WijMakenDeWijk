@@ -29,6 +29,7 @@ class CreatePostActivity : AppCompatActivity() {
                 binding.content.serviceRadioButton.id -> "SERVICE"
                 binding.content.gatheringRadioButton.id -> "GATHERING"
                 binding.content.sustainabilityRadioButton.id -> "SUSTAINABILITY"
+                binding.content.ideaRadioButton.id -> "IDEA"
                 else -> return@setOnClickListener
             }
 

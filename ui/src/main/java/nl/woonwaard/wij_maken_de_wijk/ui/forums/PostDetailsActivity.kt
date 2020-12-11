@@ -50,7 +50,7 @@ class PostDetailsActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
         }
 
-        viewModel.isFromNotification = intent.getBooleanExtra(EXTRA_FROM_NOTIFICATION, true)
+        viewModel.isFromNotification = intent.getBooleanExtra(EXTRA_FROM_NOTIFICATION, false)
 
         if(!viewModel.isFromNotification) {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)

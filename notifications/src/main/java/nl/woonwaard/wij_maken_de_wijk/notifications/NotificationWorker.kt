@@ -44,7 +44,6 @@ class NotificationWorker(context: Context, params: WorkerParameters) : Coroutine
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY)
             .putExtra(EXTRA_POST, notification.post)
             .putExtra(EXTRA_FROM_NOTIFICATION, true)
-            .putExtra(EXTRA_COMMENTS, notification.comments)
 
         val postDetailsPendingIntent = PendingIntent.getActivity(applicationContext, notification.id.hashCode(), postDetailsIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
@@ -53,7 +52,6 @@ class NotificationWorker(context: Context, params: WorkerParameters) : Coroutine
             .setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY)
             .putExtra(EXTRA_POST, notification.post)
             .putExtra(EXTRA_FROM_NOTIFICATION, true)
-            .putExtra(EXTRA_COMMENTS, notification.comments)
 
         val postDetailsBubblePendingIntent = PendingIntent.getActivity(applicationContext, notification.id.hashCode() + 1, postDetailsBubbleIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 

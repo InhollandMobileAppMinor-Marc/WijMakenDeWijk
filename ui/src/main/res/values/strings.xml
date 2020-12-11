@@ -24,4 +24,6 @@
     <string name="code_format_help">Example codes: XX-XX-XX or XX-XX-XXXX</string>
     <string name="settings">Settings</string>
     <string name="log_out">Log out</string>
+    <string name="idea">Idea</string>
+    <string name="unknown">Unknown</string>
 </resources>

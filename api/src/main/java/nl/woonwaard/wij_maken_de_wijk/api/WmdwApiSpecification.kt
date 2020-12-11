@@ -78,6 +78,7 @@ interface WmdwApiSpecification {
     suspend fun getNewNotifications(
         @Header("Authorization") authorization: String,
         @Query("inlineComments") inlineComments: Boolean = true,
-        @Query("inlineAuthor") inlineAuthor: Boolean = true
+        @Query("inlineAuthor") inlineAuthor: Boolean = true,
+        @Query("inlinePost") inlinePost: Boolean = true
     ): Response<Set<Notification>>
 }

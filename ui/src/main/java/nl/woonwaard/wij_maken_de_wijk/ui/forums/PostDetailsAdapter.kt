@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 import nl.woonwaard.wij_maken_de_wijk.domain.utils.toSentenceCasing
+import nl.woonwaard.wij_maken_de_wijk.ui.R
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.CommentBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.PostHeaderBinding
 
@@ -47,7 +48,13 @@ class PostDetailsAdapter(
                 holder.binding.title.text = post.title
                 holder.binding.body.text = post.body
                 holder.binding.user.text = post.author.nameWithLocation
-                holder.binding.category.text = post.category.toSentenceCasing()
+                holder.binding.category.setText(when(post.category) {
+                    "SERVICE" -> R.string.service
+                    "GATHERING" -> R.string.gathering
+                    "SUSTAINABILITY" -> R.string.sustainability
+                    "IDEA" -> R.string.idea
+                    else -> R.string.unknown
+                })
                 holder.binding.time.text = DateUtils.getRelativeTimeSpanString(
                     post.timestamp.time,
                     System.currentTimeMillis(),
