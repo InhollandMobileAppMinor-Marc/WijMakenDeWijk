@@ -27,4 +27,5 @@
     <string name="log_out">Log uit</string>
     <string name="idea">Idee</string>
     <string name="unknown">Onbekend</string>
+    <string name="check_for_notifications">Controleren op nieuwe notificaties</string>
 </resources>

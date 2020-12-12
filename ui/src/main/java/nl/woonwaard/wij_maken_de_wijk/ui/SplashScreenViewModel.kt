@@ -11,7 +11,7 @@ import nl.woonwaard.wij_maken_de_wijk.domain.services.NotificationWorkScheduler
 
 class SplashScreenViewModel(
     private val accountManager: AccountManager,
-    notificationWorkScheduler: NotificationWorkScheduler
+    private val notificationWorkScheduler: NotificationWorkScheduler
 ) : ViewModel() {
     private val mutableShouldShowSplashScreen = MutableLiveData(SplashScreenState.SHOULD_SHOW)
 
@@ -23,6 +23,11 @@ class SplashScreenViewModel(
 
     init {
         notificationWorkScheduler.schedule()
+    }
+
+    fun ensureCorrectNotificationConfiguration(areNotificationsEnabled: Boolean = true) {
+        if(areNotificationsEnabled) notificationWorkScheduler.schedule()
+        else notificationWorkScheduler.cancel()
     }
 
     fun onSplashScreenShown() {

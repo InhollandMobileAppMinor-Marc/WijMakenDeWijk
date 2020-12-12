@@ -11,6 +11,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class SettingsActivity : AppCompatActivity() {
     private val viewModel by viewModel<SettingsViewModel>()
 
+    private val notificationPreferences = getSharedPreferences("notifications", Context.MODE_PRIVATE)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,9 +32,18 @@ class SettingsActivity : AppCompatActivity() {
                 finish()
             }
         }
+
+        binding.content.checkForNotificationsToggle.isChecked = notificationPreferences.getBoolean(CHECK_FOR_NOTIFICATIONS, true)
+
+        binding.content.checkForNotificationsToggle.setOnCheckedChangeListener { buttonView, isChecked ->
+            viewModel.ensureCorrectNotificationConfiguration(isChecked)
+            notificationPreferences.edit().putBoolean(CHECK_FOR_NOTIFICATIONS, isChecked).apply()
+        }
     }
 
     companion object {
+        const val CHECK_FOR_NOTIFICATIONS = "CHECK_FOR_NOTIFICATIONS"
+
         fun Context.navigateToSettings() {
             startActivity(Intent(this, SettingsActivity::class.java))
         }

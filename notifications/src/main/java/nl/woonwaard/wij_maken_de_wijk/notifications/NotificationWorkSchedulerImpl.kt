@@ -11,13 +11,20 @@ import java.util.concurrent.TimeUnit
 class NotificationWorkSchedulerImpl(
     private val context: Context
 ) : NotificationWorkScheduler {
+    private val workManager by lazy {
+        WorkManager.getInstance(context)
+    }
+
     override fun schedule() {
         // Only check every 5 hours because of free back-end limitations.
         val workRequest = PeriodicWorkRequest.Builder(NotificationWorker::class.java, 5, TimeUnit.HOURS)
             .setInitialDelay(45, TimeUnit.SECONDS)
             .build()
 
-        val workManager = WorkManager.getInstance(context)
         workManager.enqueueUniquePeriodicWork(NotificationWorker.WORKER_ID, ExistingPeriodicWorkPolicy.REPLACE, workRequest)
+    }
+
+    override fun cancel() {
+        workManager.cancelAllWork()
     }
 }
