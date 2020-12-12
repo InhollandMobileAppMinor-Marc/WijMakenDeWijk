@@ -11,7 +11,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class SettingsActivity : AppCompatActivity() {
     private val viewModel by viewModel<SettingsViewModel>()
 
-    private val notificationPreferences = getSharedPreferences("notifications", Context.MODE_PRIVATE)
+    private val notificationPreferences by lazy {
+        getSharedPreferences("notifications", Context.MODE_PRIVATE)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
