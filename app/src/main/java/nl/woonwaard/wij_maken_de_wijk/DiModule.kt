@@ -38,6 +38,10 @@ val weMakeTheDistrictModule = module {
         get<WmdwApi>()
     }
 
+    single<ApiStatusController> {
+        get<WmdwApi>()
+    }
+
     single<UiClasses> {
         object : UiClasses {
             override val postDetails: Class<*>
@@ -53,7 +57,7 @@ val weMakeTheDistrictModule = module {
     }
 
     viewModel {
-        SplashScreenViewModel(get(), get())
+        SplashScreenViewModel(get(), get(), get())
     }
 
     viewModel {

@@ -3,6 +3,7 @@ package nl.woonwaard.wij_maken_de_wijk.ui
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import nl.woonwaard.wij_maken_de_wijk.domain.models.ApiStatus
 import nl.woonwaard.wij_maken_de_wijk.ui.MainActivity.Companion.navigateToMain
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.LoginActivity.Companion.navigateToLogin
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivitySplashScreenBinding
@@ -26,16 +27,20 @@ class SplashScreenActivity : AppCompatActivity() {
         viewModel.ensureCorrectNotificationConfiguration(notificationPreferences.getBoolean(
             SettingsActivity.CHECK_FOR_NOTIFICATIONS, true))
 
+        viewModel.apiStatus.observe(this) {
+            when (it) {
+                is ApiStatus.ConnectionError -> navigateToMain()
+                is ApiStatus.LoggedOut -> navigateToLogin()
+                is ApiStatus.LoggedIn -> navigateToMain()
+            }
+
+            viewModel.onDismissed()
+        }
+
         viewModel.shouldShowSplashScreen.observe(this) {
             when (it) {
                 SplashScreenViewModel.SplashScreenState.SHOULD_SHOW -> {
                     viewModel.onSplashScreenShown()
-                }
-                SplashScreenViewModel.SplashScreenState.SHOULD_DISMISS -> {
-                    if(viewModel.isLoggedIn) navigateToMain()
-                    else navigateToLogin()
-
-                    viewModel.onDismissed()
                 }
                 SplashScreenViewModel.SplashScreenState.DISMISSED -> {
                     finish()

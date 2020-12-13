@@ -6,24 +6,28 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import nl.woonwaard.wij_maken_de_wijk.domain.models.ApiStatus
 import nl.woonwaard.wij_maken_de_wijk.domain.services.AccountManager
+import nl.woonwaard.wij_maken_de_wijk.domain.services.ApiStatusController
 import nl.woonwaard.wij_maken_de_wijk.domain.services.NotificationWorkScheduler
 
 class SplashScreenViewModel(
     private val accountManager: AccountManager,
-    private val notificationWorkScheduler: NotificationWorkScheduler
+    private val notificationWorkScheduler: NotificationWorkScheduler,
+    private val apiStatusController: ApiStatusController
 ) : ViewModel() {
     private val mutableShouldShowSplashScreen = MutableLiveData(SplashScreenState.SHOULD_SHOW)
 
     val shouldShowSplashScreen: LiveData<SplashScreenState>
         get() = mutableShouldShowSplashScreen
 
+    private val mutableApiStatus = MutableLiveData<ApiStatus>()
+
+    val apiStatus: LiveData<ApiStatus>
+        get() = mutableApiStatus
+
     val isLoggedIn: Boolean
         get() = accountManager.token != null
-
-    init {
-        notificationWorkScheduler.schedule()
-    }
 
     fun ensureCorrectNotificationConfiguration(areNotificationsEnabled: Boolean = true) {
         if(areNotificationsEnabled) notificationWorkScheduler.schedule()
@@ -33,7 +37,13 @@ class SplashScreenViewModel(
     fun onSplashScreenShown() {
         mutableShouldShowSplashScreen.postValue(SplashScreenState.SHOWN)
         viewModelScope.launch {
-            delay(DELAY)
+            notificationWorkScheduler.schedule()
+
+            viewModelScope.launch {
+                val status = apiStatusController.getApiStatus()
+                mutableApiStatus.postValue(status)
+            }
+
             mutableShouldShowSplashScreen.postValue(SplashScreenState.SHOULD_DISMISS)
         }
     }
@@ -48,9 +58,5 @@ class SplashScreenViewModel(
 
     enum class SplashScreenState {
         SHOULD_SHOW, SHOWN, SHOULD_DISMISS, DISMISSED, CANCELLED
-    }
-
-    companion object {
-        const val DELAY = 2000L
     }
 }

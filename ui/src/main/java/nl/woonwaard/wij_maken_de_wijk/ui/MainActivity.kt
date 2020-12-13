@@ -6,13 +6,21 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabColorSchemeParams
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityMainBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.PinboardOverviewActivity.Companion.navigateToPinboardOverview
 import nl.woonwaard.wij_maken_de_wijk.ui.settings.SettingsActivity.Companion.navigateToSettings
+import nl.woonwaard.wij_maken_de_wijk.ui.utils.CustomTabsHelper
 import nl.woonwaard.wij_maken_de_wijk.ui.utils.terminateApplication
 
 class MainActivity : AppCompatActivity() {
+    private val customTabsSession by lazy {
+        CustomTabsHelper.createSession(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -26,11 +34,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.content.repairsButton.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, WOONWAARD_REPAIR_URL.toUri()))
+            openInBrowser(WOONWAARD_REPAIR_URL)
         }
 
         binding.content.neighborhoodMediationButton.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, WOONWAARD_NEIGHBORHOOD_MEDIATION_URL.toUri()))
+            openInBrowser(WOONWAARD_NEIGHBORHOOD_MEDIATION_URL)
+        }
+
+        customTabsSession.observe(this) {
+            it?.mayLaunchUrl(WOONWAARD_REPAIR_URL.toUri(), null, null)
+            it?.mayLaunchUrl(WOONWAARD_NEIGHBORHOOD_MEDIATION_URL.toUri(), null, null)
         }
     }
 
@@ -50,6 +63,25 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         terminateApplication()
+    }
+
+    private fun openInBrowser(url: String) {
+        val customTabsBuilder = CustomTabsIntent.Builder()
+            .setDefaultColorSchemeParams(
+                CustomTabColorSchemeParams.Builder()
+                    .setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary))
+                    .setSecondaryToolbarColor(ContextCompat.getColor(this, R.color.colorAccent))
+                    .build()
+            )
+            .setColorScheme(CustomTabsIntent.COLOR_SCHEME_SYSTEM)
+            .setShareState(CustomTabsIntent.SHARE_STATE_ON)
+            .setUrlBarHidingEnabled(true)
+            .setShowTitle(true)
+
+        val session = customTabsSession.value
+        if(session != null) customTabsBuilder.setSession(session)
+
+        customTabsBuilder.build().launchUrl(this, url.toUri())
     }
 
     companion object {
