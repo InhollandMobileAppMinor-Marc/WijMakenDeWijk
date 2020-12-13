@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="nl.woonwaard.wij_maken_de_wijk">
+
+    <uses-sdk tools:overrideLibrary="androidx.security" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -68,8 +71,8 @@
         <activity
             android:name=".ui.forums.PostDetailsBubbleActivity"
             android:allowEmbedded="true"
-            android:launchMode="standard"
             android:documentLaunchMode="always"
+            android:launchMode="standard"
             android:noHistory="true"
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionBar" />

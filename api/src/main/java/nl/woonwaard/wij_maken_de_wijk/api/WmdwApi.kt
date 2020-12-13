@@ -1,6 +1,7 @@
 package nl.woonwaard.wij_maken_de_wijk.api
 
 import android.content.Context
+import android.util.Log
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -147,7 +148,10 @@ class WmdwApi(context: Context) : PostsRepository, CommentsRepository, UsersRepo
         return when {
             status == null -> ApiStatus.ConnectionError
             status.loggedIn && status.user != null -> ApiStatus.LoggedIn(status.user)
-            else -> ApiStatus.LoggedOut
+            else -> {
+                logout()
+                ApiStatus.LoggedOut
+            }
         }
     }
 

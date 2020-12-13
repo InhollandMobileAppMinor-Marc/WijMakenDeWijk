@@ -2,11 +2,12 @@ package nl.woonwaard.wij_maken_de_wijk.api.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Build
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 
 fun Context.getPreferences(name: String = this.packageName + "_preferences", encrypted: Boolean = true): SharedPreferences {
-    return if(encrypted) EncryptedSharedPreferences.create(
+    return if(encrypted && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) EncryptedSharedPreferences.create(
         this.packageName + "_preferences",
         MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC),
         this,

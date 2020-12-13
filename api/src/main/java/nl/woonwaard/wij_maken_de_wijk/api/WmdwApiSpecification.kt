@@ -18,7 +18,7 @@ interface WmdwApiSpecification {
         @Body credentials: Credentials
     ): Response<LoginResponse>
 
-    @POST("status")
+    @GET("status")
     suspend fun getStatus(
         @Header("Authorization") authorization: String? = null
     ): Response<StatusResponse>
