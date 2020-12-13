@@ -10,19 +10,29 @@ import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import nl.woonwaard.wij_maken_de_wijk.domain.services.AccountManager
+import nl.woonwaard.wij_maken_de_wijk.ui.authentication.LoginActivity.Companion.navigateToLogin
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityMainBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.PinboardOverviewActivity.Companion.navigateToPinboardOverview
 import nl.woonwaard.wij_maken_de_wijk.ui.settings.SettingsActivity.Companion.navigateToSettings
 import nl.woonwaard.wij_maken_de_wijk.ui.utils.CustomTabsHelper
 import nl.woonwaard.wij_maken_de_wijk.ui.utils.terminateApplication
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
     private val customTabsSession by lazy {
         CustomTabsHelper.createSession(this)
     }
 
+    private val accountManager by inject<AccountManager>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if(accountManager.token == null) {
+            navigateToLogin()
+            finish()
+        }
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

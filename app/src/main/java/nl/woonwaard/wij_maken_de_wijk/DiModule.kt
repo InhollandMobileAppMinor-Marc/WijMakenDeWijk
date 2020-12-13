@@ -2,6 +2,7 @@ package nl.woonwaard.wij_maken_de_wijk
 
 import nl.woonwaard.wij_maken_de_wijk.api.WmdwApi
 import nl.woonwaard.wij_maken_de_wijk.domain.services.*
+import nl.woonwaard.wij_maken_de_wijk.notifications.NotificationManagerImpl
 import nl.woonwaard.wij_maken_de_wijk.notifications.NotificationWorkSchedulerImpl
 import nl.woonwaard.wij_maken_de_wijk.notifications.NotificationWorker
 import nl.woonwaard.wij_maken_de_wijk.notifications.UiClasses
@@ -50,6 +51,10 @@ val weMakeTheDistrictModule = module {
             override val postDetailsBubble: Class<*>
                 get() = PostDetailsBubbleActivity::class.java
         }
+    }
+
+    single<NotificationManager> {
+        NotificationManagerImpl(get())
     }
 
     single<NotificationWorkScheduler> {

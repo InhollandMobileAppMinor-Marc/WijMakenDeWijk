@@ -82,6 +82,8 @@
             android:parentActivityName=".ui.forums.PinboardOverviewActivity"
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <receiver android:name="nl.woonwaard.wij_maken_de_wijk.notifications.ReplyReceiver" />
     </application>
 
 </manifest>

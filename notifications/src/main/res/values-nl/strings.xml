@@ -3,4 +3,7 @@
     <string name="notification_title">Nieuwe reactie(s) op je bericht</string>
     <string name="notification_content">Klik om te bekijken</string>
     <string name="notification_replies_channel">Reacties op jouw berichten</string>
+    <string name="notification_reply_label">Antwoorden</string>
+    <string name="notification_reply_type_hint">Antwoord hier typen</string>
+    <string name="notification_open_label">Details weergeven</string>
 </resources>
