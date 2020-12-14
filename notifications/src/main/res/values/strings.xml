@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notification_title">New reaction(s) on your post</string>
+    <string name="notification_content">Click to view</string>
+    <string name="notification_replies_channel">Replies on your posts</string>
+    <string name="notification_reply_label">Reply</string>
+    <string name="notification_reply_type_hint">Type your reply here...</string>
+    <string name="notification_open_label">View details</string>
+</resources>

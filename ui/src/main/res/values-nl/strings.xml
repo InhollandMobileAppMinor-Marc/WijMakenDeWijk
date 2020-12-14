@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Wij maken de Wijk</string>
+    <string name="start">Start</string>
+    <string name="pinboard">Babbel</string>
+    <string name="neighborhood_mediation">Buurtbemiddeling</string>
+    <string name="repairs">Reparaties</string>
+    <string name="comment_placeholder">Typ hier jouw bericht</string>
+    <string name="login">Login</string>
+    <string name="log_in">Log in</string>
+    <string name="email">E-mail</string>
+    <string name="password">Wachtwoord</string>
+    <string name="new_post">Nieuwe babbel</string>
+    <string name="title">Titel</string>
+    <string name="message">Bericht</string>
+    <string name="submit">Plaatsen</string>
+    <string name="service">Dienst</string>
+    <string name="gathering">Samenkomst</string>
+    <string name="sustainability">Duurzaamheid</string>
+    <string name="type">Type</string>
+    <string name="signup">Registreren</string>
+    <string name="sign_up">Registreer</string>
+    <string name="name">Naam</string>
+    <string name="code">Code</string>
+    <string name="code_format_help">Voorbeeldcodes: XX-XX-XX of XX-XX-XXXX</string>
+    <string name="settings">Instellingen</string>
+    <string name="log_out">Log uit</string>
+    <string name="idea">Idee</string>
+    <string name="unknown">Onbekend</string>
+    <string name="check_for_notifications">Controleren op nieuwe notificaties</string>
+    <string name="no_connection">Geen internetverbinding</string>
+    <string name="try_again">Opnieuw proberen</string>
+    <string name="cancel">Annuleren</string>
+</resources>
