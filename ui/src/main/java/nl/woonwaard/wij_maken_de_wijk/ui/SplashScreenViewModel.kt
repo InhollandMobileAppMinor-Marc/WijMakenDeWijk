@@ -36,14 +36,10 @@ class SplashScreenViewModel(
 
     fun onSplashScreenShown() {
         mutableShouldShowSplashScreen.postValue(SplashScreenState.SHOWN)
+
         viewModelScope.launch {
-            notificationWorkScheduler.schedule()
-
-            viewModelScope.launch {
-                val status = apiStatusController.getApiStatus()
-                mutableApiStatus.postValue(status)
-            }
-
+            val status = apiStatusController.getApiStatus()
+            mutableApiStatus.postValue(status)
             mutableShouldShowSplashScreen.postValue(SplashScreenState.SHOULD_DISMISS)
         }
     }

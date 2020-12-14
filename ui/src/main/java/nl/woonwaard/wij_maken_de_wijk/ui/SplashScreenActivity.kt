@@ -3,6 +3,7 @@ package nl.woonwaard.wij_maken_de_wijk.ui
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import nl.woonwaard.wij_maken_de_wijk.domain.models.ApiStatus
 import nl.woonwaard.wij_maken_de_wijk.ui.MainActivity.Companion.navigateToMain
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.LoginActivity.Companion.navigateToLogin
@@ -29,7 +30,18 @@ class SplashScreenActivity : AppCompatActivity() {
 
         viewModel.apiStatus.observe(this) {
             when (it) {
-                is ApiStatus.ConnectionError -> navigateToMain()
+                is ApiStatus.ConnectionError -> {
+                    MaterialAlertDialogBuilder(this)
+                        .setTitle(resources.getString(R.string.no_connection))
+                        .setNegativeButton(resources.getString(R.string.cancel)) { _, _ ->
+                            viewModel.onCancelled()
+                        }
+                        .setPositiveButton(resources.getString(R.string.try_again)) { _, _ ->
+                            viewModel.onSplashScreenShown()
+                        }
+                        .show()
+                    return@observe
+                }
                 is ApiStatus.LoggedOut -> navigateToLogin()
                 is ApiStatus.LoggedIn -> navigateToMain()
             }

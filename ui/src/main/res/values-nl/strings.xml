@@ -28,4 +28,7 @@
     <string name="idea">Idee</string>
     <string name="unknown">Onbekend</string>
     <string name="check_for_notifications">Controleren op nieuwe notificaties</string>
+    <string name="no_connection">Geen internetverbinding</string>
+    <string name="try_again">Opnieuw proberen</string>
+    <string name="cancel">Annuleren</string>
 </resources>

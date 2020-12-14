@@ -27,4 +27,7 @@
     <string name="idea">Idea</string>
     <string name="unknown">Unknown</string>
     <string name="check_for_notifications">Check for new notifications</string>
+    <string name="no_connection">No internet connection</string>
+    <string name="try_again">Try again</string>
+    <string name="cancel">Cancel</string>
 </resources>
