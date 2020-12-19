@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import nl.woonwaard.wij_maken_de_wijk.ui.MainActivity.Companion.navigateToMain
+import nl.woonwaard.wij_maken_de_wijk.ui.R
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityRegistrationBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -24,12 +26,36 @@ class RegistrationActivity : AppCompatActivity() {
         binding.content.signup.setOnClickListener {
             hideKeyboard()
 
-            viewModel.signup(
-                binding.content.codeInputField.text.toString(),
-                binding.content.nameInputField.text.toString(),
-                binding.content.emailInputField.text.toString(),
-                binding.content.passwordInputField.text.toString()
-            )
+            val code = binding.content.codeInputField.text.toString()
+            val isCodeCorrect = viewModel.isCodeCorrect(code)
+
+            val email = binding.content.emailInputField.text.toString()
+            val isEmailCorrect = viewModel.isEmailCorrect(email)
+
+            if(!isCodeCorrect) {
+                binding.content.codeField.error = getString(R.string.incorrect_code)
+            }
+
+            if(!isEmailCorrect) {
+                binding.content.emailField.error = getString(R.string.invalid_email)
+            }
+
+            if(isCodeCorrect && isEmailCorrect) {
+                viewModel.signup(
+                    code,
+                    binding.content.nameInputField.text.toString(),
+                    email,
+                    binding.content.passwordInputField.text.toString()
+                )
+            }
+        }
+
+        binding.content.codeInputField.doOnTextChanged { _, _, _, _ ->
+            binding.content.codeField.error = null
+        }
+
+        binding.content.emailInputField.doOnTextChanged { _, _, _, _ ->
+            binding.content.emailField.error = null
         }
 
         viewModel.isLoading.observe(this) {

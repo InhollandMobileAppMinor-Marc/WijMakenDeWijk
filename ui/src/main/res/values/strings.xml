@@ -30,4 +30,6 @@
     <string name="no_connection">No internet connection</string>
     <string name="try_again">Try again</string>
     <string name="cancel">Cancel</string>
+    <string name="incorrect_code">Incorrect code</string>
+    <string name="invalid_email">Invalid email</string>
 </resources>
