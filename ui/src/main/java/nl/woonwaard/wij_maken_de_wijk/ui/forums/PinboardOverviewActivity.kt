@@ -4,8 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
+import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityPinboardOverviewBinding
+import nl.woonwaard.wij_maken_de_wijk.ui.databinding.PinboardListItemBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.CreatePostActivity.Companion.navigateToPostCreation
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.PostDetailsActivity.Companion.navigateToPostDetails
+import nl.woonwaard.wij_maken_de_wijk.ui.utils.GenericViewBindingRecyclerViewAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PinboardOverviewActivity : AppCompatActivity() {
@@ -20,7 +25,18 @@ class PinboardOverviewActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val adapter = PinboardAdapter(viewModel.posts)
+        val adapter = GenericViewBindingRecyclerViewAdapter.create(
+            viewModel.posts as LiveData<Collection<Post>>,
+            PinboardListItemBinding::inflate
+        ) { binding, element, _ ->
+            binding.cardView.setOnClickListener {
+                it.context.navigateToPostDetails(element)
+            }
+
+            binding.title.text = element.title
+
+            binding.content.text = element.body.replace('\n', ' ')
+        }
 
         binding.content.recyclerView.setHasFixedSize(true)
         binding.content.recyclerView.adapter = adapter
