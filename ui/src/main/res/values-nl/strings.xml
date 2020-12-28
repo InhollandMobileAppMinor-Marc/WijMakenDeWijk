@@ -39,4 +39,5 @@
     <string name="change_password">Wijzig wachtwoord</string>
     <string name="change_email">Wijzig e-mail</string>
     <string name="ideas">Ideeën</string>
+    <string name="deleted">Verwijderd</string>
 </resources>

@@ -33,7 +33,7 @@ class PinboardOverviewViewModel(
 
         viewModelScope.launch {
             val posts = postsRepository.getAllPosts()
-            mutablePosts.postValue(posts)
+            mutablePosts.postValue(posts.filter { !it.deleted }.toSet())
             mutableIsLoading.postValue(false)
         }
     }

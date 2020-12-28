@@ -12,6 +12,7 @@ import nl.woonwaard.wij_maken_de_wijk.domain.utils.toSentenceCasing
 import nl.woonwaard.wij_maken_de_wijk.ui.R
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.CommentBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.PostHeaderBinding
+import nl.woonwaard.wij_maken_de_wijk.ui.utils.context
 
 class PostDetailsAdapter(
     private val post: LiveData<Post>,
@@ -43,29 +44,39 @@ class PostDetailsAdapter(
     override fun onBindViewHolder(holder: PostDetailsViewHolder, position: Int) {
         when (holder) {
             is PostDetailsViewHolder.HeaderViewHolder -> {
+                val binding = holder.binding
                 val post = post.value!!
-                holder.binding.title.visibility = if(showTitleInHeader) View.VISIBLE else View.GONE
-                holder.binding.title.text = post.title
-                holder.binding.body.text = post.body
-                holder.binding.user.text = post.author.nameWithLocation
-                holder.binding.category.setText(when(post.category) {
+                binding.title.visibility = if(showTitleInHeader) View.VISIBLE else View.GONE
+                binding.title.text = post.title
+                binding.body.text =
+                    if(post.deleted) binding.context.getString(R.string.deleted)
+                    else post.body
+                binding.user.text =
+                    if(post.author.deleted) binding.context.getString(R.string.deleted)
+                    else post.author.nameWithLocation
+                binding.category.setText(when(post.category) {
                     "SERVICE" -> R.string.service
                     "GATHERING" -> R.string.gathering
                     "SUSTAINABILITY" -> R.string.sustainability
                     "IDEA" -> R.string.idea
                     else -> R.string.unknown
                 })
-                holder.binding.time.text = DateUtils.getRelativeTimeSpanString(
+                binding.time.text = DateUtils.getRelativeTimeSpanString(
                     post.timestamp.time,
                     System.currentTimeMillis(),
                     DateUtils.MINUTE_IN_MILLIS
                 )
             }
             is PostDetailsViewHolder.CommentViewHolder -> {
+                val binding = holder.binding
                 val comment = comments.value!!.elementAt(position - 1)
-                holder.binding.body.text = comment.body
-                holder.binding.user.text = comment.author.nameWithLocation
-                holder.binding.time.text = DateUtils.getRelativeTimeSpanString(
+                binding.body.text =
+                    if(comment.deleted) binding.context.getString(R.string.deleted)
+                    else comment.body
+                binding.user.text =
+                    if(comment.author.deleted) binding.context.getString(R.string.deleted)
+                    else comment.author.nameWithLocation
+                binding.time.text = DateUtils.getRelativeTimeSpanString(
                     comment.timestamp.time,
                     System.currentTimeMillis(),
                     DateUtils.MINUTE_IN_MILLIS
