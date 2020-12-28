@@ -17,7 +17,7 @@ class NotificationWorkSchedulerImpl(
     override fun schedule() {
         // Only check every 5 hours because of free back-end limitations.
         val workRequest = PeriodicWorkRequest.Builder(NotificationWorker::class.java, 5, TimeUnit.HOURS)
-            .setInitialDelay(30, TimeUnit.SECONDS)
+            .setInitialDelay(20, TimeUnit.SECONDS)
             .build()
 
         workManager.enqueueUniquePeriodicWork(NotificationWorker.WORKER_ID, ExistingPeriodicWorkPolicy.REPLACE, workRequest)

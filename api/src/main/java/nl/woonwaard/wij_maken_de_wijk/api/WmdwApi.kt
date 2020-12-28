@@ -9,6 +9,7 @@ import nl.woonwaard.wij_maken_de_wijk.domain.models.*
 import nl.woonwaard.wij_maken_de_wijk.domain.services.*
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import javax.net.ssl.SSLPeerUnverifiedException
 
 class WmdwApi(context: Context) : PostsRepository, CommentsRepository, UsersRepository, NotificationsRepository, AccountManager, ApiStatusController {
     override var token: String? = null
@@ -40,6 +41,8 @@ class WmdwApi(context: Context) : PostsRepository, CommentsRepository, UsersRepo
                 // Network is offline
                 null
             } catch (error: SocketTimeoutException) {
+                null
+            } catch (error: SSLPeerUnverifiedException) {
                 null
             }
         }
@@ -131,7 +134,7 @@ class WmdwApi(context: Context) : PostsRepository, CommentsRepository, UsersRepo
             putString(PREFERENCES_TOKEN, token)
         }
 
-        return token != null
+        return isLoggedIn
     }
 
     override fun logout() {

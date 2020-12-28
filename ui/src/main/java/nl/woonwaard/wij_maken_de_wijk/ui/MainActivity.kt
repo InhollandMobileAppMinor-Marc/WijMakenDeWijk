@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if(accountManager.token == null) {
+        if(!accountManager.isLoggedIn) {
             navigateToLogin()
             finish()
         }
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         binding.content.pinboardButton.setOnClickListener {
-            navigateToPinboardOverview()
+            navigateToPinboardOverview(listOf("SERVICE", "GATHERING", "SUSTAINABILITY", "OTHER"))
         }
 
         binding.content.repairsButton.setOnClickListener {
@@ -48,6 +48,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.content.neighborhoodMediationButton.setOnClickListener {
             openInBrowser(WOONWAARD_NEIGHBORHOOD_MEDIATION_URL)
+        }
+
+        binding.content.ideasButton.setOnClickListener {
+            navigateToPinboardOverview(listOf("IDEA"))
         }
 
         customTabsSession.observe(this) {

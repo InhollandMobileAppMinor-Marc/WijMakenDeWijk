@@ -50,7 +50,7 @@ interface WmdwApiSpecification {
     suspend fun deletePostById(
         @Header("Authorization") authorization: String,
         @Path("id") id: String
-    ): Response<Nothing?>
+    ): Response<Unit>
 
     @GET("posts/{postId}/comments")
     suspend fun getCommentsForPost(
@@ -71,7 +71,7 @@ interface WmdwApiSpecification {
     suspend fun deleteCommentById(
         @Header("Authorization") authorization: String,
         @Path("id") id: String
-    ): Response<Nothing?>
+    ): Response<Unit>
 
     @POST("posts/{postId}/comments")
     suspend fun addCommentToPost(
@@ -96,7 +96,7 @@ interface WmdwApiSpecification {
     suspend fun deleteUserById(
         @Header("Authorization") authorization: String,
         @Path("id") id: String
-    ): Response<Nothing?>
+    ): Response<Unit>
 
     @DELETE("notifications")
     suspend fun getNewNotifications(
