@@ -8,4 +8,8 @@ interface CommentsRepository {
     suspend fun getCommentsForPost(post: Post): Set<Comment>
 
     suspend fun addCommentToPost(post: Post, comment: CreatedComment): Comment?
+
+    suspend fun deleteComment(comment: Comment): Boolean
+
+    suspend fun deleteComment(id: String): Boolean
 }

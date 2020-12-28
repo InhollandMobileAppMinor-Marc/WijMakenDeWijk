@@ -9,4 +9,8 @@ interface PostsRepository {
     suspend fun getPostById(id: String): Post?
 
     suspend fun addPost(createdPost: CreatedPost): Post?
+
+    suspend fun deletePost(post: Post): Boolean
+
+    suspend fun deletePost(id: String): Boolean
 }

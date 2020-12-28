@@ -8,17 +8,51 @@
     tools:context=".settings.SettingsActivity"
     tools:theme="@style/AppTheme.NoActionBar">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/logout"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/account_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/log_out"
+        android:text="@string/account"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textColor="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/logout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/log_out"
+        app:layout_constraintEnd_toEndOf="@id/account_text"
+        app:layout_constraintStart_toStartOf="@id/account_text"
+        app:layout_constraintTop_toBottomOf="@id/account_text" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/delete_account"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/delete_account"
+        app:layout_constraintEnd_toEndOf="@id/logout"
+        app:layout_constraintStart_toStartOf="@id/logout"
+        app:layout_constraintTop_toBottomOf="@id/logout" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/notifications_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/notifications"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textColor="?attr/colorPrimary"
+        app:layout_constraintEnd_toEndOf="@id/delete_account"
+        app:layout_constraintStart_toStartOf="@id/delete_account"
+        app:layout_constraintTop_toBottomOf="@id/delete_account" />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/check_for_notifications_toggle"
@@ -27,8 +61,8 @@
         android:layout_marginTop="8dp"
         android:checked="true"
         android:text="@string/check_for_notifications"
-        app:layout_constraintEnd_toEndOf="@id/logout"
-        app:layout_constraintStart_toStartOf="@id/logout"
-        app:layout_constraintTop_toBottomOf="@id/logout" />
+        app:layout_constraintEnd_toEndOf="@id/notifications_text"
+        app:layout_constraintStart_toStartOf="@id/notifications_text"
+        app:layout_constraintTop_toBottomOf="@id/notifications_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

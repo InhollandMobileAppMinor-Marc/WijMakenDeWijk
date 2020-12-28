@@ -32,4 +32,7 @@
     <string name="cancel">Cancel</string>
     <string name="incorrect_code">Incorrect code</string>
     <string name="invalid_email">Invalid email</string>
+    <string name="delete_account">Delete account</string>
+    <string name="notifications">Notifications</string>
+    <string name="account">Account</string>
 </resources>

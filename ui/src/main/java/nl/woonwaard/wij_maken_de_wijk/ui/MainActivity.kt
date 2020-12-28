@@ -16,13 +16,12 @@ import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityMainBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.PinboardOverviewActivity.Companion.navigateToPinboardOverview
 import nl.woonwaard.wij_maken_de_wijk.ui.settings.SettingsActivity.Companion.navigateToSettings
 import nl.woonwaard.wij_maken_de_wijk.ui.utils.CustomTabsHelper
+import nl.woonwaard.wij_maken_de_wijk.ui.utils.customTabsSession
 import nl.woonwaard.wij_maken_de_wijk.ui.utils.terminateApplication
 import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
-    private val customTabsSession by lazy {
-        CustomTabsHelper.createSession(this)
-    }
+    private val customTabsSession by customTabsSession()
 
     private val accountManager by inject<AccountManager>()
 

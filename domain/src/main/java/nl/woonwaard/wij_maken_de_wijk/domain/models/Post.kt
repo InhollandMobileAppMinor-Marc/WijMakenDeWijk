@@ -15,5 +15,6 @@ data class Post(
     val timestamp: Date,
     val comments: Set<String>,
     val hallway: String,
-    val location: String
+    val location: String,
+    val deleted: Boolean
 ) : java.io.Serializable

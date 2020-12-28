@@ -37,14 +37,11 @@ class RegistrationViewModel(
         val location = Location.values().find { it.locationId == actualLocationId }?.fullName ?: return
 
         viewModelScope.launch {
-            val createdAccount = accountManager.createAccount(
+            accountManager.createAccount(
                 Registration(email, password, name, actualHouseNumberCode, actualHallwayCode, location)
             )
-            val result =
-                if(createdAccount != null) accountManager.login(Credentials(email, password))
-                else false
             mutableIsLoading.postValue(false)
-            mutableIsLoggedIn.postValue(result)
+            mutableIsLoggedIn.postValue(accountManager.isLoggedIn)
         }
     }
 

@@ -28,6 +28,10 @@ class SettingsActivity : AppCompatActivity() {
             viewModel.logout()
         }
 
+        binding.content.deleteAccount.setOnClickListener {
+            viewModel.deleteAccount()
+        }
+
         viewModel.isLoggedIn.observe(this) {
             if(!it) {
                 navigateToLogin()
@@ -37,7 +41,7 @@ class SettingsActivity : AppCompatActivity() {
 
         binding.content.checkForNotificationsToggle.isChecked = notificationPreferences.getBoolean(CHECK_FOR_NOTIFICATIONS, true)
 
-        binding.content.checkForNotificationsToggle.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.content.checkForNotificationsToggle.setOnCheckedChangeListener { _, isChecked ->
             viewModel.ensureCorrectNotificationConfiguration(isChecked)
             notificationPreferences.edit().putBoolean(CHECK_FOR_NOTIFICATIONS, isChecked).apply()
         }

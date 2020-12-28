@@ -6,4 +6,8 @@ interface UsersRepository {
     suspend fun getAllUsers(): Set<User>
 
     suspend fun getUserById(id: String): User?
+
+    suspend fun deleteUser(user: User): Boolean
+
+    suspend fun deleteUser(id: String): Boolean
 }

@@ -31,4 +31,9 @@
     <string name="no_connection">Geen internetverbinding</string>
     <string name="try_again">Opnieuw proberen</string>
     <string name="cancel">Annuleren</string>
+    <string name="incorrect_code">Ongeldige code</string>
+    <string name="invalid_email">Ongeldige e-mail</string>
+    <string name="delete_account">Verwijder account</string>
+    <string name="account">Account</string>
+    <string name="notifications">Notificaties</string>
 </resources>
