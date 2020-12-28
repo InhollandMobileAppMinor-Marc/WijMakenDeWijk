@@ -36,4 +36,7 @@
     <string name="delete_account">Verwijder account</string>
     <string name="account">Account</string>
     <string name="notifications">Notificaties</string>
+    <string name="change_password">Wijzig wachtwoord</string>
+    <string name="change_email">Wijzig e-mail</string>
+    <string name="ideas">Ideeën</string>
 </resources>

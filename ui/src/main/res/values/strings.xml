@@ -35,4 +35,7 @@
     <string name="delete_account">Delete account</string>
     <string name="notifications">Notifications</string>
     <string name="account">Account</string>
+    <string name="change_password">Change password</string>
+    <string name="change_email">Change email</string>
+    <string name="ideas">Ideas</string>
 </resources>
