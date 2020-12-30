@@ -21,7 +21,7 @@ class PostDetailsBubbleActivity : AppCompatActivity() {
         val binding = ActivityPostDetailsBubbleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adapter = PostDetailsAdapter(viewModel.post, viewModel.comments, true)
+        val adapter = PostDetailsAdapter(viewModel.post, viewModel.comments, viewModel.currentUser, true)
 
         binding.recyclerView.adapter = adapter
 

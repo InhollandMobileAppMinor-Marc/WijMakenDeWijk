@@ -4,20 +4,27 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MarginLayoutParamsCompat
+import androidx.core.view.marginEnd
+import androidx.core.view.marginStart
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 import nl.woonwaard.wij_maken_de_wijk.domain.models.PostCategory
+import nl.woonwaard.wij_maken_de_wijk.domain.models.User
 import nl.woonwaard.wij_maken_de_wijk.domain.utils.toSentenceCasing
 import nl.woonwaard.wij_maken_de_wijk.ui.R
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.CommentBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.PostHeaderBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.utils.context
+import kotlin.math.max
+import kotlin.math.min
 
 class PostDetailsAdapter(
     private val post: LiveData<Post>,
     private val comments: LiveData<Set<Comment>>,
+    private val currentUser: User? = null,
     private val showTitleInHeader: Boolean = false
 ) : RecyclerView.Adapter<PostDetailsAdapter.PostDetailsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostDetailsViewHolder {
@@ -72,16 +79,29 @@ class PostDetailsAdapter(
                 val binding = holder.binding
                 val comment = comments.value!!.elementAt(position - 1)
                 binding.body.text =
-                    if(comment.deleted) binding.context.getString(R.string.deleted)
+                    if (comment.deleted) binding.context.getString(R.string.deleted)
                     else comment.body
                 binding.user.text =
-                    if(comment.author.deleted) binding.context.getString(R.string.deleted)
+                    if (comment.author.deleted) binding.context.getString(R.string.deleted)
                     else comment.author.nameWithLocation
                 binding.time.text = DateUtils.getRelativeTimeSpanString(
                     comment.timestamp.time,
                     System.currentTimeMillis(),
                     DateUtils.MINUTE_IN_MILLIS
                 )
+
+                val startFun: (Int, Int) -> Int =
+                    if (comment.author.id == currentUser?.id) ::max else ::min
+                val endFun: (Int, Int) -> Int =
+                    if (comment.author.id == currentUser?.id) ::min else ::max
+                val marginStart = binding.view.marginStart
+                val marginEnd = binding.view.marginEnd
+                binding.view.layoutParams = binding.view.layoutParams.also {
+                    if (it is ViewGroup.MarginLayoutParams) {
+                        MarginLayoutParamsCompat.setMarginStart(it, startFun(marginStart, marginEnd))
+                        MarginLayoutParamsCompat.setMarginEnd(it, endFun(marginStart, marginEnd))
+                    }
+                }
             }
         }
     }

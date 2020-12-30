@@ -70,7 +70,7 @@ val weMakeTheDistrictModule = module {
     }
 
     viewModel {
-        PostDetailsViewModel(get(), get())
+        PostDetailsViewModel(get(), get(), get())
     }
 
     viewModel {

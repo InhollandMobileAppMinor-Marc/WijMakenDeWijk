@@ -8,13 +8,16 @@ import kotlinx.coroutines.launch
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.CreatedComment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
+import nl.woonwaard.wij_maken_de_wijk.domain.models.User
+import nl.woonwaard.wij_maken_de_wijk.domain.services.AccountManager
 import nl.woonwaard.wij_maken_de_wijk.domain.services.CommentsRepository
 import nl.woonwaard.wij_maken_de_wijk.domain.services.PostsRepository
 import java.util.*
 
 class PostDetailsViewModel(
     private val postsRepository: PostsRepository,
-    private val commentsRepository: CommentsRepository
+    private val commentsRepository: CommentsRepository,
+    private val accountManager: AccountManager
 ) : ViewModel() {
     private val mutablePost = MutableLiveData<Post>()
 
@@ -30,6 +33,9 @@ class PostDetailsViewModel(
 
     val isLoading: LiveData<Boolean>
         get() = mutableIsLoading
+
+    val currentUser: User?
+        get() = accountManager.user
 
     var isFromNotification = false
 
