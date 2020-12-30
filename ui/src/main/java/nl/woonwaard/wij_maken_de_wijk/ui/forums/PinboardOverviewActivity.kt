@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
+import nl.woonwaard.wij_maken_de_wijk.domain.models.PostCategory
 import nl.woonwaard.wij_maken_de_wijk.ui.R
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityPinboardOverviewBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.PinboardListItemBinding
@@ -50,10 +51,10 @@ class PinboardOverviewActivity : AppCompatActivity() {
 
             binding.category.visibility = if(viewModel.singleCategory) View.GONE else View.VISIBLE
             binding.category.setText(when(post.category) {
-                "SERVICE" -> R.string.service
-                "GATHERING" -> R.string.gathering
-                "SUSTAINABILITY" -> R.string.sustainability
-                "IDEA" -> R.string.idea
+                PostCategory.SERVICE -> R.string.service
+                PostCategory.GATHERING -> R.string.gathering
+                PostCategory.SUSTAINABILITY -> R.string.sustainability
+                PostCategory.IDEA -> R.string.idea
                 else -> R.string.unknown
             })
 
@@ -68,11 +69,11 @@ class PinboardOverviewActivity : AppCompatActivity() {
         binding.content.recyclerView.adapter = adapter
 
         binding.content.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.reloadPosts()
+            viewModel.loadPosts()
         }
 
         binding.createPostFab.setOnClickListener {
-            navigateToPostCreation()
+            navigateToPostCreation(viewModel.categories.value)
         }
 
         viewModel.isLoading.observe(this) {
@@ -83,24 +84,29 @@ class PinboardOverviewActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
         }
 
-        viewModel.loadPosts(intent.getStringArrayExtra(EXTRA_CATEGORIES)?.asList())
+        viewModel.categories.observe(this) {
+            title = getString(if(it == setOf(PostCategory.IDEA)) R.string.ideas else R.string.pinboard)
+        }
+
+        viewModel.changeCategories(intent.getStringArrayExtra(EXTRA_CATEGORIES)?.toSet())
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
+
         if(intent != null)
-            viewModel.loadPosts(intent.getStringArrayExtra(EXTRA_CATEGORIES)?.asList())
+            viewModel.changeCategories(intent.getStringArrayExtra(EXTRA_CATEGORIES)?.toSet())
     }
 
     override fun onStart() {
         super.onStart()
-        viewModel.reloadPosts()
+        viewModel.loadPosts()
     }
 
     companion object {
         const val EXTRA_CATEGORIES = "EXTRA_CATEGORIES"
 
-        fun Context.navigateToPinboardOverview(categories: List<String>? = null) {
+        fun Context.navigateToPinboardOverview(categories: Set<String>? = null) {
             val intent = Intent(this, PinboardOverviewActivity::class.java)
             if(categories != null)
                 intent.putExtra(EXTRA_CATEGORIES, categories.toTypedArray())

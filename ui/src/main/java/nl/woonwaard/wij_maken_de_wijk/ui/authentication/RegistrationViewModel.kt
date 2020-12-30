@@ -59,7 +59,15 @@ class RegistrationViewModel(
         return location != null
     }
 
+    fun isNameCorrect(name: String) = name.length in 2 until 64 && name.none { it.isDigit() }
+
     fun isEmailCorrect(email: String) = emailRegExp.toRegex().matches(email)
+
+    fun isPasswordCorrect(password: String) =
+        password.length in 4 until 64 &&
+                password.any { it.isDigit() } &&
+                password.any { it.isLetter() && it.isLowerCase() } &&
+                password.any { it.isLetter() && it.isUpperCase() }
 
     companion object {
         private val characters = charArrayOf(

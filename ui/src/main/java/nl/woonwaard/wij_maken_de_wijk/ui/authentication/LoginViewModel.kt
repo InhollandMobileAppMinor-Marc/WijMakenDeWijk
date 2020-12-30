@@ -21,13 +21,14 @@ class LoginViewModel(
     val isLoggedIn: LiveData<Boolean>
         get() = mutableIsLoggedIn
 
-    fun login(email: String, password: String) {
+    fun login(email: String, password: String, error: (() -> Unit)? = null) {
         mutableIsLoading.postValue(true)
 
         viewModelScope.launch {
-            val result = accountManager.login(Credentials(email, password))
+            val isLoggedIn = accountManager.login(Credentials(email, password))
             mutableIsLoading.postValue(false)
-            mutableIsLoggedIn.postValue(result)
+            mutableIsLoggedIn.postValue(isLoggedIn)
+            if (!isLoggedIn) error?.invoke()
         }
     }
 }

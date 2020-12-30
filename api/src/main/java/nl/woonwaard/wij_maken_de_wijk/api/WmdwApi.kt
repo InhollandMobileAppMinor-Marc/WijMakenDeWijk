@@ -48,7 +48,7 @@ class WmdwApi(context: Context) : PostsRepository, CommentsRepository, UsersRepo
         }
     }
 
-    override suspend fun getAllPosts(categories: List<String>?): Set<Post> {
+    override suspend fun getAllPosts(categories: Set<String>?): Set<Post> {
         val response = api {
             getPosts(authHeaderValue ?: "N/A", categories?.joinToString(","))
         }
@@ -146,12 +146,13 @@ class WmdwApi(context: Context) : PostsRepository, CommentsRepository, UsersRepo
     }
 
     override suspend fun deleteAccount(): Boolean {
-        val apiStatus = getApiStatus()
-        return if(apiStatus is ApiStatus.LoggedIn) {
-            val success = deleteUser(apiStatus.user)
-            if(success) logout()
-            success
-        } else false
+        val loggedInUser = user ?: getApiStatus().let {
+            if (it is ApiStatus.LoggedIn) it.user else null
+        } ?: return false
+
+        val success = deleteUser(loggedInUser)
+        if(success) logout()
+        return success
     }
 
     override suspend fun getApiStatus(): ApiStatus {

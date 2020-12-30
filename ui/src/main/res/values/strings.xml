@@ -39,4 +39,7 @@
     <string name="change_email">Change email</string>
     <string name="ideas">Ideas</string>
     <string name="deleted">Deleted</string>
+    <string name="password_too_weak">Password too weak</string>
+    <string name="invalid_name">Invalid name</string>
+    <string name="invalid_login">Invalid login data</string>
 </resources>

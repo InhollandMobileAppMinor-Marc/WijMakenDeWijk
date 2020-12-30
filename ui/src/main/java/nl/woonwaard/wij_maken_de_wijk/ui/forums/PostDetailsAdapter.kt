@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
+import nl.woonwaard.wij_maken_de_wijk.domain.models.PostCategory
 import nl.woonwaard.wij_maken_de_wijk.domain.utils.toSentenceCasing
 import nl.woonwaard.wij_maken_de_wijk.ui.R
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.CommentBinding
@@ -55,10 +56,10 @@ class PostDetailsAdapter(
                     if(post.author.deleted) binding.context.getString(R.string.deleted)
                     else post.author.nameWithLocation
                 binding.category.setText(when(post.category) {
-                    "SERVICE" -> R.string.service
-                    "GATHERING" -> R.string.gathering
-                    "SUSTAINABILITY" -> R.string.sustainability
-                    "IDEA" -> R.string.idea
+                    PostCategory.SERVICE -> R.string.service
+                    PostCategory.GATHERING -> R.string.gathering
+                    PostCategory.SUSTAINABILITY -> R.string.sustainability
+                    PostCategory.IDEA -> R.string.idea
                     else -> R.string.unknown
                 })
                 binding.time.text = DateUtils.getRelativeTimeSpanString(

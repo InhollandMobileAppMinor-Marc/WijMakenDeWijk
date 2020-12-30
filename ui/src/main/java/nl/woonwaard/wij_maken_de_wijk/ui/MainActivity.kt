@@ -10,6 +10,7 @@ import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import nl.woonwaard.wij_maken_de_wijk.domain.models.PostCategory
 import nl.woonwaard.wij_maken_de_wijk.domain.services.AccountManager
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.LoginActivity.Companion.navigateToLogin
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityMainBinding
@@ -39,7 +40,12 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         binding.content.pinboardButton.setOnClickListener {
-            navigateToPinboardOverview(listOf("SERVICE", "GATHERING", "SUSTAINABILITY", "OTHER"))
+            navigateToPinboardOverview(setOf(
+                PostCategory.SERVICE,
+                PostCategory.GATHERING,
+                PostCategory.SUSTAINABILITY,
+                PostCategory.OTHER
+            ))
         }
 
         binding.content.repairsButton.setOnClickListener {
@@ -51,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.content.ideasButton.setOnClickListener {
-            navigateToPinboardOverview(listOf("IDEA"))
+            navigateToPinboardOverview(setOf(PostCategory.IDEA))
         }
 
         customTabsSession.observe(this) {

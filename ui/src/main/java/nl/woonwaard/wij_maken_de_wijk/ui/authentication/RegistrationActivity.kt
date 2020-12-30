@@ -26,27 +26,29 @@ class RegistrationActivity : AppCompatActivity() {
         binding.content.signup.setOnClickListener {
             hideKeyboard()
 
-            val code = binding.content.codeInputField.text.toString()
-            val isCodeCorrect = viewModel.isCodeCorrect(code)
+            val correctnessChecks = setOf(
+                Triple(binding.content.codeInputField, viewModel::isCodeCorrect) {
+                    binding.content.codeField.error = getString(R.string.incorrect_code)
+                },
+                Triple(binding.content.nameInputField, viewModel::isNameCorrect) {
+                    binding.content.nameField.error = getString(R.string.invalid_name)
+                },
+                Triple(binding.content.emailInputField, viewModel::isEmailCorrect) {
+                    binding.content.emailField.error = getString(R.string.invalid_email)
+                },
+                Triple(binding.content.passwordInputField, viewModel::isPasswordCorrect) {
+                    binding.content.passwordField.error = getString(R.string.password_too_weak)
+                }
+            )
 
-            val email = binding.content.emailInputField.text.toString()
-            val isEmailCorrect = viewModel.isEmailCorrect(email)
-
-            if(!isCodeCorrect) {
-                binding.content.codeField.error = getString(R.string.incorrect_code)
+            for ((field, checker, errorMarker) in correctnessChecks) {
+                if(!checker(field.text.toString()))
+                    errorMarker()
             }
 
-            if(!isEmailCorrect) {
-                binding.content.emailField.error = getString(R.string.invalid_email)
-            }
-
-            if(isCodeCorrect && isEmailCorrect) {
-                viewModel.signup(
-                    code,
-                    binding.content.nameInputField.text.toString(),
-                    email,
-                    binding.content.passwordInputField.text.toString()
-                )
+            if(correctnessChecks.all { it.second(it.first.text.toString()) }) {
+                val (code, name, email, password) = correctnessChecks.map { it.first.text.toString() }
+                viewModel.signup(code, name, email, password)
             }
         }
 
@@ -54,8 +56,16 @@ class RegistrationActivity : AppCompatActivity() {
             binding.content.codeField.error = null
         }
 
+        binding.content.nameInputField.doOnTextChanged { _, _, _, _ ->
+            binding.content.nameField.error = null
+        }
+
         binding.content.emailInputField.doOnTextChanged { _, _, _, _ ->
             binding.content.emailField.error = null
+        }
+
+        binding.content.passwordInputField.doOnTextChanged { _, _, _, _ ->
+            binding.content.passwordField.error = null
         }
 
         viewModel.isLoading.observe(this) {

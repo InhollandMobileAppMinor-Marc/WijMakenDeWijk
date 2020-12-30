@@ -23,6 +23,11 @@ class CreatePostViewModel(
     val createdPost: LiveData<Post>
         get() = mutableCreatedPost
 
+    val categories = MutableLiveData<Set<String>>(null)
+
+    val singleCategory: Boolean
+        get() = categories.value?.size == 1
+
     fun createPost(title: String, type: String, message: String) {
         mutableIsLoading.postValue(true)
 

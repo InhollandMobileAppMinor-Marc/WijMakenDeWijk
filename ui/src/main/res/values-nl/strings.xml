@@ -10,7 +10,7 @@
     <string name="log_in">Log in</string>
     <string name="email">E-mail</string>
     <string name="password">Wachtwoord</string>
-    <string name="new_post">Nieuwe babbel</string>
+    <string name="new_post">Nieuw bericht</string>
     <string name="title">Titel</string>
     <string name="message">Bericht</string>
     <string name="submit">Plaatsen</string>
@@ -40,4 +40,7 @@
     <string name="change_email">Wijzig e-mail</string>
     <string name="ideas">Ideeën</string>
     <string name="deleted">Verwijderd</string>
+    <string name="password_too_weak">Wachtwoord te zwak</string>
+    <string name="invalid_name">Ongeldige naam</string>
+    <string name="invalid_login">Ongeldige logingegevens</string>
 </resources>
