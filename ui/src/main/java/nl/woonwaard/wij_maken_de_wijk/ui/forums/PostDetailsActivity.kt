@@ -3,10 +3,14 @@ package nl.woonwaard.wij_maken_de_wijk.ui.forums
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
+import nl.woonwaard.wij_maken_de_wijk.ui.R
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityPostDetailsBinding
+import nl.woonwaard.wij_maken_de_wijk.ui.settings.SettingsActivity.Companion.navigateToSettings
 import nl.woonwaard.wij_maken_de_wijk.ui.utils.terminateApplication
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -68,6 +72,21 @@ class PostDetailsActivity : AppCompatActivity() {
             val postId = intent.getStringExtra(EXTRA_POST_ID)
             if(postId != null) viewModel.loadPostData(postId)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_post_details, menu)
+        menu?.findItem(R.id.action_delete_post)?.isEnabled = viewModel.canBeDeleted
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.action_delete_post -> viewModel.deletePost()
+            else -> return super.onOptionsItemSelected(item)
+        }
+
+        return true
     }
 
     override fun onBackPressed() {

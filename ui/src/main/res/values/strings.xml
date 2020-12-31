@@ -42,4 +42,6 @@
     <string name="password_too_weak">Password too weak</string>
     <string name="invalid_name">Invalid name</string>
     <string name="invalid_login">Invalid login data</string>
+    <string name="delete">Delete</string>
+    <string name="report">Report</string>
 </resources>

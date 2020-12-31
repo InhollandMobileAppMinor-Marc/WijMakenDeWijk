@@ -43,4 +43,6 @@
     <string name="password_too_weak">Wachtwoord te zwak</string>
     <string name="invalid_name">Ongeldige naam</string>
     <string name="invalid_login">Ongeldige logingegevens</string>
+    <string name="delete">Verwijder</string>
+    <string name="report">Rapporteer</string>
 </resources>
