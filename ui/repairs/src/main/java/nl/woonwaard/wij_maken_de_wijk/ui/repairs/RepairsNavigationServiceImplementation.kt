@@ -2,7 +2,6 @@ package nl.woonwaard.wij_maken_de_wijk.ui.repairs
 
 import android.content.Context
 import android.content.Intent
-import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.MainNavigationService
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.RepairsNavigationService
 
 class RepairsNavigationServiceImplementation(

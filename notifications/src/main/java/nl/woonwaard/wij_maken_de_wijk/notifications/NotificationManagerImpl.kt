@@ -14,9 +14,9 @@ import androidx.core.app.RemoteInput
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Notification
-import nl.woonwaard.wij_maken_de_wijk.domain.services.notifications.NotificationManager
 import nl.woonwaard.wij_maken_de_wijk.domain.services.data.NotificationsRepository
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.ForumsNavigationService
+import nl.woonwaard.wij_maken_de_wijk.domain.services.notifications.NotificationManager
 import nl.woonwaard.wij_maken_de_wijk.notifications.utils.asPerson
 import nl.woonwaard.wij_maken_de_wijk.notifications.utils.createShortcut
 import org.koin.core.KoinComponent

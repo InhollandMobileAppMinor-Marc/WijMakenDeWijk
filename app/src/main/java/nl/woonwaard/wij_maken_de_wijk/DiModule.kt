@@ -10,7 +10,10 @@ import nl.woonwaard.wij_maken_de_wijk.notifications.NotificationWorkSchedulerImp
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.AuthenticationNavigationServiceImplementation
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.LoginViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.RegistrationViewModel
-import nl.woonwaard.wij_maken_de_wijk.ui.forums.*
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.CreatePostViewModel
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.PinboardOverviewViewModel
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.PostDetailsViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.main.MainNavigationServiceImplementation
 import nl.woonwaard.wij_maken_de_wijk.ui.main.SplashScreenViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.repairs.RepairsNavigationServiceImplementation

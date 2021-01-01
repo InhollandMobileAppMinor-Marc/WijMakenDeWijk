@@ -6,8 +6,8 @@ import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import nl.woonwaard.wij_maken_de_wijk.ui.repairs.databinding.ActivityRepairsOverviewBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.core.customTabsSession
+import nl.woonwaard.wij_maken_de_wijk.ui.repairs.databinding.ActivityRepairsOverviewBinding
 
 class RepairsOverviewActivity : AppCompatActivity() {
     private val customTabsSession by customTabsSession()

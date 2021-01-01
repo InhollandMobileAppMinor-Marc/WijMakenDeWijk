@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import nl.woonwaard.wij_maken_de_wijk.domain.models.ApiStatus
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.NavigationService
-import nl.woonwaard.wij_maken_de_wijk.ui.main.databinding.ActivitySplashScreenBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.core.terminateApplication
+import nl.woonwaard.wij_maken_de_wijk.ui.main.databinding.ActivitySplashScreenBinding
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

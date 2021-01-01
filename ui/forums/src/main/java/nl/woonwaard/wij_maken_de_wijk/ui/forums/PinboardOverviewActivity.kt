@@ -9,9 +9,9 @@ import androidx.lifecycle.LiveData
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 import nl.woonwaard.wij_maken_de_wijk.domain.models.PostCategory
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.ForumsNavigationService
-import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_CATEGORIES
 import nl.woonwaard.wij_maken_de_wijk.ui.core.GenericViewBindingRecyclerViewAdapter
 import nl.woonwaard.wij_maken_de_wijk.ui.core.context
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_CATEGORIES
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.databinding.ActivityPinboardOverviewBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.databinding.PinboardListItemBinding
 import org.koin.android.ext.android.inject
