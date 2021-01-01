@@ -45,4 +45,6 @@
     <string name="invalid_login">Ongeldige logingegevens</string>
     <string name="delete">Verwijder</string>
     <string name="report">Rapporteer</string>
+    <string name="per_category">Per categorie</string>
+    <string name="other">Overig</string>
 </resources>

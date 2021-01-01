@@ -7,12 +7,16 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import nl.woonwaard.wij_maken_de_wijk.domain.models.PostCategory
+import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.ForumsNavigationService
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityCreatePostBinding
-import nl.woonwaard.wij_maken_de_wijk.ui.forums.PostDetailsActivity.Companion.navigateToPostDetails
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_CATEGORIES
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreatePostActivity : AppCompatActivity() {
     private val viewModel by viewModel<CreatePostViewModel>()
+
+    private val forumsNavigationService by inject<ForumsNavigationService>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +54,7 @@ class CreatePostActivity : AppCompatActivity() {
 
         viewModel.createdPost.observe(this) {
             if(it !== null) {
-                navigateToPostDetails(it)
+                startActivity(forumsNavigationService.getPostDetailsIntent(it))
                 finish()
             }
         }
@@ -93,16 +97,5 @@ class CreatePostActivity : AppCompatActivity() {
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         val view = currentFocus ?: View(this)
         imm.hideSoftInputFromWindow(view.windowToken, 0)
-    }
-
-    companion object {
-        const val EXTRA_CATEGORIES = "EXTRA_CATEGORIES"
-
-        fun Context.navigateToPostCreation(categories: Set<String>? = null) {
-            val intent = Intent(this, CreatePostActivity::class.java)
-            if(categories != null)
-                intent.putExtra(EXTRA_CATEGORIES, categories.toTypedArray())
-            startActivity(intent)
-        }
     }
 }

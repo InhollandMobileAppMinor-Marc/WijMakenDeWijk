@@ -1,19 +1,20 @@
 package nl.woonwaard.wij_maken_de_wijk.ui.authentication
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
-import nl.woonwaard.wij_maken_de_wijk.ui.MainActivity.Companion.navigateToMain
+import nl.woonwaard.wij_maken_de_wijk.ui.MainNavigationServiceImplementation
 import nl.woonwaard.wij_maken_de_wijk.ui.R
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityRegistrationBinding
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegistrationActivity : AppCompatActivity() {
     private val viewModel by viewModel<RegistrationViewModel>()
+
+    private val mainNavigationService by inject<MainNavigationServiceImplementation>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +75,7 @@ class RegistrationActivity : AppCompatActivity() {
 
         viewModel.isLoggedIn.observe(this) {
             if(it) {
-                navigateToMain()
+                startActivity(mainNavigationService.getHomeScreenIntent())
                 finish()
             }
         }
@@ -86,11 +87,5 @@ class RegistrationActivity : AppCompatActivity() {
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         val view = currentFocus ?: View(this)
         imm.hideSoftInputFromWindow(view.windowToken, 0)
-    }
-
-    companion object {
-        fun Context.navigateToRegistration() {
-            startActivity(Intent(this, RegistrationActivity::class.java))
-        }
     }
 }

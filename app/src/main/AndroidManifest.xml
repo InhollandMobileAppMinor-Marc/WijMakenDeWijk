@@ -49,6 +49,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
+            android:name=".ui.repairs.RepairsOverviewActivity"
+            android:label="@string/repairs"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
             android:name=".ui.settings.SettingsActivity"
             android:label="@string/settings"
             android:parentActivityName=".ui.MainActivity"

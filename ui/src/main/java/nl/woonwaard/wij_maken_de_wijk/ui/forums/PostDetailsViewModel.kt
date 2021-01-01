@@ -9,9 +9,9 @@ import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.CreatedComment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 import nl.woonwaard.wij_maken_de_wijk.domain.models.User
-import nl.woonwaard.wij_maken_de_wijk.domain.services.AccountManager
-import nl.woonwaard.wij_maken_de_wijk.domain.services.CommentsRepository
-import nl.woonwaard.wij_maken_de_wijk.domain.services.PostsRepository
+import nl.woonwaard.wij_maken_de_wijk.domain.services.data.AccountManager
+import nl.woonwaard.wij_maken_de_wijk.domain.services.data.CommentsRepository
+import nl.woonwaard.wij_maken_de_wijk.domain.services.data.PostsRepository
 import java.util.*
 
 class PostDetailsViewModel(
@@ -40,7 +40,7 @@ class PostDetailsViewModel(
     var isFromNotification = false
 
     val canBeDeleted: Boolean
-        get() = accountManager.user == post.value?.author //|| accountManager.user?.role == "admin"
+        get() = accountManager.user == post.value?.author || accountManager.user?.role == "admin"
 
     fun loadPostData(postId: String) {
         // Don't load new post data if we're already doing so

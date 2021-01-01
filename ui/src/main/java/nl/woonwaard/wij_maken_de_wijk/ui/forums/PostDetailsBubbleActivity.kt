@@ -9,6 +9,10 @@ import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityPostDetailsBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityPostDetailsBubbleBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityPostDetailsContentBinding
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_COMMENTS
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_FROM_NOTIFICATION
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_POST
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_POST_ID
 import nl.woonwaard.wij_maken_de_wijk.ui.utils.terminateApplication
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -69,12 +73,5 @@ class PostDetailsBubbleActivity : AppCompatActivity() {
     override fun onBackPressed() {
         if(viewModel.isFromNotification) terminateApplication()
         else super.onBackPressed()
-    }
-
-    companion object {
-        const val EXTRA_POST = "EXTRA_POST"
-        const val EXTRA_POST_ID = "EXTRA_POST_ID"
-        const val EXTRA_COMMENTS = "EXTRA_COMMENTS"
-        const val EXTRA_FROM_NOTIFICATION = "EXTRA_FROM_NOTIFICATION"
     }
 }

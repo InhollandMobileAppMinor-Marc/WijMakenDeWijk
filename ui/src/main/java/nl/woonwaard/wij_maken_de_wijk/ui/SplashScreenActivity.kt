@@ -5,15 +5,17 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import nl.woonwaard.wij_maken_de_wijk.domain.models.ApiStatus
-import nl.woonwaard.wij_maken_de_wijk.ui.MainActivity.Companion.navigateToMain
-import nl.woonwaard.wij_maken_de_wijk.ui.authentication.LoginActivity.Companion.navigateToLogin
+import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.NavigationService
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivitySplashScreenBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.settings.SettingsActivity
 import nl.woonwaard.wij_maken_de_wijk.ui.utils.terminateApplication
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashScreenActivity : AppCompatActivity() {
     private val viewModel by viewModel<SplashScreenViewModel>()
+
+    private val navigationService by inject<NavigationService>()
 
     private val notificationPreferences by lazy {
         getSharedPreferences("notifications", Context.MODE_PRIVATE)
@@ -42,8 +44,8 @@ class SplashScreenActivity : AppCompatActivity() {
                         .show()
                     return@observe
                 }
-                is ApiStatus.LoggedOut -> navigateToLogin()
-                is ApiStatus.LoggedIn -> navigateToMain()
+                is ApiStatus.LoggedOut -> startActivity(navigationService.authentication.getLoginIntent())
+                is ApiStatus.LoggedIn -> startActivity(navigationService.main.getHomeScreenIntent())
             }
 
             viewModel.onDismissed()

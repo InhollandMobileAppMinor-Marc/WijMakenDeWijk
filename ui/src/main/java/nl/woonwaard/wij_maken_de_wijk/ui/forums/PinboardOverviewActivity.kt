@@ -10,17 +10,20 @@ import androidx.lifecycle.LiveData
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 import nl.woonwaard.wij_maken_de_wijk.domain.models.PostCategory
+import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.ForumsNavigationService
 import nl.woonwaard.wij_maken_de_wijk.ui.R
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityPinboardOverviewBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.PinboardListItemBinding
-import nl.woonwaard.wij_maken_de_wijk.ui.forums.CreatePostActivity.Companion.navigateToPostCreation
-import nl.woonwaard.wij_maken_de_wijk.ui.forums.PostDetailsActivity.Companion.navigateToPostDetails
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_CATEGORIES
 import nl.woonwaard.wij_maken_de_wijk.ui.utils.GenericViewBindingRecyclerViewAdapter
 import nl.woonwaard.wij_maken_de_wijk.ui.utils.context
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PinboardOverviewActivity : AppCompatActivity() {
     private val viewModel by viewModel<PinboardOverviewViewModel>()
+
+    private val forumsNavigationService by inject<ForumsNavigationService>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +39,7 @@ class PinboardOverviewActivity : AppCompatActivity() {
             PinboardListItemBinding::inflate
         ) { binding, post, _ ->
             binding.cardView.setOnClickListener {
-                it.context.navigateToPostDetails(post)
+                it.context.startActivity(forumsNavigationService.getPostDetailsIntent(post))
             }
 
             binding.title.text = post.title
@@ -73,7 +76,7 @@ class PinboardOverviewActivity : AppCompatActivity() {
         }
 
         binding.createPostFab.setOnClickListener {
-            navigateToPostCreation(viewModel.categories.value)
+            startActivity(forumsNavigationService.getCreatePostIntent(viewModel.categories.value))
         }
 
         viewModel.isLoading.observe(this) {
@@ -101,16 +104,5 @@ class PinboardOverviewActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         viewModel.loadPosts()
-    }
-
-    companion object {
-        const val EXTRA_CATEGORIES = "EXTRA_CATEGORIES"
-
-        fun Context.navigateToPinboardOverview(categories: Set<String>? = null) {
-            val intent = Intent(this, PinboardOverviewActivity::class.java)
-            if(categories != null)
-                intent.putExtra(EXTRA_CATEGORIES, categories.toTypedArray())
-            startActivity(intent)
-        }
     }
 }

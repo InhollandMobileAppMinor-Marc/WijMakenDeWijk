@@ -5,10 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import nl.woonwaard.wij_maken_de_wijk.domain.models.Credentials
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Location
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Registration
-import nl.woonwaard.wij_maken_de_wijk.domain.services.AccountManager
+import nl.woonwaard.wij_maken_de_wijk.domain.services.data.AccountManager
 
 class RegistrationViewModel(
     private val accountManager: AccountManager

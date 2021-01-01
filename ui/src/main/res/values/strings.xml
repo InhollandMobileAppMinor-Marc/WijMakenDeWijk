@@ -44,4 +44,6 @@
     <string name="invalid_login">Invalid login data</string>
     <string name="delete">Delete</string>
     <string name="report">Report</string>
+    <string name="per_category">Per category</string>
+    <string name="other">Other</string>
 </resources>

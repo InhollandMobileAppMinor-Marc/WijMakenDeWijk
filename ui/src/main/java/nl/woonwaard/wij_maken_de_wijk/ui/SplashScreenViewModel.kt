@@ -4,12 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import nl.woonwaard.wij_maken_de_wijk.domain.models.ApiStatus
-import nl.woonwaard.wij_maken_de_wijk.domain.services.AccountManager
-import nl.woonwaard.wij_maken_de_wijk.domain.services.ApiStatusController
-import nl.woonwaard.wij_maken_de_wijk.domain.services.NotificationWorkScheduler
+import nl.woonwaard.wij_maken_de_wijk.domain.services.data.AccountManager
+import nl.woonwaard.wij_maken_de_wijk.domain.services.data.ApiStatusController
+import nl.woonwaard.wij_maken_de_wijk.domain.services.notifications.NotificationWorkScheduler
 
 class SplashScreenViewModel(
     private val accountManager: AccountManager,

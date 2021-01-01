@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
-import nl.woonwaard.wij_maken_de_wijk.domain.services.NotificationWorkScheduler
+import nl.woonwaard.wij_maken_de_wijk.domain.services.notifications.NotificationWorkScheduler
 import java.util.concurrent.TimeUnit
 
 class NotificationWorkSchedulerImpl(

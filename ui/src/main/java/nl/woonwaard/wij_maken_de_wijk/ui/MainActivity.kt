@@ -1,7 +1,5 @@
 package nl.woonwaard.wij_maken_de_wijk.ui
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -11,12 +9,9 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import nl.woonwaard.wij_maken_de_wijk.domain.models.PostCategory
-import nl.woonwaard.wij_maken_de_wijk.domain.services.AccountManager
-import nl.woonwaard.wij_maken_de_wijk.ui.authentication.LoginActivity.Companion.navigateToLogin
+import nl.woonwaard.wij_maken_de_wijk.domain.services.data.AccountManager
+import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.NavigationService
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivityMainBinding
-import nl.woonwaard.wij_maken_de_wijk.ui.forums.PinboardOverviewActivity.Companion.navigateToPinboardOverview
-import nl.woonwaard.wij_maken_de_wijk.ui.settings.SettingsActivity.Companion.navigateToSettings
-import nl.woonwaard.wij_maken_de_wijk.ui.utils.CustomTabsHelper
 import nl.woonwaard.wij_maken_de_wijk.ui.utils.customTabsSession
 import nl.woonwaard.wij_maken_de_wijk.ui.utils.terminateApplication
 import org.koin.android.ext.android.inject
@@ -26,11 +21,13 @@ class MainActivity : AppCompatActivity() {
 
     private val accountManager by inject<AccountManager>()
 
+    private val navigationService by inject<NavigationService>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         if(!accountManager.isLoggedIn) {
-            navigateToLogin()
+            startActivity(navigationService.authentication.getLoginIntent())
             finish()
         }
 
@@ -40,16 +37,18 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         binding.content.pinboardButton.setOnClickListener {
-            navigateToPinboardOverview(setOf(
-                PostCategory.SERVICE,
-                PostCategory.GATHERING,
-                PostCategory.SUSTAINABILITY,
-                PostCategory.OTHER
-            ))
+            startActivity(
+                navigationService.forums.getOverviewIntent(setOf(
+                    PostCategory.SERVICE,
+                    PostCategory.GATHERING,
+                    PostCategory.SUSTAINABILITY,
+                    PostCategory.OTHER
+                ))
+            )
         }
 
         binding.content.repairsButton.setOnClickListener {
-            openInBrowser(WOONWAARD_REPAIR_URL)
+            startActivity(navigationService.repairs.getOverviewIntent())
         }
 
         binding.content.neighborhoodMediationButton.setOnClickListener {
@@ -57,11 +56,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.content.ideasButton.setOnClickListener {
-            navigateToPinboardOverview(setOf(PostCategory.IDEA))
+            startActivity(navigationService.forums.getOverviewIntent(setOf(PostCategory.IDEA)))
         }
 
         customTabsSession.observe(this) {
-            it?.mayLaunchUrl(WOONWAARD_REPAIR_URL.toUri(), null, null)
             it?.mayLaunchUrl(WOONWAARD_NEIGHBORHOOD_MEDIATION_URL.toUri(), null, null)
         }
     }
@@ -73,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.action_open_settings -> navigateToSettings()
+            R.id.action_open_settings -> startActivity(navigationService.settings.getOverviewIntent())
             else -> return super.onOptionsItemSelected(item)
         }
 
@@ -104,12 +102,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val WOONWAARD_REPAIR_URL = "https://www.woonwaard.nl/voor-huurders/reparaties-en-onderhoud/reparatieverzoek"
-
         const val WOONWAARD_NEIGHBORHOOD_MEDIATION_URL = "https://www.woonwaard.nl/overlast"
-
-        fun Context.navigateToMain() {
-            startActivity(Intent(this, MainActivity::class.java))
-        }
     }
 }

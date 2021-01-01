@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
-import nl.woonwaard.wij_maken_de_wijk.domain.services.PostsRepository
+import nl.woonwaard.wij_maken_de_wijk.domain.services.data.PostsRepository
 
 class PinboardOverviewViewModel(
     private val postsRepository: PostsRepository

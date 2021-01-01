@@ -4,12 +4,15 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import nl.woonwaard.wij_maken_de_wijk.ui.authentication.LoginActivity.Companion.navigateToLogin
+import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.AuthenticationNavigationService
 import nl.woonwaard.wij_maken_de_wijk.ui.databinding.ActivitySettingsBinding
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsActivity : AppCompatActivity() {
     private val viewModel by viewModel<SettingsViewModel>()
+
+    private val authenticationNavigationService by inject<AuthenticationNavigationService>()
 
     private val notificationPreferences by lazy {
         getSharedPreferences("notifications", Context.MODE_PRIVATE)
@@ -34,7 +37,7 @@ class SettingsActivity : AppCompatActivity() {
 
         viewModel.isLoggedIn.observe(this) {
             if(!it) {
-                navigateToLogin()
+                startActivity(authenticationNavigationService.getLoginIntent())
                 finish()
             }
         }
@@ -49,9 +52,5 @@ class SettingsActivity : AppCompatActivity() {
 
     companion object {
         const val CHECK_FOR_NOTIFICATIONS = "CHECK_FOR_NOTIFICATIONS"
-
-        fun Context.navigateToSettings() {
-            startActivity(Intent(this, SettingsActivity::class.java))
-        }
     }
 }

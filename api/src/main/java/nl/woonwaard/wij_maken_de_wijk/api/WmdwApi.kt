@@ -6,12 +6,14 @@ import kotlinx.coroutines.withContext
 import nl.woonwaard.wij_maken_de_wijk.api.utils.edit
 import nl.woonwaard.wij_maken_de_wijk.api.utils.getPreferences
 import nl.woonwaard.wij_maken_de_wijk.domain.models.*
-import nl.woonwaard.wij_maken_de_wijk.domain.services.*
+import nl.woonwaard.wij_maken_de_wijk.domain.services.data.*
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.net.ssl.SSLPeerUnverifiedException
 
-class WmdwApi(context: Context) : PostsRepository, CommentsRepository, UsersRepository, NotificationsRepository, AccountManager, ApiStatusController {
+class WmdwApi(context: Context) : PostsRepository, CommentsRepository, UsersRepository,
+    NotificationsRepository,
+    AccountManager, ApiStatusController {
     override var token: String? = null
 
     override var user: User? = null
