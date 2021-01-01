@@ -47,7 +47,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":ui"))
+    implementation(project(":ui:authentication"))
+    implementation(project(":ui:forums"))
+    implementation(project(":ui:repairs"))
+    implementation(project(":ui:settings"))
+    implementation(project(":ui:main"))
     implementation(project(":api"))
     implementation(project(":notifications"))
     implementation(project(":domain"))

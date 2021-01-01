@@ -1,7 +1,12 @@
-include ':notifications'
 rootProject.name = "Wij maken de Wijk"
 
-include(":ui")
+include(":ui:main")
+include(":ui:settings")
+include(":ui:repairs")
+include(":ui:forums")
+include(":ui:authentication")
+include(":ui:core")
+include(":notifications")
 include(":domain")
 include(":api")
 include(":app")

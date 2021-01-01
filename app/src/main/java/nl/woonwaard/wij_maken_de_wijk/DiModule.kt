@@ -7,12 +7,12 @@ import nl.woonwaard.wij_maken_de_wijk.domain.services.notifications.Notification
 import nl.woonwaard.wij_maken_de_wijk.domain.services.notifications.NotificationWorkScheduler
 import nl.woonwaard.wij_maken_de_wijk.notifications.NotificationManagerImpl
 import nl.woonwaard.wij_maken_de_wijk.notifications.NotificationWorkSchedulerImpl
-import nl.woonwaard.wij_maken_de_wijk.ui.MainNavigationServiceImplementation
-import nl.woonwaard.wij_maken_de_wijk.ui.SplashScreenViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.AuthenticationNavigationServiceImplementation
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.LoginViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.RegistrationViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.*
+import nl.woonwaard.wij_maken_de_wijk.ui.main.MainNavigationServiceImplementation
+import nl.woonwaard.wij_maken_de_wijk.ui.main.SplashScreenViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.repairs.RepairsNavigationServiceImplementation
 import nl.woonwaard.wij_maken_de_wijk.ui.settings.SettingsNavigationServiceImplementation
 import nl.woonwaard.wij_maken_de_wijk.ui.settings.SettingsViewModel
