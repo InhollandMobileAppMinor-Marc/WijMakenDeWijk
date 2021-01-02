@@ -14,6 +14,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import nl.woonwaard.wij_maken_de_wijk.domain.models.PostCategory
 import nl.woonwaard.wij_maken_de_wijk.domain.services.data.AccountManager
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.NavigationService
+import nl.woonwaard.wij_maken_de_wijk.ui.core.WmdwCustomTabsStyle
 import nl.woonwaard.wij_maken_de_wijk.ui.core.customTabsSession
 import nl.woonwaard.wij_maken_de_wijk.ui.core.terminateApplication
 import nl.woonwaard.wij_maken_de_wijk.ui.main.databinding.ActivityMainBinding
@@ -121,22 +122,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openInBrowser(url: String) {
-        val customTabsBuilder = CustomTabsIntent.Builder()
-            .setDefaultColorSchemeParams(
-                CustomTabColorSchemeParams.Builder()
-                    .setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary))
-                    .setSecondaryToolbarColor(ContextCompat.getColor(this, R.color.colorAccent))
-                    .build()
-            )
-            .setColorScheme(CustomTabsIntent.COLOR_SCHEME_SYSTEM)
-            .setShareState(CustomTabsIntent.SHARE_STATE_ON)
-            .setUrlBarHidingEnabled(true)
-            .setShowTitle(true)
-
-        val session = customTabsSession.value
-        if(session != null) customTabsBuilder.setSession(session)
-
-        customTabsBuilder.build().launchUrl(this, url.toUri())
+        WmdwCustomTabsStyle
+                .createCustomTabsSessionWithWmdwStyle(this, customTabsSession.value)
+                .launchUrl(this, url.toUri())
     }
 
     companion object {

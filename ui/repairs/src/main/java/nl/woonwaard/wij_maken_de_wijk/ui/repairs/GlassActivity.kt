@@ -8,6 +8,7 @@ import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import nl.woonwaard.wij_maken_de_wijk.ui.core.WmdwCustomTabsStyle
 import nl.woonwaard.wij_maken_de_wijk.ui.core.customTabsSession
 import nl.woonwaard.wij_maken_de_wijk.ui.repairs.databinding.ActivityCentralHeatingBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.repairs.databinding.ActivityGlassBinding
@@ -38,22 +39,9 @@ class GlassActivity : AppCompatActivity() {
     }
 
     private fun openInBrowser(url: String) {
-        val customTabsBuilder = CustomTabsIntent.Builder()
-                .setDefaultColorSchemeParams(
-                        CustomTabColorSchemeParams.Builder()
-                                .setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary))
-                                .setSecondaryToolbarColor(ContextCompat.getColor(this, R.color.colorAccent))
-                                .build()
-                )
-                .setColorScheme(CustomTabsIntent.COLOR_SCHEME_SYSTEM)
-                .setShareState(CustomTabsIntent.SHARE_STATE_ON)
-                .setUrlBarHidingEnabled(true)
-                .setShowTitle(true)
-
-        val session = customTabsSession.value
-        if(session != null) customTabsBuilder.setSession(session)
-
-        customTabsBuilder.build().launchUrl(this, url.toUri())
+        WmdwCustomTabsStyle
+                .createCustomTabsSessionWithWmdwStyle(this, customTabsSession.value)
+                .launchUrl(this, url.toUri())
     }
 
     companion object {
