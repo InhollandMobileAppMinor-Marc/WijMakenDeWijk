@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="call_hvc">HVC bellen</string>
+    <string name="hvc_info">Voor storingen, lekkages en andere reparaties aan uw HVC warmte unit belt u met HVC: 0800 4823637</string>
+    <string name="hvc">HVC</string>
+    <string name="central_heating_info">Bel het telefoonnummer van het bedrijf dat op de sticker op uw CV-ketel staat.<br /><br />Met dat bedrijf heeft Woonwaard voor uw woning in een servicecontract afgesproken dat zij de reparaties en het onderhoud van de centrale verwarming regelen met u.<br /><br />Woonwaard werkt samen met Feenstra, Comfort Partners, Breman, Bonarius en Schouten.</string>
+    <string name="glass_info">Neem contact op met Glastotaal Beheer via het gratis nummer 0800 45 27 234.<br /><br />Zij zorgen ervoor dat een glaszetter een nieuwe ruit zal plaatsen en waar nodig een noodoplossing maakt. Dit is kosteloos als u een Glasverzekering bij Woonwaard heeft.</string>
+    <string name="view_procedure">Procedure bekijken</string>
+    <string name="call_glastotaal">Glastotaal bellen</string>
+    <string name="emergency_repairs">Spoedreparaties</string>
+    <string name="emergency_repairs_info">Heb je last van brandschade, gaslekkage, elektrastoring of een gesprongen waterleiding? Neem dan contact op met Woonwaard voor een spoedreparatie.</string>
+    <string name="central_heating">Centrale verwarming</string>
+    <string name="glass">Glas</string>
+    <string name="lift">Lift</string>
+    <string name="cleaning">Schoonmaak</string>
+    <string name="green_maintenance">Groen onderhoud</string>
+</resources>

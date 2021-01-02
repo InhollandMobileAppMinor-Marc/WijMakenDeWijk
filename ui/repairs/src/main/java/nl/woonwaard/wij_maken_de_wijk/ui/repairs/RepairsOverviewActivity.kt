@@ -6,11 +6,15 @@ import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.RepairsNavigationService
 import nl.woonwaard.wij_maken_de_wijk.ui.core.customTabsSession
 import nl.woonwaard.wij_maken_de_wijk.ui.repairs.databinding.ActivityRepairsOverviewBinding
+import org.koin.android.ext.android.inject
 
 class RepairsOverviewActivity : AppCompatActivity() {
     private val customTabsSession by customTabsSession()
+
+    private val repairsNavigationService by inject<RepairsNavigationService>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +25,16 @@ class RepairsOverviewActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        binding.content.repairsButton.setOnClickListener {
+        binding.content.otherRepairsButton.setOnClickListener {
             openInBrowser(WOONWAARD_REPAIR_URL)
+        }
+
+        binding.content.centralHeatingButton.setOnClickListener {
+            startActivity(repairsNavigationService.getCentralHeatingIntent())
+        }
+
+        binding.content.glassButton.setOnClickListener {
+            startActivity(repairsNavigationService.getGlassIntent())
         }
 
         customTabsSession.observe(this) {

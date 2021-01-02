@@ -4,4 +4,8 @@ import android.content.Intent
 
 interface RepairsNavigationService {
     fun getOverviewIntent(): Intent
+
+    fun getCentralHeatingIntent(): Intent
+
+    fun getGlassIntent(): Intent
 }

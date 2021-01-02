@@ -10,4 +10,12 @@ class RepairsNavigationServiceImplementation(
     override fun getOverviewIntent(): Intent {
         return Intent(context, RepairsOverviewActivity::class.java)
     }
+
+    override fun getCentralHeatingIntent(): Intent {
+        return Intent(context, CentralHeatingActivity::class.java)
+    }
+
+    override fun getGlassIntent(): Intent {
+        return Intent(context, GlassActivity::class.java)
+    }
 }

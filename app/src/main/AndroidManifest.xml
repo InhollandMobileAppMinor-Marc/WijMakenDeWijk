@@ -56,6 +56,20 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
+            android:name=".ui.repairs.CentralHeatingActivity"
+            android:label="@string/central_heating"
+            android:parentActivityName=".ui.repairs.RepairsOverviewActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.repairs.GlassActivity"
+            android:label="@string/glass"
+            android:parentActivityName=".ui.repairs.RepairsOverviewActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
             android:name=".ui.settings.SettingsActivity"
             android:label="@string/settings"
             android:parentActivityName=".ui.main.MainActivity"

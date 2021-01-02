@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="call_hvc">Call HVC</string>
+    <string name="hvc_info">For malfunctions, leaks and other repairs to your HVC heat unit, call HVC: 0800 4823637</string>
+    <string name="hvc">HVC</string>
+    <string name="central_heating_info">Call the telephone number of the company that is stated on the sticker on your boiler.<br /><br />Woonwaard has agreed with that company in a service contract for your home that they will arrange repairs and maintenance of the central heating with you.<br /><br />Woonwaard works together with Feenstra, Comfort Partners, Breman, Bonarius and Schouten.</string>
+    <string name="glass_info">Contact Glastotaal Beheer via the toll-free number 0800 45 27 234.<br /><br />They ensure that a glazier will install a new window and make an emergency solution where necessary. This is free of charge if you have glass insurance with Woonwaard.</string>
+    <string name="view_procedure">View procedure</string>
+    <string name="call_glastotaal">Call glastotaal</string>
+    <string name="emergency_repairs">Emergency repairs</string>
+    <string name="emergency_repairs_info">Do you suffer from fire damage, gas leakage, electricity failure or a burst water pipe? Then contact Woonwaard for an urgent repair.</string>
+    <string name="central_heating">Central heating</string>
+    <string name="glass">Glass</string>
+    <string name="lift">Lift/elevator</string>
+    <string name="cleaning">Cleaning</string>
+    <string name="green_maintenance">Green maintenance</string>
+</resources>
