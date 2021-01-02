@@ -63,6 +63,8 @@ class PinboardOverviewActivity : AppCompatActivity() {
                 System.currentTimeMillis(),
                 DateUtils.MINUTE_IN_MILLIS
             )
+
+            binding.votingButtons.visibility = if(post.category == PostCategory.IDEA) View.VISIBLE else View.GONE
         }
 
         binding.content.recyclerView.setHasFixedSize(true)
