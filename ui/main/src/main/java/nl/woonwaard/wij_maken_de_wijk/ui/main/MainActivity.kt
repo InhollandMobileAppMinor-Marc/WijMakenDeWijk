@@ -1,13 +1,16 @@
 package nl.woonwaard.wij_maken_de_wijk.ui.main
 
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import nl.woonwaard.wij_maken_de_wijk.domain.models.PostCategory
 import nl.woonwaard.wij_maken_de_wijk.domain.services.data.AccountManager
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.NavigationService
@@ -15,18 +18,19 @@ import nl.woonwaard.wij_maken_de_wijk.ui.core.customTabsSession
 import nl.woonwaard.wij_maken_de_wijk.ui.core.terminateApplication
 import nl.woonwaard.wij_maken_de_wijk.ui.main.databinding.ActivityMainBinding
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     private val customTabsSession by customTabsSession()
 
-    private val accountManager by inject<AccountManager>()
+    private val viewModel by viewModel<MainViewModel>()
 
     private val navigationService by inject<NavigationService>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if(!accountManager.isLoggedIn) {
+        if(!viewModel.isLoggedIn) {
             startActivity(navigationService.authentication.getLoginIntent())
             finish()
         }
@@ -57,6 +61,40 @@ class MainActivity : AppCompatActivity() {
 
         binding.content.ideasButton.setOnClickListener {
             startActivity(navigationService.forums.getOverviewIntent(setOf(PostCategory.IDEA)))
+        }
+
+        viewModel.notice.observe(this) {
+            binding.content.noticeCardView.visibility = if(it == null) View.GONE else View.VISIBLE
+
+            if(it != null) {
+                binding.content.noticeTitle.text = it.title
+                binding.content.noticeContent.text = DateUtils.getRelativeTimeSpanString(
+                        it.timestamp.time,
+                        System.currentTimeMillis(),
+                        DateUtils.MINUTE_IN_MILLIS
+                ).toString() + " - " + it.body
+                binding.content.noticeCardView.setOnClickListener { _ ->
+                    MaterialAlertDialogBuilder(this)
+                            .setTitle(it.title)
+                            .setMessage(DateUtils.getRelativeTimeSpanString(
+                                    it.timestamp.time,
+                                    System.currentTimeMillis(),
+                                    DateUtils.MINUTE_IN_MILLIS
+                            ).toString() + "\n\n" + it.body)
+                            .setPositiveButton(resources.getString(R.string.ok)) { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            .show()
+                }
+            }
+        }
+
+        viewModel.isLoading.observe(this) {
+            binding.content.swipeRefreshLayout.isRefreshing = it
+        }
+
+        binding.content.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.loadNotice()
         }
 
         customTabsSession.observe(this) {

@@ -9,7 +9,7 @@ object PostCategory {
 
     const val IDEA = "IDEA"
 
-    const val NOTICES = "NOTICES"
+    const val NOTICE = "NOTICE"
 
     const val OTHER = "OTHER"
 }
