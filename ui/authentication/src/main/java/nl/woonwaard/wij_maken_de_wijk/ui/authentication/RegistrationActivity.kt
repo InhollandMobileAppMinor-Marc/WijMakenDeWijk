@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.MainNavigationService
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.databinding.ActivityRegistrationBinding
+import nl.woonwaard.wij_maken_de_wijk.ui.core.fluidresize.enableFluidContentResizer
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,6 +21,8 @@ class RegistrationActivity : AppCompatActivity() {
 
         val binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        enableFluidContentResizer()
 
         setSupportActionBar(binding.toolbar)
 

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="nl.woonwaard.wij_maken_de_wijk">
+    package="nl.woonwaard.wij_maken_de_wijk"
+    android:installLocation="auto">
 
     <uses-sdk tools:overrideLibrary="androidx.security" />
 
@@ -34,13 +35,15 @@
             android:name=".ui.authentication.LoginActivity"
             android:label="@string/login"
             android:resizeableActivity="true"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".ui.authentication.RegistrationActivity"
             android:label="@string/signup"
             android:resizeableActivity="true"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".ui.main.MainActivity"
@@ -87,7 +90,8 @@
             android:name=".ui.forums.PostDetailsActivity"
             android:parentActivityName=".ui.forums.PinboardOverviewActivity"
             android:resizeableActivity="true"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".ui.forums.PostDetailsBubbleActivity"
@@ -96,13 +100,15 @@
             android:launchMode="standard"
             android:noHistory="true"
             android:resizeableActivity="true"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".ui.forums.CreatePostActivity"
             android:parentActivityName=".ui.forums.PinboardOverviewActivity"
             android:resizeableActivity="true"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
 
         <receiver android:name="nl.woonwaard.wij_maken_de_wijk.notifications.ReplyReceiver" />
     </application>

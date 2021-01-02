@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.RepairsNavigationService
-import nl.woonwaard.wij_maken_de_wijk.ui.core.WmdwCustomTabsStyle
-import nl.woonwaard.wij_maken_de_wijk.ui.core.customTabsSession
+import nl.woonwaard.wij_maken_de_wijk.ui.core.custom_tabs.WmdwCustomTabsStyle
+import nl.woonwaard.wij_maken_de_wijk.ui.core.custom_tabs.customTabsSession
 import nl.woonwaard.wij_maken_de_wijk.ui.repairs.databinding.ActivityRepairsOverviewBinding
 import org.koin.android.ext.android.inject
 

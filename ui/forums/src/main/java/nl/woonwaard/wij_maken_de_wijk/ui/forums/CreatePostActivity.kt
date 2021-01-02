@@ -7,6 +7,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import nl.woonwaard.wij_maken_de_wijk.domain.models.PostCategory
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.ForumsNavigationService
+import nl.woonwaard.wij_maken_de_wijk.ui.core.fluidresize.enableFluidContentResizer
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_CATEGORIES
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.databinding.ActivityCreatePostBinding
 import org.koin.android.ext.android.inject
@@ -22,6 +23,8 @@ class CreatePostActivity : AppCompatActivity() {
 
         val binding = ActivityCreatePostBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        enableFluidContentResizer()
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

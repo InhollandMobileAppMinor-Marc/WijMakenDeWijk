@@ -4,13 +4,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.browser.customtabs.CustomTabColorSchemeParams
-import androidx.browser.customtabs.CustomTabsIntent
-import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
-import nl.woonwaard.wij_maken_de_wijk.ui.core.WmdwCustomTabsStyle
-import nl.woonwaard.wij_maken_de_wijk.ui.core.customTabsSession
-import nl.woonwaard.wij_maken_de_wijk.ui.repairs.databinding.ActivityCentralHeatingBinding
+import nl.woonwaard.wij_maken_de_wijk.ui.core.custom_tabs.WmdwCustomTabsStyle
+import nl.woonwaard.wij_maken_de_wijk.ui.core.custom_tabs.customTabsSession
 import nl.woonwaard.wij_maken_de_wijk.ui.repairs.databinding.ActivityGlassBinding
 
 class GlassActivity : AppCompatActivity() {

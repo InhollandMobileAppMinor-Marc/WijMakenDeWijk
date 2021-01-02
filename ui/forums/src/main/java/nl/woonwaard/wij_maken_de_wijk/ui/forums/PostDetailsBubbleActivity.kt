@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
+import nl.woonwaard.wij_maken_de_wijk.ui.core.fluidresize.enableFluidContentResizer
 import nl.woonwaard.wij_maken_de_wijk.ui.core.terminateApplication
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_COMMENTS
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_FROM_NOTIFICATION
@@ -20,6 +21,8 @@ class PostDetailsBubbleActivity : AppCompatActivity() {
 
         val binding = ActivityPostDetailsBubbleBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        enableFluidContentResizer()
 
         val adapter = PostDetailsAdapter(viewModel.post, viewModel.comments, viewModel.currentUser, true)
 

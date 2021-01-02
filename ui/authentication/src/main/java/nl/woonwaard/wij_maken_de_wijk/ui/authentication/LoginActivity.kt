@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.NavigationService
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.databinding.ActivityLoginBinding
+import nl.woonwaard.wij_maken_de_wijk.ui.core.fluidresize.enableFluidContentResizer
 import nl.woonwaard.wij_maken_de_wijk.ui.core.terminateApplication
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,6 +22,8 @@ class LoginActivity : AppCompatActivity() {
 
         val binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        enableFluidContentResizer()
 
         setSupportActionBar(binding.toolbar)
 

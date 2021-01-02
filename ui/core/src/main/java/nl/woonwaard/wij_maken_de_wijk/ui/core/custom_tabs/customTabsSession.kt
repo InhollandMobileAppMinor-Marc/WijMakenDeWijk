@@ -1,4 +1,4 @@
-package nl.woonwaard.wij_maken_de_wijk.ui.core
+package nl.woonwaard.wij_maken_de_wijk.ui.core.custom_tabs
 
 import android.content.Context
 
