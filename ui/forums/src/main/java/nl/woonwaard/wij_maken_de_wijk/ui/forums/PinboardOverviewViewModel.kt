@@ -66,10 +66,8 @@ class PinboardOverviewViewModel(
         mutableIsLoading.postValue(true)
 
         job = viewModelScope.launch {
-            Log.i("PINBOARD", "Loading ${categories?.joinToString()}")
             val posts = postsRepository.getAllPosts(categories)
             if(isActive) {
-                Log.i("PINBOARD", "Loaded ${categories?.joinToString()}")
                 mutablePosts.postValue(posts.filter { !it.deleted }.toSet())
                 mutableIsLoading.postValue(false)
             }
