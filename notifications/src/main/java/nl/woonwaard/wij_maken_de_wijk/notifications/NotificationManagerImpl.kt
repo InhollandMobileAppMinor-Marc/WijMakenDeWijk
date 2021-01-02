@@ -81,7 +81,7 @@ class NotificationManagerImpl(private val context: Context) : NotificationManage
 
         val bubbleData = NotificationCompat.BubbleMetadata.Builder()
             .setIntent(postDetailsBubblePendingIntent)
-            .setIcon(IconCompat.createWithResource(context, R.drawable.ic_woonwaard))
+            .setIcon(IconCompat.createWithResource(context, R.drawable.ic_wij_maken_de_wijk))
             .setDesiredHeight(context.resources.getDimensionPixelSize(R.dimen.bubble_height))
             .build()
 
@@ -89,7 +89,7 @@ class NotificationManagerImpl(private val context: Context) : NotificationManage
             notification.id.hashCode(),
             NotificationCompat.Builder(context, NOTIFICATION_CHANNEL)
                 .setBubbleMetadata(bubbleData)
-                .setSmallIcon(R.drawable.ic_woonwaard)
+                .setSmallIcon(R.drawable.ic_wij_maken_de_wijk)
                 .setContentTitle(titleNotification)
                 .setStyle(style)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
