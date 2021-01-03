@@ -6,20 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".SplashScreenActivity">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <FrameLayout
         android:id="@+id/image_art"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="64dp"
-        android:adjustViewBounds="true"
-        app:layout_constraintBottom_toTopOf="@+id/app_title"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:srcCompat="@drawable/va_undraw_coming_home" />
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_gravity="bottom|center_horizontal"
+            app:srcCompat="@drawable/va_undraw_coming_home" />
+
+    </FrameLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/app_title"
@@ -28,7 +37,6 @@
         android:layout_marginTop="16dp"
         android:text="@string/app_name"
         android:textAppearance="?attr/textAppearanceHeadline5"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,8 +47,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@id/image_art"
-        app:layout_constraintStart_toStartOf="@id/image_art"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_title" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
