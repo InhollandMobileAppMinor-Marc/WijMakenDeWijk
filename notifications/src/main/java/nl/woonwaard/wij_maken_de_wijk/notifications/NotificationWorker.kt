@@ -3,7 +3,7 @@ package nl.woonwaard.wij_maken_de_wijk.notifications
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import nl.woonwaard.wij_maken_de_wijk.domain.services.NotificationManager
+import nl.woonwaard.wij_maken_de_wijk.domain.services.notifications.NotificationManager
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 

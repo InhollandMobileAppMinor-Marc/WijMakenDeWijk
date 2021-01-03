@@ -1,12 +1,15 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
     compileSdkVersion 30
 
     packagingOptions {
+        // https://github.com/minvws/nl-covid19-notification-app-android/blob/ffad2e333211dd844899745cb1018a982a53a7e4/app/build.gradle#L51
         exclude("kotlin/**")
         exclude("okhttp3/**")
         exclude("**/*.kotlin_metadata")
@@ -14,6 +17,7 @@ android {
         exclude("META-INF/*.kotlin_module")
         exclude("META-INF/*.version")
         exclude("build-data.properties")
+        exclude("play-**.properties")
     }
 
     defaultConfig {
@@ -21,15 +25,21 @@ android {
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName "0.9"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            crunchPngs true
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+        debug {
+            applicationIdSuffix ".debug"
         }
     }
 
@@ -44,7 +54,12 @@ android {
 }
 
 dependencies {
-    implementation(project(":ui"))
+    implementation(project(":ui:authentication"))
+    implementation(project(":ui:forums"))
+    implementation(project(":ui:repairs"))
+    implementation(project(":ui:settings"))
+    implementation(project(":ui:neighborhood_mediation"))
+    implementation(project(":ui:main"))
     implementation(project(":api"))
     implementation(project(":notifications"))
     implementation(project(":domain"))
@@ -56,6 +71,9 @@ dependencies {
 
     implementation("androidx.core:core-ktx:1.3.2")
     implementation("androidx.appcompat:appcompat:1.2.0")
+
+    implementation(platform("com.google.firebase:firebase-bom:26.2.0"))
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
 
     testImplementation("junit:junit:4.13.1")
 

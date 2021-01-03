@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="call_hvc">Call HVC</string>
+    <string name="hvc_info">For malfunctions, leaks and other repairs to your HVC heat unit, call HVC: 0800 4823637</string>
+    <string name="hvc">HVC</string>
+    <string name="central_heating_info">Call the telephone number of the company that is stated on the sticker on your boiler.<br /><br />Woonwaard has agreed with that company in a service contract for your home that they will arrange repairs and maintenance of the central heating with you.<br /><br />Woonwaard works together with Feenstra, Comfort Partners, Breman, Bonarius and Schouten.</string>
+    <string name="glass_info">Contact Glastotaal Beheer via the toll-free number 0800 45 27 234.<br /><br />They ensure that a glazier will install a new window and make an emergency solution where necessary. This is free of charge if you have glass insurance with Woonwaard.</string>
+    <string name="view_procedure">View procedure</string>
+    <string name="call_glastotaal">Call glastotaal</string>
+    <string name="emergency_repairs">Emergency repairs</string>
+    <string name="emergency_repairs_info">Do you suffer from fire damage, gas leakage, electricity failure or a burst water pipe? Then contact Woonwaard for an urgent repair.</string>
+    <string name="central_heating">Central heating</string>
+    <string name="glass">Glass</string>
+    <string name="lift">Lift/elevator</string>
+    <string name="cleaning">Cleaning</string>
+    <string name="green_maintenance">Green maintenance</string>
+    <string name="call_mo2">Call MO2</string>
+    <string name="lift_info">Contact MO2 on the toll-free number 0800 8600 860. <br /><br />They will resolve the lift/elevator failure as soon as possible.</string>
+    <string name="cleaning_info">Notifications about cleaning in your residential building can be sent by e-mail to schoon@woonwaard.nl <br /><br />There is no collective cleaning in some flats or porches. The residents themselves clean (their part) of the communal space. If this is not done (properly), you can request your liveability consultant to start a cleaning program. At least 70% of the residents must agree to this. We settle the costs for cleaning via the service costs with all residents of the flat or porch.</string>
+    <string name="call_emergency_number">Call emergency number</string>
+    <string name="emergency_info">In the event of fire damage, gas leakage, electricity failure or a burst water pipe, please contact us immediately (072) 527 6 527. We are available 24 hours a day for urgent matters.</string>
+    <string name="green_maintenance_info">You should report any green maintenance to your residential building to your liveability consultant: your point of contact in the area.</string>
+</resources>

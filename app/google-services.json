@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "189441646221",
+    "project_id": "wij-maken-de-wijk",
+    "storage_bucket": "wij-maken-de-wijk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189441646221:android:e9ea78694b1269ddfe8cc4",
+        "android_client_info": {
+          "package_name": "nl.woonwaard.wij_maken_de_wijk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189441646221-vtudhokl87mp5pe5l4jc7c610i20de14.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-MbvhKFgR0c6AE4EQEZGZRye6sWAwfJk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189441646221-vtudhokl87mp5pe5l4jc7c610i20de14.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189441646221:android:b62b1cb618cf60affe8cc4",
+        "android_client_info": {
+          "package_name": "nl.woonwaard.wij_maken_de_wijk.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189441646221-vtudhokl87mp5pe5l4jc7c610i20de14.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-MbvhKFgR0c6AE4EQEZGZRye6sWAwfJk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189441646221-vtudhokl87mp5pe5l4jc7c610i20de14.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

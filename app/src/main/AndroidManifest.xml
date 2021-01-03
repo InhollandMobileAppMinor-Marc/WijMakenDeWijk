@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="nl.woonwaard.wij_maken_de_wijk">
+    package="nl.woonwaard.wij_maken_de_wijk"
+    android:installLocation="auto">
 
     <uses-sdk tools:overrideLibrary="androidx.security" />
 
@@ -18,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.SplashScreenActivity"
+            android:name=".ui.main.SplashScreenActivity"
             android:label="@string/app_name"
             android:noHistory="true"
             android:resizeableActivity="true"
@@ -31,34 +32,99 @@
         </activity>
 
         <activity
-            android:name=".ui.authentication.LoginActivity"
-            android:label="@string/login"
+            android:name=".ui.authentication.InviteScreenActivity"
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.authentication.LoginActivity"
+            android:label="@string/login"
+            android:parentActivityName=".ui.authentication.InviteScreenActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".ui.authentication.RegistrationActivity"
             android:label="@string/signup"
+            android:parentActivityName=".ui.authentication.InviteScreenActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:label="@string/start"
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".ui.MainActivity"
-            android:label="@string/start"
+            android:name=".ui.neighborhood_mediation.NeighborhoodMediationActivity"
+            android:label="@string/neighborhood_mediation"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.repairs.RepairsOverviewActivity"
+            android:label="@string/repairs"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.repairs.CentralHeatingActivity"
+            android:label="@string/central_heating"
+            android:parentActivityName=".ui.repairs.RepairsOverviewActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.repairs.GlassActivity"
+            android:label="@string/glass"
+            android:parentActivityName=".ui.repairs.RepairsOverviewActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.repairs.LiftActivity"
+            android:label="@string/lift"
+            android:parentActivityName=".ui.repairs.RepairsOverviewActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.repairs.CleaningActivity"
+            android:label="@string/cleaning"
+            android:parentActivityName=".ui.repairs.RepairsOverviewActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.repairs.GreenMaintenanceActivity"
+            android:label="@string/green_maintenance"
+            android:parentActivityName=".ui.repairs.RepairsOverviewActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.repairs.EmergencyActivity"
+            android:label="@string/emergency_repairs"
+            android:parentActivityName=".ui.repairs.RepairsOverviewActivity"
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".ui.settings.SettingsActivity"
             android:label="@string/settings"
-            android:parentActivityName=".ui.MainActivity"
+            android:parentActivityName=".ui.main.MainActivity"
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".ui.forums.PinboardOverviewActivity"
             android:label="@string/pinboard"
-            android:parentActivityName=".ui.MainActivity"
+            android:parentActivityName=".ui.main.MainActivity"
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -66,7 +132,8 @@
             android:name=".ui.forums.PostDetailsActivity"
             android:parentActivityName=".ui.forums.PinboardOverviewActivity"
             android:resizeableActivity="true"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".ui.forums.PostDetailsBubbleActivity"
@@ -75,13 +142,15 @@
             android:launchMode="standard"
             android:noHistory="true"
             android:resizeableActivity="true"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".ui.forums.CreatePostActivity"
             android:parentActivityName=".ui.forums.PinboardOverviewActivity"
             android:resizeableActivity="true"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
 
         <receiver android:name="nl.woonwaard.wij_maken_de_wijk.notifications.ReplyReceiver" />
     </application>

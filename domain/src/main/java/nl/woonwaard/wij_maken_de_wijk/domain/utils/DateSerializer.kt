@@ -7,10 +7,16 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import java.text.SimpleDateFormat
+import java.time.ZoneId
+import java.time.ZoneOffset.UTC
 import java.util.*
 
 object DateSerializer : KSerializer<Date> {
-    private val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US)
+    private val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
+
+    init {
+        parser.calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"), Locale.getDefault())
+    }
 
     override val descriptor: SerialDescriptor
         get() = PrimitiveSerialDescriptor("Date", PrimitiveKind.STRING)

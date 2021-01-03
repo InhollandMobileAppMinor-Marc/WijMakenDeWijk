@@ -6,8 +6,8 @@ import android.content.Intent
 import androidx.core.app.RemoteInput
 import nl.woonwaard.wij_maken_de_wijk.domain.models.CreatedComment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Notification
-import nl.woonwaard.wij_maken_de_wijk.domain.services.CommentsRepository
-import nl.woonwaard.wij_maken_de_wijk.domain.services.NotificationManager
+import nl.woonwaard.wij_maken_de_wijk.domain.services.data.CommentsRepository
+import nl.woonwaard.wij_maken_de_wijk.domain.services.notifications.NotificationManager
 import nl.woonwaard.wij_maken_de_wijk.notifications.utils.launch
 import org.koin.core.KoinComponent
 import org.koin.core.inject

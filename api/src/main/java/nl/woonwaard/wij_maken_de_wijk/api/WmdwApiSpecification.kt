@@ -1,8 +1,6 @@
 package nl.woonwaard.wij_maken_de_wijk.api
 
-import nl.woonwaard.wij_maken_de_wijk.api.models.LoginResponse
-import nl.woonwaard.wij_maken_de_wijk.api.models.RegistrationResponse
-import nl.woonwaard.wij_maken_de_wijk.api.models.StatusResponse
+import nl.woonwaard.wij_maken_de_wijk.api.models.*
 import nl.woonwaard.wij_maken_de_wijk.domain.models.*
 import retrofit2.Response
 import retrofit2.http.*
@@ -17,6 +15,18 @@ interface WmdwApiSpecification {
     suspend fun login(
         @Body credentials: Credentials
     ): Response<LoginResponse>
+
+    @PATCH("credentials")
+    suspend fun updateEmail(
+        @Header("Authorization") authorization: String,
+        @Body credentials: EmailUpdateRequest
+    ): Response<UpdatedCredentialsResponse>
+
+    @PATCH("credentials")
+    suspend fun updatePassword(
+        @Header("Authorization") authorization: String,
+        @Body credentials: PasswordUpdateRequest
+    ): Response<UpdatedCredentialsResponse>
 
     @GET("status")
     suspend fun getStatus(
@@ -46,6 +56,12 @@ interface WmdwApiSpecification {
         @Query("inlineAuthor") inlineAuthor: Boolean = true
     ): Response<Post>
 
+    @DELETE("posts/{id}")
+    suspend fun deletePostById(
+        @Header("Authorization") authorization: String,
+        @Path("id") id: String
+    ): Response<Unit>
+
     @GET("posts/{postId}/comments")
     suspend fun getCommentsForPost(
         @Header("Authorization") authorization: String,
@@ -60,6 +76,12 @@ interface WmdwApiSpecification {
         @Query("inlineAuthor") inlineAuthor: Boolean = true,
         @Query("inlinePost") inlinePost: Boolean = false
     ): Response<Comment>
+
+    @DELETE("comments/{id}")
+    suspend fun deleteCommentById(
+        @Header("Authorization") authorization: String,
+        @Path("id") id: String
+    ): Response<Unit>
 
     @POST("posts/{postId}/comments")
     suspend fun addCommentToPost(
@@ -79,6 +101,12 @@ interface WmdwApiSpecification {
         @Header("Authorization") authorization: String,
         @Path("id") id: String
     ): Response<User>
+
+    @DELETE("users/{id}")
+    suspend fun deleteUserById(
+        @Header("Authorization") authorization: String,
+        @Path("id") id: String
+    ): Response<Unit>
 
     @DELETE("notifications")
     suspend fun getNewNotifications(

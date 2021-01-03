@@ -11,5 +11,6 @@ data class Comment(
     val author: User,
     @Serializable(with = DateSerializer::class)
     val timestamp: Date,
-    val post: String
+    val post: String,
+    val deleted: Boolean
 ) : java.io.Serializable

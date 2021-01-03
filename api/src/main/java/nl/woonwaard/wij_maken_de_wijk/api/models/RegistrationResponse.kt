@@ -11,8 +11,9 @@ data class RegistrationResponse(
     val role: String,
     val houseNumber: String,
     val hallway: String,
-    val location: String
+    val location: String,
+    val deleted: Boolean
 ) {
     val user: User
-        get() = User(id, name, role, houseNumber, hallway, location)
+        get() = User(id, name, role, houseNumber, hallway, location, deleted)
 }

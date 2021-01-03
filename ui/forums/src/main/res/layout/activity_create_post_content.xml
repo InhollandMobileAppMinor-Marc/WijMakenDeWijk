@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:focusable="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".CreatePostActivity"
+    tools:theme="@style/AppTheme.NoActionBar">
+
+    <requestFocus />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="16dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/titleField"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:hint="@string/title"
+            app:layout_constraintEnd_toEndOf="@+id/messageField"
+            app:layout_constraintStart_toStartOf="@+id/messageField"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/titleInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textShortMessage"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/type_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/type"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintStart_toStartOf="@+id/messageField"
+            app:layout_constraintTop_toBottomOf="@+id/titleField" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/messageField"
+            app:layout_constraintStart_toStartOf="@+id/messageField"
+            app:layout_constraintTop_toBottomOf="@+id/type_text">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/service_radio_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/service" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/gathering_radio_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/gathering" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/idea_radio_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/idea" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/sustainability_radio_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/sustainability" />
+
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/messageField"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:hint="@string/message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/radioGroup">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/messageInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|start"
+                android:inputType="textMultiLine"
+                android:minLines="5" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/submit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/submit"
+            app:layout_constraintEnd_toEndOf="@+id/messageField"
+            app:layout_constraintStart_toStartOf="@+id/messageField"
+            app:layout_constraintTop_toBottomOf="@+id/messageField" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

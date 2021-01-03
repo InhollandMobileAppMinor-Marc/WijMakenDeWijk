@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <color android:color="@color/colorAccent" />
+    </item>
+    <item
+        android:bottom="4dp"
+        android:end="0dp"
+        android:left="0dp"
+        android:right="0dp"
+        android:start="0dp"
+        android:top="0dp">
+        <color android:color="@color/white" />
+    </item>
+</layer-list>

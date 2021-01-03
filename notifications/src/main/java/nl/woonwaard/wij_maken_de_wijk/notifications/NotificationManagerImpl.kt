@@ -14,16 +14,17 @@ import androidx.core.app.RemoteInput
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Notification
-import nl.woonwaard.wij_maken_de_wijk.domain.services.NotificationManager
-import nl.woonwaard.wij_maken_de_wijk.domain.services.NotificationsRepository
+import nl.woonwaard.wij_maken_de_wijk.domain.services.data.NotificationsRepository
+import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.ForumsNavigationService
+import nl.woonwaard.wij_maken_de_wijk.domain.services.notifications.NotificationManager
 import nl.woonwaard.wij_maken_de_wijk.notifications.utils.asPerson
 import nl.woonwaard.wij_maken_de_wijk.notifications.utils.createShortcut
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class NotificationManagerImpl(private val context: Context) : NotificationManager, KoinComponent {
-    private val uiClasses by inject<UiClasses>()
     private val api by inject<NotificationsRepository>()
+    private val forumsNavigationService by inject<ForumsNavigationService>()
 
     override suspend fun checkNotifications() {
         val notifications = api.getNewNotifications()
@@ -43,19 +44,15 @@ class NotificationManagerImpl(private val context: Context) : NotificationManage
     }
 
     private fun sendNotification(notification: Notification) {
-        val postDetailsIntent = Intent(context, uiClasses.postDetails)
+        val postDetailsIntent = forumsNavigationService.getPostDetailsIntent(notification.post, fromNotification = true)
             .setAction(Intent.ACTION_VIEW)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY)
-            .putExtra(EXTRA_POST, notification.post)
-            .putExtra(EXTRA_FROM_NOTIFICATION, true)
 
         val postDetailsPendingIntent = PendingIntent.getActivity(context, notification.id.hashCode(), postDetailsIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
-        val postDetailsBubbleIntent = Intent(context, uiClasses.postDetailsBubble)
+        val postDetailsBubbleIntent = forumsNavigationService.getPostDetailsBubbleIntent(notification.post, fromNotification = true)
             .setAction(Intent.ACTION_VIEW)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY)
-            .putExtra(EXTRA_POST, notification.post)
-            .putExtra(EXTRA_FROM_NOTIFICATION, true)
 
         val postDetailsBubblePendingIntent = PendingIntent.getActivity(context, notification.id.hashCode() + 1, postDetailsBubbleIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
@@ -84,7 +81,7 @@ class NotificationManagerImpl(private val context: Context) : NotificationManage
 
         val bubbleData = NotificationCompat.BubbleMetadata.Builder()
             .setIntent(postDetailsBubblePendingIntent)
-            .setIcon(IconCompat.createWithResource(context, R.drawable.ic_notification_post))
+            .setIcon(IconCompat.createWithResource(context, R.drawable.ic_wij_maken_de_wijk))
             .setDesiredHeight(context.resources.getDimensionPixelSize(R.dimen.bubble_height))
             .build()
 
@@ -92,7 +89,7 @@ class NotificationManagerImpl(private val context: Context) : NotificationManage
             notification.id.hashCode(),
             NotificationCompat.Builder(context, NOTIFICATION_CHANNEL)
                 .setBubbleMetadata(bubbleData)
-                .setSmallIcon(R.drawable.ic_notification_post)
+                .setSmallIcon(R.drawable.ic_wij_maken_de_wijk)
                 .setContentTitle(titleNotification)
                 .setStyle(style)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
@@ -137,11 +134,9 @@ class NotificationManagerImpl(private val context: Context) : NotificationManage
                 context,
                 it.post,
                 it.comments,
-                Intent(context, uiClasses.postDetails)
+                forumsNavigationService.getPostDetailsIntent(it.post.id, fromNotification = true)
                     .setAction(Intent.ACTION_VIEW)
                     .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY)
-                    .putExtra(EXTRA_POST_ID, it.post.id)
-                    .putExtra(EXTRA_FROM_NOTIFICATION, true)
             )
         }
 
@@ -172,10 +167,6 @@ class NotificationManagerImpl(private val context: Context) : NotificationManage
     }
 
     companion object {
-        const val EXTRA_POST_ID = "EXTRA_POST_ID"
-        const val EXTRA_POST = "EXTRA_POST"
-        const val EXTRA_COMMENTS = "EXTRA_COMMENTS"
-        const val EXTRA_FROM_NOTIFICATION = "EXTRA_FROM_NOTIFICATION"
         const val NOTIFICATION_CHANNEL = "nl.woonwaard.wij_maken_de_wijk.notifications.replies"
     }
 }
