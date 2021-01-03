@@ -65,6 +65,7 @@ class PostDetailsAdapter(
                     PostCategory.GATHERING -> R.string.gathering
                     PostCategory.SUSTAINABILITY -> R.string.sustainability
                     PostCategory.IDEA -> R.string.idea
+                    PostCategory.OTHER -> R.string.other
                     else -> R.string.unknown
                 })
                 binding.time.text = DateUtils.getRelativeTimeSpanString(
