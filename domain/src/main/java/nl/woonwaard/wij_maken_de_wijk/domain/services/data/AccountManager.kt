@@ -15,6 +15,10 @@ interface AccountManager {
 
     suspend fun login(credentials: Credentials): Boolean
 
+    suspend fun changeEmail(email: String): Boolean
+
+    suspend fun changePassword(password: String): Boolean
+
     fun logout()
 
     suspend fun deleteAccount(): Boolean

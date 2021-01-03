@@ -3,6 +3,8 @@ package nl.woonwaard.wij_maken_de_wijk.api
 import android.content.Context
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import nl.woonwaard.wij_maken_de_wijk.api.models.EmailUpdateRequest
+import nl.woonwaard.wij_maken_de_wijk.api.models.PasswordUpdateRequest
 import nl.woonwaard.wij_maken_de_wijk.api.utils.edit
 import nl.woonwaard.wij_maken_de_wijk.api.utils.getPreferences
 import nl.woonwaard.wij_maken_de_wijk.domain.models.*
@@ -147,6 +149,22 @@ class WmdwApi(
         }
 
         return isLoggedIn
+    }
+
+    override suspend fun changeEmail(email: String): Boolean {
+        val response = api {
+            updateEmail(authHeaderValue ?: "N/A", EmailUpdateRequest(email))
+        }
+
+        return response?.isSuccessful == true
+    }
+
+    override suspend fun changePassword(password: String): Boolean {
+        val response = api {
+            updatePassword(authHeaderValue ?: "N/A", PasswordUpdateRequest(password))
+        }
+
+        return response?.isSuccessful == true
     }
 
     override fun logout() {

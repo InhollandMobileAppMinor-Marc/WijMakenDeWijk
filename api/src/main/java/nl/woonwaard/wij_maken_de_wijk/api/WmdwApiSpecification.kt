@@ -1,8 +1,6 @@
 package nl.woonwaard.wij_maken_de_wijk.api
 
-import nl.woonwaard.wij_maken_de_wijk.api.models.LoginResponse
-import nl.woonwaard.wij_maken_de_wijk.api.models.RegistrationResponse
-import nl.woonwaard.wij_maken_de_wijk.api.models.StatusResponse
+import nl.woonwaard.wij_maken_de_wijk.api.models.*
 import nl.woonwaard.wij_maken_de_wijk.domain.models.*
 import retrofit2.Response
 import retrofit2.http.*
@@ -17,6 +15,18 @@ interface WmdwApiSpecification {
     suspend fun login(
         @Body credentials: Credentials
     ): Response<LoginResponse>
+
+    @PATCH("credentials")
+    suspend fun updateEmail(
+        @Header("Authorization") authorization: String,
+        @Body credentials: EmailUpdateRequest
+    ): Response<UpdatedCredentialsResponse>
+
+    @PATCH("credentials")
+    suspend fun updatePassword(
+        @Header("Authorization") authorization: String,
+        @Body credentials: PasswordUpdateRequest
+    ): Response<UpdatedCredentialsResponse>
 
     @GET("status")
     suspend fun getStatus(
