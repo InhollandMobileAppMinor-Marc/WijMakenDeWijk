@@ -5,6 +5,7 @@ import android.content.Intent
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.ForumsNavigationService
+import nl.woonwaard.wij_maken_de_wijk.domain.utils.putSerializableArrayExtra
 
 class ForumsNavigationServiceImplementation(
     val context: Context
@@ -28,11 +29,8 @@ class ForumsNavigationServiceImplementation(
         val intent = Intent(context, PostDetailsActivity::class.java)
         intent.putExtra(EXTRA_POST, post)
         intent.putExtra(EXTRA_FROM_NOTIFICATION, fromNotification)
-        if (comments != null) {
-            intent.putExtra(EXTRA_COMMENTS, comments.size)
-            for(i in comments.indices)
-                intent.putExtra("${EXTRA_COMMENTS}_${i}", comments.elementAt(i))
-        }
+        if (comments != null)
+            intent.putSerializableArrayExtra(EXTRA_COMMENTS, comments.toTypedArray())
         return intent
     }
 
@@ -47,11 +45,8 @@ class ForumsNavigationServiceImplementation(
         val intent = Intent(context, PostDetailsBubbleActivity::class.java)
         intent.putExtra(EXTRA_POST, post)
         intent.putExtra(EXTRA_FROM_NOTIFICATION, fromNotification)
-        if (comments != null) {
-            intent.putExtra(EXTRA_COMMENTS, comments.size)
-            for(i in comments.indices)
-                intent.putExtra("${EXTRA_COMMENTS}_${i}", comments.elementAt(i))
-        }
+        if (comments != null)
+            intent.putSerializableArrayExtra(EXTRA_COMMENTS, comments.toTypedArray())
         return intent
     }
 

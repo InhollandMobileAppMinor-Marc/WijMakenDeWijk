@@ -6,17 +6,24 @@ import kotlinx.coroutines.withContext
 import nl.woonwaard.wij_maken_de_wijk.api.utils.edit
 import nl.woonwaard.wij_maken_de_wijk.api.utils.getPreferences
 import nl.woonwaard.wij_maken_de_wijk.domain.models.*
+import nl.woonwaard.wij_maken_de_wijk.domain.services.CrashReporter
 import nl.woonwaard.wij_maken_de_wijk.domain.services.data.*
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.net.ssl.SSLPeerUnverifiedException
 
-class WmdwApi(context: Context) : PostsRepository, CommentsRepository, UsersRepository,
-    NotificationsRepository,
-    AccountManager, ApiStatusController {
+class WmdwApi(
+    context: Context,
+    private val crashReporter: CrashReporter
+) : PostsRepository, CommentsRepository, UsersRepository, NotificationsRepository, AccountManager, ApiStatusController {
     override var token: String? = null
 
     override var user: User? = null
+        set(value) {
+            field = value
+            if(value != null) crashReporter.setUserId(value.id)
+            else crashReporter.clearUserId()
+        }
 
     override val isLoggedIn: Boolean
         get() = token != null
@@ -41,10 +48,13 @@ class WmdwApi(context: Context) : PostsRepository, CommentsRepository, UsersRepo
                 response
             } catch (error: UnknownHostException) {
                 // Network is offline
+                crashReporter.logSoftError(error)
                 null
             } catch (error: SocketTimeoutException) {
+                crashReporter.logSoftError(error)
                 null
             } catch (error: SSLPeerUnverifiedException) {
+                crashReporter.logSoftError(error)
                 null
             }
         }

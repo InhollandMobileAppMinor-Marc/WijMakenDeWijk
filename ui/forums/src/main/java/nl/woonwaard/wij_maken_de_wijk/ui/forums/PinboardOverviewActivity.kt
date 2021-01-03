@@ -67,7 +67,6 @@ class PinboardOverviewActivity : AppCompatActivity() {
             binding.votingButtons.visibility = if(post.category == PostCategory.IDEA) View.VISIBLE else View.GONE
         }
 
-        binding.content.recyclerView.setHasFixedSize(true)
         binding.content.recyclerView.adapter = adapter
 
         binding.content.swipeRefreshLayout.setOnRefreshListener {
@@ -90,14 +89,20 @@ class PinboardOverviewActivity : AppCompatActivity() {
             title = getString(if(it == setOf(PostCategory.IDEA)) R.string.ideas else R.string.pinboard)
         }
 
-        viewModel.changeCategories(intent.getStringArrayExtra(EXTRA_CATEGORIES)?.toSet())
+        updateFromIntent(intent)
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
 
-        if(intent != null)
-            viewModel.changeCategories(intent.getStringArrayExtra(EXTRA_CATEGORIES)?.toSet())
+        if(intent != null) updateFromIntent(intent)
+    }
+
+    private fun updateFromIntent(intent: Intent) {
+        val categories = intent.getStringArrayExtra(EXTRA_CATEGORIES)?.toSet()
+        viewModel.clearPosts()
+        viewModel.changeCategories(categories)
+        viewModel.loadPosts(categories)
     }
 
     override fun onStart() {

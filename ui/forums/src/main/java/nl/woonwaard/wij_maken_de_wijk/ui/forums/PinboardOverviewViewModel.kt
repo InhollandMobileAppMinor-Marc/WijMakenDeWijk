@@ -7,10 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
+import nl.woonwaard.wij_maken_de_wijk.domain.services.CrashReporter
 import nl.woonwaard.wij_maken_de_wijk.domain.services.data.PostsRepository
 
 class PinboardOverviewViewModel(
-    private val postsRepository: PostsRepository
+    private val postsRepository: PostsRepository,
+    private val crashReporter: CrashReporter
 ) : ViewModel() {
     private val mutablePosts = MutableLiveData(emptySet<Post>())
 
@@ -32,10 +34,6 @@ class PinboardOverviewViewModel(
 
     private var job: Job? = null
 
-    init {
-        loadPosts()
-    }
-
     fun changeCategories(categories: Set<String>? = null) {
         if(this.categories.value == categories)
             return
@@ -44,6 +42,7 @@ class PinboardOverviewViewModel(
             try {
                 job?.cancelAndJoin()
             } catch(error: CancellationException) {
+                crashReporter.logSoftError(error)
                 error.printStackTrace()
             }
             job = null
@@ -59,6 +58,8 @@ class PinboardOverviewViewModel(
 
     fun loadPosts() = loadPosts(false, this.categories.value)
 
+    fun loadPosts(categories: Set<String>? = null) = loadPosts(false, categories)
+
     private fun loadPosts(forced: Boolean, categories: Set<String>? = null) {
         // Don't load new posts if we're already doing so
         if(!forced && isLoading.value == true) return
@@ -72,5 +73,9 @@ class PinboardOverviewViewModel(
                 mutableIsLoading.postValue(false)
             }
         }
+    }
+
+    fun clearPosts() {
+        mutablePosts.value = emptySet()
     }
 }

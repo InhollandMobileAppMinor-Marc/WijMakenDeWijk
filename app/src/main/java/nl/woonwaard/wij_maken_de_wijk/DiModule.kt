@@ -1,6 +1,7 @@
 package nl.woonwaard.wij_maken_de_wijk
 
 import nl.woonwaard.wij_maken_de_wijk.api.WmdwApi
+import nl.woonwaard.wij_maken_de_wijk.domain.services.CrashReporter
 import nl.woonwaard.wij_maken_de_wijk.domain.services.data.*
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.*
 import nl.woonwaard.wij_maken_de_wijk.domain.services.notifications.NotificationManager
@@ -24,8 +25,10 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val weMakeTheDistrictModule = module {
+    single<CrashReporter> { FirebaseCrashReporter }
+
     single {
-        WmdwApi(get())
+        WmdwApi(get(), get())
     }
 
     single<AccountManager> {
@@ -93,7 +96,7 @@ val weMakeTheDistrictModule = module {
     }
 
     viewModel {
-        PinboardOverviewViewModel(get())
+        PinboardOverviewViewModel(get(), get())
     }
 
     viewModel {

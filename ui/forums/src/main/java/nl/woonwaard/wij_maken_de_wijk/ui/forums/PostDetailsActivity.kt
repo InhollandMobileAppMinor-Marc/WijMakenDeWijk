@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
+import nl.woonwaard.wij_maken_de_wijk.domain.utils.getSerializableArrayExtra
 import nl.woonwaard.wij_maken_de_wijk.ui.core.fluidresize.enableFluidContentResizer
 import nl.woonwaard.wij_maken_de_wijk.ui.core.terminateApplication
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_COMMENTS
@@ -65,10 +66,10 @@ class PostDetailsActivity : AppCompatActivity() {
 
         val post = intent.getSerializableExtra(EXTRA_POST) as? Post
         if(post != null) {
-            val comments = intent.getIntExtra(EXTRA_COMMENTS, 0)
-            if(comments > 0) {
-                viewModel.loadPostData(post, (0 until comments).mapNotNull {
-                    intent.getSerializableExtra("${EXTRA_COMMENTS}_$it") as? Comment
+            val comments = intent.getSerializableArrayExtra(EXTRA_COMMENTS)
+            if(comments.isNotEmpty()) {
+                viewModel.loadPostData(post, comments.mapNotNull {
+                    it as? Comment
                 }.toSet())
             } else viewModel.loadPostData(post)
         } else {
