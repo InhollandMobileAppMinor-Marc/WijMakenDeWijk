@@ -10,4 +10,6 @@ interface NavigationService {
     val repairs: RepairsNavigationService
 
     val settings: SettingsNavigationService
+
+    val neighborhoodMediation: NeighborhoodMediationNavigationService
 }

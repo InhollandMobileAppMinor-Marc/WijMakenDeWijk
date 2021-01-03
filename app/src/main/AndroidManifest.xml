@@ -59,6 +59,13 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
+            android:name=".ui.neighborhood_mediation.NeighborhoodMediationActivity"
+            android:label="@string/neighborhood_mediation"
+            android:parentActivityName=".ui.main.MainActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
             android:name=".ui.repairs.RepairsOverviewActivity"
             android:label="@string/repairs"
             android:parentActivityName=".ui.main.MainActivity"

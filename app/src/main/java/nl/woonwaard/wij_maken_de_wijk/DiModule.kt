@@ -18,6 +18,7 @@ import nl.woonwaard.wij_maken_de_wijk.ui.forums.PostDetailsViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.main.MainNavigationServiceImplementation
 import nl.woonwaard.wij_maken_de_wijk.ui.main.MainViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.main.SplashScreenViewModel
+import nl.woonwaard.wij_maken_de_wijk.ui.neighborhood_mediation.NeighborhoodMediationNavigationServiceImplementation
 import nl.woonwaard.wij_maken_de_wijk.ui.repairs.RepairsNavigationServiceImplementation
 import nl.woonwaard.wij_maken_de_wijk.ui.settings.SettingsNavigationServiceImplementation
 import nl.woonwaard.wij_maken_de_wijk.ui.settings.SettingsViewModel
@@ -83,8 +84,12 @@ val weMakeTheDistrictModule = module {
         SettingsNavigationServiceImplementation(get())
     }
 
+    single<NeighborhoodMediationNavigationService> {
+        NeighborhoodMediationNavigationServiceImplementation(get())
+    }
+
     single<NavigationService> {
-        DefaultNavigationService(get(), get(), get(), get(), get())
+        DefaultNavigationService(get(), get(), get(), get(), get(), get())
     }
 
     viewModel {

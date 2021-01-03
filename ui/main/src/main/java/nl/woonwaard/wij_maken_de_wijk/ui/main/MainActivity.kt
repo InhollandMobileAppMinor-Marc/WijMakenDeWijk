@@ -19,8 +19,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.RuntimeException
 
 class MainActivity : AppCompatActivity() {
-    private val customTabsSession by customTabsSession()
-
     private val viewModel by viewModel<MainViewModel>()
 
     private val navigationService by inject<NavigationService>()
@@ -54,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.content.neighborhoodMediationButton.setOnClickListener {
-            openInBrowser(WOONWAARD_NEIGHBORHOOD_MEDIATION_URL)
+            startActivity(navigationService.neighborhoodMediation.getOverviewIntent())
         }
 
         binding.content.ideasButton.setOnClickListener {
@@ -94,10 +92,6 @@ class MainActivity : AppCompatActivity() {
         binding.content.swipeRefreshLayout.setOnRefreshListener {
             viewModel.loadNotice()
         }
-
-        customTabsSession.observe(this) {
-            it?.mayLaunchUrl(WOONWAARD_NEIGHBORHOOD_MEDIATION_URL.toUri(), null, null)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -112,15 +106,5 @@ class MainActivity : AppCompatActivity() {
         }
 
         return true
-    }
-
-    private fun openInBrowser(url: String) {
-        WmdwCustomTabsStyle
-                .createCustomTabsSessionWithWmdwStyle(this, customTabsSession.value)
-                .launchUrl(this, url.toUri())
-    }
-
-    companion object {
-        const val WOONWAARD_NEIGHBORHOOD_MEDIATION_URL = "https://www.woonwaard.nl/overlast"
     }
 }

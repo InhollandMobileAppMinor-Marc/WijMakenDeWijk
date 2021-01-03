@@ -7,5 +7,6 @@ class DefaultNavigationService(
     override val forums: ForumsNavigationService,
     override val main: MainNavigationService,
     override val repairs: RepairsNavigationService,
-    override val settings: SettingsNavigationService
+    override val settings: SettingsNavigationService,
+    override val neighborhoodMediation: NeighborhoodMediationNavigationService
 ) : NavigationService
