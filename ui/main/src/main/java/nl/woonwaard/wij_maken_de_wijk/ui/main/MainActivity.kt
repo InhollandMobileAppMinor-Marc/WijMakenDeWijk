@@ -16,6 +16,7 @@ import nl.woonwaard.wij_maken_de_wijk.ui.core.terminateApplication
 import nl.woonwaard.wij_maken_de_wijk.ui.main.databinding.ActivityMainBinding
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.lang.RuntimeException
 
 class MainActivity : AppCompatActivity() {
     private val customTabsSession by customTabsSession()

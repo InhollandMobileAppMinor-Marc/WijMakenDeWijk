@@ -15,11 +15,14 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:focusable="true"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/call_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <requestFocus />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
