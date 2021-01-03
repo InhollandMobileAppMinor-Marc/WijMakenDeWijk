@@ -43,11 +43,11 @@ class CreatePostActivity : AppCompatActivity() {
                 }
             ) ?: PostCategory.OTHER
 
-            viewModel.createPost(
-                binding.content.titleInputField.text.toString(),
-                type,
-                binding.content.messageInputField.text.toString()
-            )
+            val title = binding.content.titleInputField.text.toString()
+            val message = binding.content.messageInputField.text.toString()
+
+            if(title.isNotEmpty() && message.isNotEmpty())
+                viewModel.createPost(title, type, message)
         }
 
         viewModel.isLoading.observe(this) {
