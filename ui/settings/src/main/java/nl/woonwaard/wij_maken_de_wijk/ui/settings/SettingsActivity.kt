@@ -1,6 +1,7 @@
 package nl.woonwaard.wij_maken_de_wijk.ui.settings
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.AuthenticationNavigationService
@@ -36,7 +37,9 @@ class SettingsActivity : AppCompatActivity() {
 
         viewModel.isLoggedIn.observe(this) {
             if(!it) {
-                startActivity(authenticationNavigationService.getLoginIntent())
+                startActivity(authenticationNavigationService.getLoginIntent().apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                })
                 finish()
             }
         }

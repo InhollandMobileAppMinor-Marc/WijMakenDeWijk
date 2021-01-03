@@ -1,6 +1,7 @@
 package nl.woonwaard.wij_maken_de_wijk.ui.main
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -42,8 +43,12 @@ class SplashScreenActivity : AppCompatActivity() {
                         .show()
                     return@observe
                 }
-                is ApiStatus.LoggedOut -> startActivity(navigationService.authentication.getLoginIntent())
-                is ApiStatus.LoggedIn -> startActivity(navigationService.main.getHomeScreenIntent())
+                is ApiStatus.LoggedOut -> startActivity(navigationService.authentication.getLoginIntent().apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                })
+                is ApiStatus.LoggedIn -> startActivity(navigationService.main.getHomeScreenIntent().apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                })
             }
 
             viewModel.onDismissed()

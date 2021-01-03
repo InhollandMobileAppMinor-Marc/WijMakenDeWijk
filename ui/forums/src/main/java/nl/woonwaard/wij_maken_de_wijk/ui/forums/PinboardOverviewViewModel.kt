@@ -34,48 +34,36 @@ class PinboardOverviewViewModel(
 
     private var job: Job? = null
 
-    fun changeCategories(categories: Set<String>? = null) {
-        if(this.categories.value == categories)
-            return
+    fun reset(done: () -> Unit) {
+        mutableIsLoading.value = true
+        mutableCategories.value = emptySet()
+        mutablePosts.value = emptySet()
 
         viewModelScope.launch {
             try {
                 job?.cancelAndJoin()
-            } catch(error: CancellationException) {
+            } catch (error: CancellationException) {
                 crashReporter.logSoftError(error)
-                error.printStackTrace()
             }
-            job = null
-
-            mutablePosts.postValue(emptySet())
-            mutableIsLoading.postValue(false)
-
-            mutableCategories.postValue(categories)
-
-            loadPosts(true, categories)
+            mutableIsLoading.value = false
+            done()
         }
     }
 
-    fun loadPosts() = loadPosts(false, this.categories.value)
+    fun reloadPosts() = loadPosts(this.categories.value)
 
-    fun loadPosts(categories: Set<String>? = null) = loadPosts(false, categories)
-
-    private fun loadPosts(forced: Boolean, categories: Set<String>? = null) {
+    fun loadPosts(categories: Set<String>?) {
         // Don't load new posts if we're already doing so
-        if(!forced && isLoading.value == true) return
+        if(isLoading.value == true) return
 
-        mutableIsLoading.postValue(true)
+        mutableIsLoading.value = true
+        mutableCategories.value = categories
 
         job = viewModelScope.launch {
             val posts = postsRepository.getAllPosts(categories)
-            if(isActive) {
-                mutablePosts.postValue(posts.filter { !it.deleted }.toSet())
-                mutableIsLoading.postValue(false)
-            }
+            mutablePosts.postValue(posts.filter { !it.deleted && (categories == null || it.category in categories) }.toSet())
+            mutableIsLoading.postValue(false)
+            job = null
         }
-    }
-
-    fun clearPosts() {
-        mutablePosts.value = emptySet()
     }
 }

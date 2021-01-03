@@ -1,5 +1,6 @@
 package nl.woonwaard.wij_maken_de_wijk.ui.authentication
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -77,7 +78,9 @@ class RegistrationActivity : AppCompatActivity() {
 
         viewModel.isLoggedIn.observe(this) {
             if(it) {
-                startActivity(mainNavigationService.getHomeScreenIntent())
+                startActivity(mainNavigationService.getHomeScreenIntent().apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                })
                 finish()
             }
         }

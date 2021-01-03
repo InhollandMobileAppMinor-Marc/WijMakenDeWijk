@@ -8,11 +8,12 @@ import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.ForumsNavigatio
 import nl.woonwaard.wij_maken_de_wijk.domain.utils.putSerializableArrayExtra
 
 class ForumsNavigationServiceImplementation(
-    val context: Context
+        val context: Context
 ) : ForumsNavigationService {
 
     override fun getOverviewIntent(categories: Set<String>?): Intent {
         val intent = Intent(context, PinboardOverviewActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         if(categories != null)
             intent.putExtra(EXTRA_CATEGORIES, categories.toTypedArray())
         return intent

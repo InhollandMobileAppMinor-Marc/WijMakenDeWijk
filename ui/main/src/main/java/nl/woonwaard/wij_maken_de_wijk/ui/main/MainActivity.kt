@@ -113,10 +113,6 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onBackPressed() {
-        terminateApplication()
-    }
-
     private fun openInBrowser(url: String) {
         WmdwCustomTabsStyle
                 .createCustomTabsSessionWithWmdwStyle(this, customTabsSession.value)

@@ -70,7 +70,7 @@ class PinboardOverviewActivity : AppCompatActivity() {
         binding.content.recyclerView.adapter = adapter
 
         binding.content.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.loadPosts()
+            viewModel.reloadPosts()
         }
 
         binding.createPostFab.setOnClickListener {
@@ -100,13 +100,13 @@ class PinboardOverviewActivity : AppCompatActivity() {
 
     private fun updateFromIntent(intent: Intent) {
         val categories = intent.getStringArrayExtra(EXTRA_CATEGORIES)?.toSet()
-        viewModel.clearPosts()
-        viewModel.changeCategories(categories)
-        viewModel.loadPosts(categories)
+        viewModel.reset {
+            viewModel.loadPosts(categories)
+        }
     }
 
     override fun onStart() {
         super.onStart()
-        viewModel.loadPosts()
+        viewModel.reloadPosts()
     }
 }

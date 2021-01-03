@@ -1,5 +1,6 @@
 package nl.woonwaard.wij_maken_de_wijk.ui.authentication
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -62,14 +63,12 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.isLoggedIn.observe(this) {
             if(it) {
-                startActivity(navigationService.main.getHomeScreenIntent())
+                startActivity(navigationService.main.getHomeScreenIntent().apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                })
                 finish()
             }
         }
-    }
-
-    override fun onBackPressed() {
-        terminateApplication()
     }
 
     private fun hideKeyboard() {
