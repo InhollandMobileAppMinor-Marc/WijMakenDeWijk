@@ -49,4 +49,6 @@
     <string name="other">Overig</string>
     <string name="ok">Oké</string>
     <string name="more_information">Meer informatie</string>
+    <string name="repeat_password">Herhaal wachtwoord</string>
+    <string name="not_identical">Niet hetzelfde</string>
 </resources>

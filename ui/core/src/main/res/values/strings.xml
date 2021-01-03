@@ -48,4 +48,6 @@
     <string name="other">Other</string>
     <string name="ok">OK</string>
     <string name="more_information">More information</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="not_identical">Not identical</string>
 </resources>

@@ -43,7 +43,12 @@ class RegistrationActivity : AppCompatActivity() {
                 },
                 Triple(binding.content.passwordInputField, viewModel::isPasswordCorrect) {
                     binding.content.passwordField.error = getString(R.string.password_too_weak)
-                }
+                },
+                Triple(binding.content.repeatPasswordInputField, { repeatedPassword ->
+                    repeatedPassword == binding.content.passwordInputField.text.toString()
+                }, {
+                    binding.content.repeatPasswordField.error = getString(R.string.not_identical)
+                })
             )
 
             for ((field, checker, errorMarker) in correctnessChecks) {
@@ -71,6 +76,12 @@ class RegistrationActivity : AppCompatActivity() {
 
         binding.content.passwordInputField.doOnTextChanged { _, _, _, _ ->
             binding.content.passwordField.error = null
+            binding.content.repeatPasswordField.error = null
+        }
+
+        binding.content.repeatPasswordInputField.doOnTextChanged { _, _, _, _ ->
+            binding.content.passwordField.error = null
+            binding.content.repeatPasswordField.error = null
         }
 
         viewModel.isLoading.observe(this) {
