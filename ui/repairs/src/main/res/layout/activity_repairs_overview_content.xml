@@ -113,7 +113,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:foregroundTint="?attr/colorOnError"
             android:text="@string/more_information"
+            app:backgroundTint="?attr/colorError"
             app:layout_constraintEnd_toEndOf="@id/category_text"
             app:layout_constraintStart_toStartOf="@id/category_text"
             app:layout_constraintTop_toBottomOf="@id/emergency_repairs_info_text" />

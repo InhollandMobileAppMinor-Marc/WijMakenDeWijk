@@ -8,6 +8,20 @@
     tools:context=".SettingsActivity"
     tools:theme="@style/AppTheme.NoActionBar">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/settings_image"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:adjustViewBounds="true"
+        android:maxHeight="160dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/va_undraw_settings" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/account_text"
         android:layout_width="0dp"
@@ -20,7 +34,7 @@
         android:textColor="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/settings_image" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/logout"
@@ -33,36 +47,14 @@
         app:layout_constraintTop_toBottomOf="@id/account_text" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/change_email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:enabled="false"
-        android:text="@string/change_email"
-        app:layout_constraintEnd_toEndOf="@id/logout"
-        app:layout_constraintStart_toStartOf="@id/logout"
-        app:layout_constraintTop_toBottomOf="@id/logout" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/change_password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:enabled="false"
-        android:text="@string/change_password"
-        app:layout_constraintEnd_toEndOf="@id/change_email"
-        app:layout_constraintStart_toStartOf="@id/change_email"
-        app:layout_constraintTop_toBottomOf="@id/change_email" />
-
-    <com.google.android.material.button.MaterialButton
         android:id="@+id/delete_account"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/delete_account"
-        app:layout_constraintEnd_toEndOf="@id/change_password"
-        app:layout_constraintStart_toStartOf="@id/change_password"
-        app:layout_constraintTop_toBottomOf="@id/change_password" />
+        app:layout_constraintEnd_toEndOf="@id/logout"
+        app:layout_constraintStart_toStartOf="@id/logout"
+        app:layout_constraintTop_toBottomOf="@id/logout" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/notifications_text"
