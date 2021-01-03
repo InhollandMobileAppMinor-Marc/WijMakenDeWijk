@@ -14,4 +14,10 @@
     <string name="lift">Lift/elevator</string>
     <string name="cleaning">Cleaning</string>
     <string name="green_maintenance">Green maintenance</string>
+    <string name="call_mo2">Call MO2</string>
+    <string name="lift_info">Contact MO2 on the toll-free number 0800 8600 860. <br /><br />They will resolve the lift/elevator failure as soon as possible.</string>
+    <string name="cleaning_info">Notifications about cleaning in your residential building can be sent by e-mail to schoon@woonwaard.nl <br /><br />There is no collective cleaning in some flats or porches. The residents themselves clean (their part) of the communal space. If this is not done (properly), you can request your liveability consultant to start a cleaning program. At least 70% of the residents must agree to this. We settle the costs for cleaning via the service costs with all residents of the flat or porch.</string>
+    <string name="call_emergency_number">Call emergency number</string>
+    <string name="emergency_info">In the event of fire damage, gas leakage, electricity failure or a burst water pipe, please contact us immediately (072) 527 6 527. We are available 24 hours a day for urgent matters.</string>
+    <string name="green_maintenance_info">You should report any green maintenance to your residential building to your liveability consultant: your point of contact in the area.</string>
 </resources>

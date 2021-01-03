@@ -14,4 +14,10 @@
     <string name="lift">Lift</string>
     <string name="cleaning">Schoonmaak</string>
     <string name="green_maintenance">Groen onderhoud</string>
+    <string name="call_mo2">MO2 bellen</string>
+    <string name="lift_info">Neem contact op met MO2 via het gratis nummer 0800 8600 860.<br /><br />Zij zullen de liftstoring zo snel mogelijk verhelpen.</string>
+    <string name="cleaning_info">Meldingen over schoonmaak in uw woongebouw geeft u per e-mail door via schoon@woonwaard.nl <br /><br />In sommige flats of portieken is geen collectieve schoonmaak. De bewoners maken zelf (hun deel) van de gemeenschappelijke ruimte schoon. Als dat niet (goed) gebeurt, kunt u uw leefbaarheidsconsulent verzoeken een schoonmaakprogramma te starten. 70 % van de bewoners moeten daar minimaal mee akkoord gaan. De kosten voor schoonmaak verrekenen we via de servicekosten met alle bewoners van de flat of portiek.</string>
+    <string name="call_emergency_number">Spoednummer bellen</string>
+    <string name="emergency_info">In geval van brandschade, gaslekkage, elektrastoring of een gesprongen waterleiding neemt u direct contact met ons op (072) 527 6 527. Voor spoed zijn wij 24 uur per dag bereikbaar.</string>
+    <string name="green_maintenance_info">Meldingen over het groenonderhoud bij uw woongebouw geeft u door aan uw leefbaarheidsconsulent: uw aanspreekpunt in de buurt.</string>
 </resources>

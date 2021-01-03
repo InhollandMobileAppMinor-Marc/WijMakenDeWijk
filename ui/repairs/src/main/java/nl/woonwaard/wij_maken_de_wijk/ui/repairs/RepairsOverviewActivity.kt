@@ -35,6 +35,22 @@ class RepairsOverviewActivity : AppCompatActivity() {
             startActivity(repairsNavigationService.getGlassIntent())
         }
 
+        binding.content.liftButton.setOnClickListener {
+            startActivity(repairsNavigationService.getLiftIntent())
+        }
+
+        binding.content.cleaningButton.setOnClickListener {
+            startActivity(repairsNavigationService.getCleaningIntent())
+        }
+
+        binding.content.greenMaintenanceButton.setOnClickListener {
+            startActivity(repairsNavigationService.getGreenMaintenanceIntent())
+        }
+
+        binding.content.emergencyRepairsButton.setOnClickListener {
+            startActivity(repairsNavigationService.getEmergencyIntent())
+        }
+
         customTabsSession.observe(this) {
             it?.mayLaunchUrl(WOONWAARD_REPAIR_URL.toUri(), null, null)
         }

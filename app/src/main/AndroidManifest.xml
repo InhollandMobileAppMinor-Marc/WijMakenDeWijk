@@ -73,6 +73,34 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
+            android:name=".ui.repairs.LiftActivity"
+            android:label="@string/lift"
+            android:parentActivityName=".ui.repairs.RepairsOverviewActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.repairs.CleaningActivity"
+            android:label="@string/cleaning"
+            android:parentActivityName=".ui.repairs.RepairsOverviewActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.repairs.GreenMaintenanceActivity"
+            android:label="@string/green_maintenance"
+            android:parentActivityName=".ui.repairs.RepairsOverviewActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.repairs.EmergencyActivity"
+            android:label="@string/emergency_repairs"
+            android:parentActivityName=".ui.repairs.RepairsOverviewActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
             android:name=".ui.settings.SettingsActivity"
             android:label="@string/settings"
             android:parentActivityName=".ui.main.MainActivity"

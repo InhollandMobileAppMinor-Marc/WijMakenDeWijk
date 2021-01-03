@@ -8,4 +8,12 @@ interface RepairsNavigationService {
     fun getCentralHeatingIntent(): Intent
 
     fun getGlassIntent(): Intent
+
+    fun getLiftIntent(): Intent
+
+    fun getCleaningIntent(): Intent
+
+    fun getGreenMaintenanceIntent(): Intent
+
+    fun getEmergencyIntent(): Intent
 }
