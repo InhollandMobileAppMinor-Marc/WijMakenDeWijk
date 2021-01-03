@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         if(!viewModel.isLoggedIn) {
-            startActivity(navigationService.authentication.getLoginIntent())
+            startActivity(navigationService.authentication.getInviteScreenIntent())
             finish()
         }
 

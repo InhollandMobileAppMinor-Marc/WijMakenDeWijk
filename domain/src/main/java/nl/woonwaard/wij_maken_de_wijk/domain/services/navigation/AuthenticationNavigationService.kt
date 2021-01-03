@@ -6,4 +6,6 @@ interface AuthenticationNavigationService {
     fun getLoginIntent(): Intent
 
     fun getRegistrationIntent(): Intent
+
+    fun getInviteScreenIntent(): Intent
 }

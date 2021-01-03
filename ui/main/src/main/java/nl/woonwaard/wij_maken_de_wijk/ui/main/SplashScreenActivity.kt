@@ -43,7 +43,7 @@ class SplashScreenActivity : AppCompatActivity() {
                         .show()
                     return@observe
                 }
-                is ApiStatus.LoggedOut -> startActivity(navigationService.authentication.getLoginIntent().apply {
+                is ApiStatus.LoggedOut -> startActivity(navigationService.authentication.getInviteScreenIntent().apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 })
                 is ApiStatus.LoggedIn -> startActivity(navigationService.main.getHomeScreenIntent().apply {

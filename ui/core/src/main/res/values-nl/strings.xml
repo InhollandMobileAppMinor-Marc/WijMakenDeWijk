@@ -51,4 +51,5 @@
     <string name="more_information">Meer informatie</string>
     <string name="repeat_password">Herhaal wachtwoord</string>
     <string name="not_identical">Niet hetzelfde</string>
+    <string name="invitation_received">Uitnodiging ontvangen?</string>
 </resources>

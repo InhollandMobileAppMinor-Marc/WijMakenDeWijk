@@ -6,6 +6,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
+import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.MainNavigationService
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.NavigationService
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.databinding.ActivityLoginBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.core.fluidresize.enableFluidContentResizer
@@ -16,7 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class LoginActivity : AppCompatActivity() {
     private val viewModel by viewModel<LoginViewModel>()
 
-    private val navigationService by inject<NavigationService>()
+    private val mainNavigationService by inject<MainNavigationService>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
         enableFluidContentResizer()
 
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.content.login.setOnClickListener {
             hideKeyboard()
@@ -52,18 +54,13 @@ class LoginActivity : AppCompatActivity() {
             binding.content.passwordField.error = null
         }
 
-        binding.content.signup.setOnClickListener {
-            startActivity(navigationService.authentication.getRegistrationIntent())
-        }
-
         viewModel.isLoading.observe(this) {
             binding.content.login.isEnabled = !it
-            binding.content.signup.isEnabled = !it
         }
 
         viewModel.isLoggedIn.observe(this) {
             if(it) {
-                startActivity(navigationService.main.getHomeScreenIntent().apply {
+                startActivity(mainNavigationService.getHomeScreenIntent().apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 })
                 finish()

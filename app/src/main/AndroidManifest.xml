@@ -32,8 +32,14 @@
         </activity>
 
         <activity
+            android:name=".ui.authentication.InviteScreenActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
             android:name=".ui.authentication.LoginActivity"
             android:label="@string/login"
+            android:parentActivityName=".ui.authentication.InviteScreenActivity"
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
@@ -41,6 +47,7 @@
         <activity
             android:name=".ui.authentication.RegistrationActivity"
             android:label="@string/signup"
+            android:parentActivityName=".ui.authentication.InviteScreenActivity"
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />

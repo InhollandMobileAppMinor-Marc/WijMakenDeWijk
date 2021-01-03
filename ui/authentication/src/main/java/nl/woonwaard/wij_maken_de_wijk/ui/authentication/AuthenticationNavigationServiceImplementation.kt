@@ -16,4 +16,8 @@ class AuthenticationNavigationServiceImplementation(
         return Intent(context, RegistrationActivity::class.java)
     }
 
+    override fun getInviteScreenIntent(): Intent {
+        return Intent(context, InviteScreenActivity::class.java)
+    }
+
 }
