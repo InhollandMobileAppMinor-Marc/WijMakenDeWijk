@@ -7,9 +7,11 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Credentials
 import nl.woonwaard.wij_maken_de_wijk.domain.services.data.AccountManager
+import nl.woonwaard.wij_maken_de_wijk.domain.services.data.ApiStatusController
 
 class LoginViewModel(
-    private val accountManager: AccountManager
+    private val accountManager: AccountManager,
+    private val apiStatusController: ApiStatusController
 ) : ViewModel() {
     private val mutableIsLoading = MutableLiveData(false)
 
@@ -26,6 +28,7 @@ class LoginViewModel(
 
         viewModelScope.launch {
             val isLoggedIn = accountManager.login(Credentials(email, password))
+            apiStatusController.getApiStatus()
             mutableIsLoading.postValue(false)
             mutableIsLoggedIn.postValue(isLoggedIn)
             if (!isLoggedIn) error?.invoke()

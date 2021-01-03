@@ -4,4 +4,6 @@ import android.content.Intent
 
 interface MainNavigationService {
     fun getHomeScreenIntent(): Intent
+
+    fun getSplashScreenIntent(): Intent
 }

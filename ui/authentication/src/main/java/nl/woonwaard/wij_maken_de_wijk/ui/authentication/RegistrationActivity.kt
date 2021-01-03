@@ -26,6 +26,7 @@ class RegistrationActivity : AppCompatActivity() {
         enableFluidContentResizer()
 
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.content.signup.setOnClickListener {
             hideKeyboard()

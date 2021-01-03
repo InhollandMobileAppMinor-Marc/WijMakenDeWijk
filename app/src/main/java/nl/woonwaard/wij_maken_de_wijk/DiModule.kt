@@ -104,7 +104,7 @@ val weMakeTheDistrictModule = module {
     }
 
     viewModel {
-        LoginViewModel(get())
+        LoginViewModel(get(), get())
     }
 
     viewModel {

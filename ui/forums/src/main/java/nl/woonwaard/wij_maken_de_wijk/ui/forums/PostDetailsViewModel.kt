@@ -82,6 +82,9 @@ class PostDetailsViewModel(
     }
 
     fun addComment(text: String) {
+        if(text.isEmpty())
+            return
+
         mutableIsLoading.postValue(true)
 
         viewModelScope.launch {
@@ -99,7 +102,8 @@ class PostDetailsViewModel(
         viewModelScope.launch {
             val success = postsRepository.deletePost(post)
             mutableIsLoading.postValue(false)
-            mutablePost.postValue(post.copy(deleted = true))
+            if(success)
+                mutablePost.postValue(post.copy(deleted = true))
         }
     }
 }
