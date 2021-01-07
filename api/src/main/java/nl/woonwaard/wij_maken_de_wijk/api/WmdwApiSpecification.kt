@@ -56,6 +56,12 @@ interface WmdwApiSpecification {
         @Query("inlineAuthor") inlineAuthor: Boolean = true
     ): Response<Post>
 
+    @POST("posts/{id}/reports")
+    suspend fun reportPost(
+        @Header("Authorization") authorization: String,
+        @Path("id") id: String
+    ): Response<Unit>
+
     @DELETE("posts/{id}")
     suspend fun deletePostById(
         @Header("Authorization") authorization: String,
@@ -76,6 +82,12 @@ interface WmdwApiSpecification {
         @Query("inlineAuthor") inlineAuthor: Boolean = true,
         @Query("inlinePost") inlinePost: Boolean = false
     ): Response<Comment>
+
+    @POST("comments/{id}/reports")
+    suspend fun reportComment(
+        @Header("Authorization") authorization: String,
+        @Path("id") id: String
+    ): Response<Unit>
 
     @DELETE("comments/{id}")
     suspend fun deleteCommentById(

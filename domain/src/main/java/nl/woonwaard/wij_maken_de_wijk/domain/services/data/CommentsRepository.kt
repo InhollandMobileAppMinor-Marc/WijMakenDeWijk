@@ -9,6 +9,10 @@ interface CommentsRepository {
 
     suspend fun addCommentToPost(post: Post, comment: CreatedComment): Comment?
 
+    suspend fun reportComment(comment: Comment): Boolean
+
+    suspend fun reportComment(id: String): Boolean
+
     suspend fun deleteComment(comment: Comment): Boolean
 
     suspend fun deleteComment(id: String): Boolean
