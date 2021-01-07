@@ -4,4 +4,6 @@ import android.content.Intent
 
 interface SettingsNavigationService {
     fun getOverviewIntent(): Intent
+
+    fun getChangeEmailIntent(): Intent
 }

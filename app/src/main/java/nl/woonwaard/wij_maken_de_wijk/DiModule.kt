@@ -20,6 +20,7 @@ import nl.woonwaard.wij_maken_de_wijk.ui.main.MainViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.main.SplashScreenViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.neighborhood_mediation.NeighborhoodMediationNavigationServiceImplementation
 import nl.woonwaard.wij_maken_de_wijk.ui.repairs.RepairsNavigationServiceImplementation
+import nl.woonwaard.wij_maken_de_wijk.ui.settings.ChangeEmailViewModel
 import nl.woonwaard.wij_maken_de_wijk.ui.settings.SettingsNavigationServiceImplementation
 import nl.woonwaard.wij_maken_de_wijk.ui.settings.SettingsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -122,5 +123,9 @@ val weMakeTheDistrictModule = module {
 
     viewModel {
         SettingsViewModel(get(), get())
+    }
+
+    viewModel {
+        ChangeEmailViewModel(get())
     }
 }

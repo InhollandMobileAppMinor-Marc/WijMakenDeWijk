@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.pm.ShortcutManagerCompat
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.AuthenticationNavigationService
+import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.NavigationService
 import nl.woonwaard.wij_maken_de_wijk.ui.settings.databinding.ActivitySettingsBinding
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -13,7 +14,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class SettingsActivity : AppCompatActivity() {
     private val viewModel by viewModel<SettingsViewModel>()
 
-    private val authenticationNavigationService by inject<AuthenticationNavigationService>()
+    private val navigationService by inject<NavigationService>()
 
     private val notificationPreferences by lazy {
         getSharedPreferences("notifications", Context.MODE_PRIVATE)
@@ -32,6 +33,10 @@ class SettingsActivity : AppCompatActivity() {
             viewModel.logout()
         }
 
+        binding.content.changeEmailButton.setOnClickListener {
+            startActivity(navigationService.settings.getChangeEmailIntent())
+        }
+
         binding.content.deleteAccount.setOnClickListener {
             viewModel.deleteAccount()
         }
@@ -39,7 +44,7 @@ class SettingsActivity : AppCompatActivity() {
         viewModel.isLoggedIn.observe(this) {
             if(!it) {
                 ShortcutManagerCompat.removeAllDynamicShortcuts(this)
-                startActivity(authenticationNavigationService.getLoginIntent().apply {
+                startActivity(navigationService.authentication.getLoginIntent().apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 })
                 finish()
