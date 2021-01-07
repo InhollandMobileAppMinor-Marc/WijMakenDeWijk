@@ -10,6 +10,7 @@ import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.MainNavigationS
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.NavigationService
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.databinding.ActivityLoginBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.core.fluidresize.enableFluidContentResizer
+import nl.woonwaard.wij_maken_de_wijk.ui.core.hideKeyboard
 import nl.woonwaard.wij_maken_de_wijk.ui.core.terminateApplication
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -66,13 +67,5 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }
         }
-    }
-
-    private fun hideKeyboard() {
-        currentFocus?.clearFocus()
-
-        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        val view = currentFocus ?: View(this)
-        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

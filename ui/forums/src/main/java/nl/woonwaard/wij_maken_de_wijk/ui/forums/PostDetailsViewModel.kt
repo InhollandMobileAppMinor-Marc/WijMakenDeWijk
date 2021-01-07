@@ -106,4 +106,14 @@ class PostDetailsViewModel(
                 mutablePost.postValue(post.copy(deleted = true))
         }
     }
+
+    fun reportPost() {
+        val post = post.value ?: return
+        mutableIsLoading.postValue(true)
+
+        viewModelScope.launch {
+            postsRepository.reportPost(post)
+            mutableIsLoading.postValue(false)
+        }
+    }
 }
