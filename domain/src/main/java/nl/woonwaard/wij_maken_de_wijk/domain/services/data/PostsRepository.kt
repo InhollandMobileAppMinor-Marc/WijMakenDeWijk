@@ -10,6 +10,10 @@ interface PostsRepository {
 
     suspend fun addPost(createdPost: CreatedPost): Post?
 
+    suspend fun addVote(vote: String, post: Post): Boolean
+
+    suspend fun addVote(vote: String, postId: String): Boolean
+
     suspend fun reportPost(post: Post): Boolean
 
     suspend fun reportPost(id: String): Boolean

@@ -88,6 +88,16 @@ class WmdwApi(
         return if (response?.isSuccessful == true) response.body() else null
     }
 
+    override suspend fun addVote(vote: String, post: Post) = addVote(vote, post.id)
+
+    override suspend fun addVote(vote: String, postId: String): Boolean {
+        val response = api {
+            addVoteToPost(authHeaderValue ?: "N/A", postId)
+        }
+
+        return response?.isSuccessful == true
+    }
+
     override suspend fun reportPost(post: Post) = reportPost(post.id)
 
     override suspend fun reportPost(id: String): Boolean {

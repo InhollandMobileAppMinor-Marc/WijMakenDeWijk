@@ -66,4 +66,30 @@ class PinboardOverviewViewModel(
             job = null
         }
     }
+
+    fun addVote(vote: String, post: Post) = addVote(vote, post.id)
+
+    fun addVote(vote: String, postId: String) {
+        mutablePosts.postValue(posts.value?.map {
+            if(it.id == postId) it.copy(vote = vote)
+            else it
+        }?.toSet() ?: emptySet())
+
+        viewModelScope.launch {
+            postsRepository.addVote(vote, postId)
+        }
+    }
+
+    fun removeVote(post: Post) = removeVote(post.id)
+
+    fun removeVote(postId: String) {
+        mutablePosts.postValue(posts.value?.map {
+            if(it.id == postId) it.copy(vote = null)
+            else it
+        }?.toSet() ?: emptySet())
+
+        viewModelScope.launch {
+            postsRepository.addVote("", postId)
+        }
+    }
 }

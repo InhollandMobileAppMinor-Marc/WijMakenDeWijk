@@ -62,6 +62,12 @@ interface WmdwApiSpecification {
         @Path("id") id: String
     ): Response<Unit>
 
+    @POST("posts/{id}/votes")
+    suspend fun addVoteToPost(
+        @Header("Authorization") authorization: String,
+        @Path("id") id: String
+    ): Response<Unit>
+
     @DELETE("posts/{id}")
     suspend fun deletePostById(
         @Header("Authorization") authorization: String,

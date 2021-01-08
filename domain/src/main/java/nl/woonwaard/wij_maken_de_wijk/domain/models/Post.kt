@@ -16,5 +16,6 @@ data class Post(
     val comments: Set<String>,
     val hallway: String,
     val location: String,
-    val deleted: Boolean
+    val deleted: Boolean,
+    var vote: String? = null
 ) : java.io.Serializable
