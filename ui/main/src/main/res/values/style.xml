@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme.Main.ButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textSize">20sp</item>
+        <item name="iconSize">40dp</item>
+        <item name="android:paddingStart">32dp</item>
+        <item name="android:paddingEnd">32dp</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="iconPadding">24dp</item>
+        <item name="iconGravity">start</item>
+    </style>
+</resources>

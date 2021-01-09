@@ -1,9 +1,12 @@
 package nl.woonwaard.wij_maken_de_wijk.ui.forums
 
+import android.content.res.ColorStateList
 import android.text.format.DateUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.MarginLayoutParamsCompat
 import androidx.core.view.marginEnd
 import androidx.core.view.marginStart
@@ -55,22 +58,24 @@ class PostDetailsAdapter(
             is PostDetailsViewHolder.HeaderViewHolder -> {
                 val binding = holder.binding
                 val post = post.value!!
-                binding.title.visibility = if(showTitleInHeader) View.VISIBLE else View.GONE
+                binding.title.visibility = if (showTitleInHeader) View.VISIBLE else View.GONE
                 binding.title.text = post.title
                 binding.body.text =
-                    if(post.deleted) binding.context.getString(R.string.deleted)
+                    if (post.deleted) binding.context.getString(R.string.deleted)
                     else post.body
                 binding.user.text =
-                    if(post.author.deleted) binding.context.getString(R.string.deleted)
+                    if (post.author.deleted) binding.context.getString(R.string.deleted)
                     else post.author.nameWithLocation
-                binding.category.setText(when(post.category) {
-                    PostCategory.SERVICE -> R.string.service
-                    PostCategory.GATHERING -> R.string.gathering
-                    PostCategory.SUSTAINABILITY -> R.string.sustainability
-                    PostCategory.IDEA -> R.string.idea
-                    PostCategory.OTHER -> R.string.other
-                    else -> R.string.unknown
-                })
+                binding.category.setText(
+                    when (post.category) {
+                        PostCategory.SERVICE -> R.string.service
+                        PostCategory.GATHERING -> R.string.gathering
+                        PostCategory.SUSTAINABILITY -> R.string.sustainability
+                        PostCategory.IDEA -> R.string.idea
+                        PostCategory.OTHER -> R.string.other
+                        else -> R.string.unknown
+                    }
+                )
                 binding.time.text = DateUtils.getRelativeTimeSpanString(
                     post.timestamp.time,
                     System.currentTimeMillis(),
@@ -93,15 +98,16 @@ class PostDetailsAdapter(
                     DateUtils.MINUTE_IN_MILLIS
                 )
 
-                val canDeleteComment = deleteComment != null && (comment.author == currentUser || currentUser?.isAdmin ?: false)
+                val canDeleteComment =
+                    deleteComment != null && (comment.author == currentUser || currentUser?.isAdmin ?: false)
 
                 if (canDeleteComment || reportComment != null) {
                     binding.root.isFocusable = true
                     binding.root.isClickable = true
                     val items = mutableSetOf<Pair<Int, ((comment: Comment) -> Unit)?>>()
-                    if(canDeleteComment)
+                    if (canDeleteComment)
                         items += R.string.delete to deleteComment
-                    if(reportComment != null)
+                    if (reportComment != null)
                         items += R.string.report to reportComment
                     binding.root.setOnClickListener {
                         MaterialAlertDialogBuilder(binding.context)
@@ -130,10 +136,27 @@ class PostDetailsAdapter(
                 val marginEnd = binding.view.marginEnd
                 binding.view.layoutParams = binding.view.layoutParams.also {
                     if (it is ViewGroup.MarginLayoutParams) {
-                        MarginLayoutParamsCompat.setMarginStart(it, startFun(marginStart, marginEnd))
+                        MarginLayoutParamsCompat.setMarginStart(
+                            it,
+                            startFun(marginStart, marginEnd)
+                        )
                         MarginLayoutParamsCompat.setMarginEnd(it, endFun(marginStart, marginEnd))
                     }
                 }
+
+                val backgrounds = setOf(
+                    R.drawable.comment_background,
+                    R.drawable.comment_background_brown,
+                    R.drawable.comment_background_green,
+                    R.drawable.comment_background_pink,
+                    R.drawable.comment_background_purple,
+                    R.drawable.comment_background_gold,
+                )
+
+                binding.view.setBackgroundResource(
+                    if(comment.author.isAdmin) R.drawable.comment_background_woonwaard
+                    else backgrounds.random()
+                )
             }
         }
     }

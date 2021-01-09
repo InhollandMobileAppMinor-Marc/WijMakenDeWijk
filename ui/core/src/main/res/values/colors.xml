@@ -11,4 +11,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorError">#B00020</color>
     <color name="colorOK">#4CAF50</color>
+    <color name="tertiaryColorPink">#F4A9B6</color>
+    <color name="tertiaryColorBrown">#A15C4F</color>
+    <color name="tertiaryColorRed">#CE5156</color>
+    <color name="tertiaryColorGreen">#035E3B</color>
+    <color name="tertiaryColorPurple">#9375A5</color>
+    <color name="tertiaryColorGold">#D2A664</color>
 </resources>
