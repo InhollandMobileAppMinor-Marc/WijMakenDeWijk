@@ -3,7 +3,6 @@ package nl.woonwaard.wij_maken_de_wijk.ui.forums
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import nl.woonwaard.wij_maken_de_wijk.domain.models.PostCategory
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.ForumsNavigationService

@@ -1,12 +1,10 @@
 package nl.woonwaard.wij_maken_de_wijk.ui.forums
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 import nl.woonwaard.wij_maken_de_wijk.domain.models.PostCategory

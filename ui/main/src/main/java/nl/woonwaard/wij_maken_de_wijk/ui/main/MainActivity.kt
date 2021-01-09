@@ -6,17 +6,12 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import nl.woonwaard.wij_maken_de_wijk.domain.models.PostCategory
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.NavigationService
-import nl.woonwaard.wij_maken_de_wijk.ui.core.custom_tabs.WmdwCustomTabsStyle
-import nl.woonwaard.wij_maken_de_wijk.ui.core.custom_tabs.customTabsSession
-import nl.woonwaard.wij_maken_de_wijk.ui.core.terminateApplication
 import nl.woonwaard.wij_maken_de_wijk.ui.main.databinding.ActivityMainBinding
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.lang.RuntimeException
 
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModel<MainViewModel>()

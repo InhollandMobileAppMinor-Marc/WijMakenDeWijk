@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.pm.ShortcutManagerCompat
-import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.AuthenticationNavigationService
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.NavigationService
 import nl.woonwaard.wij_maken_de_wijk.ui.settings.databinding.ActivitySettingsBinding
 import org.koin.android.ext.android.inject

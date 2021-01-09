@@ -1,11 +1,13 @@
 package nl.woonwaard.wij_maken_de_wijk.ui.forums
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.launch
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 import nl.woonwaard.wij_maken_de_wijk.domain.services.CrashReporter
 import nl.woonwaard.wij_maken_de_wijk.domain.services.data.PostsRepository

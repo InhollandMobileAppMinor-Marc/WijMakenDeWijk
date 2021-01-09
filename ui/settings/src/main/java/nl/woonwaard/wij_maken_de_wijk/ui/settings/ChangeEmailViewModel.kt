@@ -10,7 +10,6 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Credentials
 import nl.woonwaard.wij_maken_de_wijk.domain.services.data.AccountManager
-import nl.woonwaard.wij_maken_de_wijk.domain.services.data.ApiStatusController
 
 class ChangeEmailViewModel(
     private val accountManager: AccountManager

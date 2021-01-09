@@ -1,12 +1,9 @@
 package nl.woonwaard.wij_maken_de_wijk.ui.forums
 
-import android.content.res.ColorStateList
 import android.text.format.DateUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.view.MarginLayoutParamsCompat
 import androidx.core.view.marginEnd
 import androidx.core.view.marginStart
