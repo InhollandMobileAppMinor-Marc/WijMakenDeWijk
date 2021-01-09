@@ -9,6 +9,7 @@ import androidx.core.view.marginEnd
 import androidx.core.view.marginStart
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 import nl.woonwaard.wij_maken_de_wijk.domain.models.PostCategory
@@ -22,6 +23,8 @@ import kotlin.math.min
 class PostDetailsAdapter(
     private val post: LiveData<Post>,
     private val comments: LiveData<Set<Comment>>,
+    private val deleteComment: ((comment: Comment) -> Unit)? = null,
+    private val reportComment: ((comment: Comment) -> Unit)? = null,
     private val currentUser: User? = null,
     private val showTitleInHeader: Boolean = false
 ) : RecyclerView.Adapter<PostDetailsAdapter.PostDetailsViewHolder>() {
@@ -77,6 +80,7 @@ class PostDetailsAdapter(
             is PostDetailsViewHolder.CommentViewHolder -> {
                 val binding = holder.binding
                 val comment = comments.value!!.elementAt(position - 1)
+
                 binding.body.text =
                     if (comment.deleted) binding.context.getString(R.string.deleted)
                     else comment.body
@@ -88,6 +92,35 @@ class PostDetailsAdapter(
                     System.currentTimeMillis(),
                     DateUtils.MINUTE_IN_MILLIS
                 )
+
+                val canDeleteComment = deleteComment != null && (comment.author == currentUser || currentUser?.isAdmin ?: false)
+
+                if (canDeleteComment || reportComment != null) {
+                    binding.root.isFocusable = true
+                    binding.root.isClickable = true
+                    val items = mutableSetOf<Pair<Int, ((comment: Comment) -> Unit)?>>()
+                    if(canDeleteComment)
+                        items += R.string.delete to deleteComment
+                    if(reportComment != null)
+                        items += R.string.report to reportComment
+                    binding.root.setOnClickListener {
+                        MaterialAlertDialogBuilder(binding.context)
+                            .setTitle(comment.body.replace("\n", "  "))
+                            .setItems(
+                                items.map {
+                                    binding.context.getString(it.first)
+                                }.toTypedArray()
+                            ) { dialog, which ->
+                                items.elementAtOrNull(which)?.second?.invoke(comment)
+                                dialog.dismiss()
+                            }
+                            .show()
+                    }
+                } else {
+                    binding.root.setOnClickListener(null)
+                    binding.root.isClickable = false
+                    binding.root.isFocusable = false
+                }
 
                 val startFun: (Int, Int) -> Int =
                     if (comment.author.id == currentUser?.id) ::max else ::min

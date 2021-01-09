@@ -26,7 +26,12 @@ class PostDetailsBubbleActivity : AppCompatActivity() {
 
         enableFluidContentResizer()
 
-        val adapter = PostDetailsAdapter(viewModel.post, viewModel.comments, viewModel.currentUser, true)
+        val adapter = PostDetailsAdapter(
+            viewModel.post,
+            viewModel.comments,
+            currentUser = viewModel.currentUser,
+            showTitleInHeader = true
+        )
 
         binding.recyclerView.adapter = adapter
 

@@ -30,7 +30,13 @@ class PostDetailsActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        val adapter = PostDetailsAdapter(viewModel.post, viewModel.comments, viewModel.currentUser)
+        val adapter = PostDetailsAdapter(
+            viewModel.post,
+            viewModel.comments,
+            viewModel::deleteComment,
+            viewModel::reportComment,
+            viewModel.currentUser
+        )
 
         binding.content.recyclerView.adapter = adapter
 

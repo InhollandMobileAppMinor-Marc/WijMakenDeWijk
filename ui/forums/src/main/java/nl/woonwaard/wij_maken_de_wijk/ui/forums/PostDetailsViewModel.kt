@@ -40,7 +40,7 @@ class PostDetailsViewModel(
     var isFromNotification = false
 
     val canBeDeleted: Boolean
-        get() = accountManager.user == post.value?.author || accountManager.user?.role == "admin"
+        get() = accountManager.user == post.value?.author || accountManager.user?.isAdmin ?: false
 
     fun loadPostData(postId: String) {
         // Don't load new post data if we're already doing so
@@ -113,6 +113,32 @@ class PostDetailsViewModel(
 
         viewModelScope.launch {
             postsRepository.reportPost(post)
+            mutableIsLoading.postValue(false)
+        }
+    }
+
+    fun deleteComment(comment: Comment) = deleteComment(comment.id)
+
+    fun deleteComment(id: String) {
+        mutableIsLoading.postValue(true)
+
+        viewModelScope.launch {
+            val success = commentsRepository.deleteComment(id)
+            mutableIsLoading.postValue(false)
+            if(success) {
+                mutableComments.postValue(comments.value?.map {
+                    if (it.id == id) it.copy(deleted = true)
+                    else it
+                }?.toSet())
+            }
+        }
+    }
+
+    fun reportComment(comment: Comment) {
+        mutableIsLoading.postValue(true)
+
+        viewModelScope.launch {
+            commentsRepository.reportComment(comment)
             mutableIsLoading.postValue(false)
         }
     }
