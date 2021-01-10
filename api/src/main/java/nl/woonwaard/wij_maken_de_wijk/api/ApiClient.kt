@@ -13,12 +13,7 @@ object ApiClient {
         OkHttpClient.Builder()
             .certificatePinner(
                 CertificatePinner.Builder()
-                    .add(
-                        "wij-maken-de-wijk.herokuapp.com",
-                        "sha256/Vuy2zjFSPqF5Hz18k88DpUViKGbABaF3vZx5Raghplc=",
-                        "sha256/k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=",
-                        "sha256/WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="
-                    )
+                    .add(ApiDomainInfo.domain, *ApiDomainInfo.certificateHashes)
                     .build()
             )
             .connectTimeout(45, TimeUnit.SECONDS)
@@ -29,7 +24,7 @@ object ApiClient {
 
     val retrofitApi by lazy {
         Retrofit.Builder()
-            .baseUrl("https://wij-maken-de-wijk.herokuapp.com/api/v1/")
+            .baseUrl("https://${ApiDomainInfo.domain}/api/v1/")
             .client(okHttpClient)
             .addConverterFactory(Json.asConverterFactory(MediaType.get("application/json")))
             .build()
