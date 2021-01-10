@@ -40,7 +40,7 @@ class PostDetailsViewModel(
     var isFromNotification = false
 
     val canBeDeleted: Boolean
-        get() = accountManager.user == post.value?.author || accountManager.user?.isAdmin ?: false
+        get() = post.value?.deleted != true && (accountManager.user == post.value?.author || accountManager.user?.isAdmin ?: false)
 
     fun loadPostData(postId: String) {
         // Don't load new post data if we're already doing so
