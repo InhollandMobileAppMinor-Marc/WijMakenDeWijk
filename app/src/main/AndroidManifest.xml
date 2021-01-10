@@ -143,6 +143,22 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
+            android:name=".ui.settings.ChangePasswordActivity"
+            android:exported="false"
+            android:label="@string/change_password"
+            android:parentActivityName=".ui.settings.SettingsActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.settings.GenerateCodeActivity"
+            android:exported="false"
+            android:label="@string/create_invite_code"
+            android:parentActivityName=".ui.settings.SettingsActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
             android:name=".ui.forums.PinboardOverviewActivity"
             android:exported="false"
             android:label="@string/pinboard"

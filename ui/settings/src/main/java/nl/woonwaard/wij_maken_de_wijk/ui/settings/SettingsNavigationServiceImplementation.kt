@@ -14,4 +14,12 @@ class SettingsNavigationServiceImplementation(
     override fun getChangeEmailIntent(): Intent {
         return Intent(context, ChangeEmailActivity::class.java)
     }
+
+    override fun getChangePasswordIntent(): Intent {
+        return Intent(context, ChangePasswordActivity::class.java)
+    }
+
+    override fun getGenerateCodeIntent(): Intent {
+        return Intent(context, GenerateCodeActivity::class.java)
+    }
 }

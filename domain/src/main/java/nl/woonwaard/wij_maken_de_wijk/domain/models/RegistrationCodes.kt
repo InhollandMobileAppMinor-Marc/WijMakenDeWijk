@@ -14,9 +14,28 @@ object RegistrationCodes {
 
     private fun getOriginalCharacter(character: Char): Char = characters[shiftedCharacters.indexOf(character)]
 
+    private fun getShiftedCharacter(character: Char): Char = shiftedCharacters[characters.indexOf(character)]
+
     const val codeRegExp = """[0-Z]{2}-[0-Z]{2}-[0-Z]{2,4}"""
 
-    fun getCodeData(code: String): Triple<String?, String, String> {
+    fun generateCode(location: Location, hallway: String, houseNumber: String): String {
+        val locationIdAsString = location.locationId.toString(16)
+        val locationCode = if(locationIdAsString.length == 1) "0$locationIdAsString" else locationIdAsString
+        val hallwayCode =
+            if(hallway.isEmpty() || hallway == "*") "00"
+            else if(hallway.length == 1) "0$hallway"
+            else hallway
+        val houseNumberCode =
+            if(houseNumber.isEmpty() || houseNumber == "*" || houseNumber == "0") "00"
+            else if (houseNumber.length == 1 || houseNumber.length == 3) "0$houseNumber"
+            else houseNumber
+
+        return listOf(locationCode, hallwayCode, houseNumberCode).joinToString("-") {
+            it.map { char -> getShiftedCharacter(char).toString() }.joinToString("")
+        }
+    }
+
+    fun getCodeData(code: String): Triple<Location?, String, String> {
         val (locationCode, hallwayCode, houseNumberCode) = code.split('-').map { code ->
             code.map { getOriginalCharacter(it).toString() }
         }
@@ -25,11 +44,13 @@ object RegistrationCodes {
         val actualHallwayCode = hallwayCode.joinToString(separator = "")
         val actualHouseNumberCode = houseNumberCode.joinToString(separator = "")
 
-        val location = Location.values().find { it.locationId == actualLocationId }?.fullName
+        val location = Location.values().find { it.locationId == actualLocationId }
 
         return Triple(
             location,
-            if(actualHallwayCode == "00") "*" else actualHallwayCode,
+            if(actualHallwayCode == "00") "*"
+            else if(actualHallwayCode.startsWith("0") && actualHallwayCode.length > 1) actualHallwayCode.substring(1)
+            else actualHallwayCode,
             if(actualHouseNumberCode == "00") "" else actualHouseNumberCode
         )
     }

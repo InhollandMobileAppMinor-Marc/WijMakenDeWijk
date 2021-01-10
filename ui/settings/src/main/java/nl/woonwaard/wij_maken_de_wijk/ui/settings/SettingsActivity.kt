@@ -3,6 +3,7 @@ package nl.woonwaard.wij_maken_de_wijk.ui.settings
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.pm.ShortcutManagerCompat
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.NavigationService
@@ -34,6 +35,18 @@ class SettingsActivity : AppCompatActivity() {
 
         binding.content.changeEmailButton.setOnClickListener {
             startActivity(navigationService.settings.getChangeEmailIntent())
+        }
+
+        binding.content.changePasswordButton.setOnClickListener {
+            startActivity(navigationService.settings.getChangePasswordIntent())
+        }
+
+        binding.content.createInviteCodeButton.visibility =
+            if(viewModel.currentUserIsAdmin) View.VISIBLE
+            else View.GONE
+
+        binding.content.createInviteCodeButton.setOnClickListener {
+            startActivity(navigationService.settings.getGenerateCodeIntent())
         }
 
         binding.content.deleteAccount.setOnClickListener {

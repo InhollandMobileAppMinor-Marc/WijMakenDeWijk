@@ -65,15 +65,37 @@
             app:layout_constraintTop_toBottomOf="@id/logout" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/change_password_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/change_password"
+            app:layout_constraintEnd_toEndOf="@id/change_email_button"
+            app:layout_constraintStart_toStartOf="@id/change_email_button"
+            app:layout_constraintTop_toBottomOf="@id/change_email_button" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/create_invite_code_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/create_invite_code"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/change_password_button"
+            app:layout_constraintStart_toStartOf="@id/change_password_button"
+            app:layout_constraintTop_toBottomOf="@id/change_password_button"
+            tools:visibility="visible" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/delete_account"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/delete_account"
             app:backgroundTint="@color/colorError"
-            app:layout_constraintEnd_toEndOf="@id/change_email_button"
-            app:layout_constraintStart_toStartOf="@id/change_email_button"
-            app:layout_constraintTop_toBottomOf="@id/change_email_button" />
+            app:layout_constraintEnd_toEndOf="@id/change_password_button"
+            app:layout_constraintStart_toStartOf="@id/change_password_button"
+            app:layout_constraintTop_toBottomOf="@id/create_invite_code_button" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/notifications_text"

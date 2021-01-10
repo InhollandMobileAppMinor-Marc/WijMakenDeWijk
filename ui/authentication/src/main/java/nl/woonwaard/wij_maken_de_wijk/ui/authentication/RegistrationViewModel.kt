@@ -34,7 +34,7 @@ class RegistrationViewModel(
 
         viewModelScope.launch {
             accountManager.createAccount(
-                Registration(email, password, name, houseNumber, hallway, location)
+                Registration(email, password, name, houseNumber, hallway, location.fullName)
             )
             mutableIsLoading.postValue(false)
             mutableIsLoggedIn.postValue(accountManager.isLoggedIn)

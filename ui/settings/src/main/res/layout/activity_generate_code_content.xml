@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:focusable="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".GenerateCodeActivity"
+    tools:theme="@style/AppTheme.NoActionBar">
+
+    <requestFocus />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/location_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/location"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintStart_toStartOf="@+id/houseNumberField"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/houseNumberField"
+            app:layout_constraintStart_toStartOf="@+id/houseNumberField"
+            app:layout_constraintTop_toBottomOf="@+id/location_text">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/test_location_radio_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:checked="true"
+                android:text="@string/test_location" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/van_de_veldelaan_radio_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/van_de_veldelaan" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/dillenburgstraat_radio_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/dillenburgstraat" />
+
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/hallwayField"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/hallway"
+            app:helperText="@string/hallway_help_text"
+            app:helperTextEnabled="true"
+            app:layout_constraintEnd_toEndOf="@+id/houseNumberField"
+            app:layout_constraintStart_toStartOf="@+id/houseNumberField"
+            app:layout_constraintTop_toBottomOf="@id/radioGroup">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/hallwayInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/houseNumberField"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            app:helperText="@string/house_number_help_text"
+            app:helperTextEnabled="true"
+            android:hint="@string/house_number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hallwayField">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/houseNumberInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/create_invite_code_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/create_invite_code"
+            app:layout_constraintEnd_toEndOf="@+id/houseNumberField"
+            app:layout_constraintStart_toStartOf="@+id/houseNumberField"
+            app:layout_constraintTop_toBottomOf="@+id/houseNumberField" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
