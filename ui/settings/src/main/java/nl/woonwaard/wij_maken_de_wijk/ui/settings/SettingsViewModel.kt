@@ -17,6 +17,9 @@ class SettingsViewModel(
     val isLoggedIn: LiveData<Boolean>
         get() = mutableIsLoggedIn
 
+    val currentUserIsAdmin: Boolean
+        get() = accountManager.user?.isAdmin ?: false
+
     fun logout() {
         accountManager.logout()
         mutableIsLoggedIn.postValue(false)

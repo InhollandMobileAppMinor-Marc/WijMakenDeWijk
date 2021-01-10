@@ -6,6 +6,7 @@ import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 import nl.woonwaard.wij_maken_de_wijk.domain.utils.getSerializableArrayExtra
 import nl.woonwaard.wij_maken_de_wijk.ui.core.fluidresize.enableFluidContentResizer
+import nl.woonwaard.wij_maken_de_wijk.ui.core.hideKeyboard
 import nl.woonwaard.wij_maken_de_wijk.ui.core.terminateApplication
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_COMMENTS
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_FROM_NOTIFICATION
@@ -25,7 +26,12 @@ class PostDetailsBubbleActivity : AppCompatActivity() {
 
         enableFluidContentResizer()
 
-        val adapter = PostDetailsAdapter(viewModel.post, viewModel.comments, viewModel.currentUser, true)
+        val adapter = PostDetailsAdapter(
+            viewModel.post,
+            viewModel.comments,
+            currentUser = viewModel.currentUser,
+            showTitleInHeader = true
+        )
 
         binding.recyclerView.adapter = adapter
 
@@ -34,6 +40,7 @@ class PostDetailsBubbleActivity : AppCompatActivity() {
         }
 
         binding.sendButton.setOnClickListener {
+            hideKeyboard()
             viewModel.addComment(binding.commentInputField.text.toString())
             binding.commentInputField.setText("")
         }

@@ -66,6 +66,26 @@ class PinboardOverviewActivity : AppCompatActivity() {
             )
 
             binding.votingButtons.visibility = if(post.category == PostCategory.IDEA) View.VISIBLE else View.GONE
+
+            binding.thumbUpButton.setImageResource(
+                if(post.vote == "👍") R.drawable.ic_thumb_up
+                else R.drawable.ic_outline_thumb_up
+            )
+
+            binding.thumbUpButton.setOnClickListener {
+                if(post.vote == "👍") viewModel.removeVote(post)
+                else viewModel.addVote("👍", post)
+            }
+
+            binding.thumbDownButton.setImageResource(
+                if(post.vote == "👎") R.drawable.ic_thumb_down
+                else R.drawable.ic_outline_thumb_down
+            )
+
+            binding.thumbDownButton.setOnClickListener {
+                if(post.vote == "👎") viewModel.removeVote(post)
+                else viewModel.addVote("👎", post)
+            }
         }
 
         binding.content.recyclerView.adapter = adapter

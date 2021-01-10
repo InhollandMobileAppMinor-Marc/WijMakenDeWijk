@@ -1,6 +1,8 @@
 package nl.woonwaard.wij_maken_de_wijk.api
 
 import android.content.Context
+import android.util.Base64
+import android.util.Log
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import nl.woonwaard.wij_maken_de_wijk.api.models.EmailUpdateRequest
@@ -86,6 +88,26 @@ class WmdwApi(
         return if (response?.isSuccessful == true) response.body() else null
     }
 
+    override suspend fun addVote(vote: String, post: Post) = addVote(vote, post.id)
+
+    override suspend fun addVote(vote: String, postId: String): Boolean {
+        val response = api {
+            addVoteToPost(authHeaderValue ?: "N/A", postId)
+        }
+
+        return response?.isSuccessful == true
+    }
+
+    override suspend fun reportPost(post: Post) = reportPost(post.id)
+
+    override suspend fun reportPost(id: String): Boolean {
+        val response = api {
+            reportPost(authHeaderValue ?: "N/A", id)
+        }
+
+        return response?.isSuccessful == true
+    }
+
     override suspend fun deletePost(post: Post) = deletePost(post.id)
 
     override suspend fun deletePost(id: String): Boolean {
@@ -151,17 +173,19 @@ class WmdwApi(
         return isLoggedIn
     }
 
-    override suspend fun changeEmail(email: String): Boolean {
+    override suspend fun changeEmail(credentials: Credentials, email: String): Boolean {
+        val basicAuth = okhttp3.Credentials.basic(credentials.email, credentials.password, Charsets.US_ASCII)
         val response = api {
-            updateEmail(authHeaderValue ?: "N/A", EmailUpdateRequest(email))
+            updateEmail(basicAuth, EmailUpdateRequest(email))
         }
 
         return response?.isSuccessful == true
     }
 
-    override suspend fun changePassword(password: String): Boolean {
+    override suspend fun changePassword(credentials: Credentials, password: String): Boolean {
+        val basicAuth = okhttp3.Credentials.basic(credentials.email, credentials.password, Charsets.US_ASCII)
         val response = api {
-            updatePassword(authHeaderValue ?: "N/A", PasswordUpdateRequest(password))
+            updatePassword(basicAuth, PasswordUpdateRequest(password))
         }
 
         return response?.isSuccessful == true
@@ -219,6 +243,16 @@ class WmdwApi(
         }
 
         return if (response?.isSuccessful == true) response.body() else null
+    }
+
+    override suspend fun reportComment(comment: Comment) = reportComment(comment.id)
+
+    override suspend fun reportComment(id: String): Boolean {
+        val response = api {
+            reportComment(authHeaderValue ?: "N/A", id)
+        }
+
+        return response?.isSuccessful == true
     }
 
     override suspend fun deleteComment(comment: Comment) = deleteComment(comment.id)

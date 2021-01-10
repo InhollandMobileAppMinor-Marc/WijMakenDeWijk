@@ -14,7 +14,6 @@
         android:id="@+id/action_report_post"
         android:icon="@drawable/ic_flag"
         android:title="@string/report"
-        android:enabled="false"
         app:showAsAction="ifRoom" />
 
 </menu>

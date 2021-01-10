@@ -2,13 +2,12 @@ package nl.woonwaard.wij_maken_de_wijk.ui.authentication
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.MainNavigationService
 import nl.woonwaard.wij_maken_de_wijk.ui.authentication.databinding.ActivityRegistrationBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.core.fluidresize.enableFluidContentResizer
+import nl.woonwaard.wij_maken_de_wijk.ui.core.hideKeyboard
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -96,13 +95,5 @@ class RegistrationActivity : AppCompatActivity() {
                 finish()
             }
         }
-    }
-
-    private fun hideKeyboard() {
-        currentFocus?.clearFocus()
-
-        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        val view = currentFocus ?: View(this)
-        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

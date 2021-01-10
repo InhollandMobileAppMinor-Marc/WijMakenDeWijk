@@ -65,53 +65,126 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toTopOf="@id/pinboard_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/notice_card_view"
+                app:layout_constraintVertical_bias="0.5"
+                app:srcCompat="@drawable/ic_headercircle" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorAccent"
+                app:layout_constraintBottom_toTopOf="@id/pinboard_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/pinboard_button"
+                style="@style/AppTheme.Main.ButtonStyle"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="64dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/pinboard"
+                android:textColor="@color/tertiaryColorPurple"
+                app:icon="@drawable/ic_chat"
+                app:iconTint="@color/tertiaryColorPurple"
                 app:layout_constraintBottom_toTopOf="@id/repairs_button"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:rippleColor="@color/tertiaryColorPurple" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent"
+                app:layout_constraintBottom_toTopOf="@id/repairs_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pinboard_button"
+                app:layout_constraintVertical_bias="0.5" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/repairs_button"
+                style="@style/AppTheme.Main.ButtonStyle"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="64dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/repairs"
+                android:textColor="@color/tertiaryColorBrown"
+                app:icon="@drawable/ic_construction"
+                app:iconTint="@color/tertiaryColorBrown"
                 app:layout_constraintBottom_toTopOf="@id/neighborhood_mediation_button"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:rippleColor="@color/tertiaryColorBrown" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent"
+                app:layout_constraintBottom_toTopOf="@id/neighborhood_mediation_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/repairs_button"
+                app:layout_constraintVertical_bias="0.5" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/neighborhood_mediation_button"
+                style="@style/AppTheme.Main.ButtonStyle"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="64dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/neighborhood_mediation"
+                android:textColor="@color/tertiaryColorRed"
+                app:icon="@drawable/ic_warning"
+                app:iconTint="@color/tertiaryColorRed"
                 app:layout_constraintBottom_toTopOf="@id/ideas_button"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:rippleColor="@color/tertiaryColorRed" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:background="@color/colorAccent"
+                app:layout_constraintBottom_toTopOf="@id/ideas_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/neighborhood_mediation_button"
+                app:layout_constraintVertical_bias="0.5" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/ideas_button"
+                style="@style/AppTheme.Main.ButtonStyle"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="64dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/ideas"
+                android:textColor="@color/tertiaryColorGreen"
+                app:icon="@drawable/ic_idea"
+                app:iconTint="@color/tertiaryColorGreen"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:rippleColor="@color/tertiaryColorGreen" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

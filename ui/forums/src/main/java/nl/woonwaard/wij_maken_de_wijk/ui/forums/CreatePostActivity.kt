@@ -3,11 +3,11 @@ package nl.woonwaard.wij_maken_de_wijk.ui.forums
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import nl.woonwaard.wij_maken_de_wijk.domain.models.PostCategory
 import nl.woonwaard.wij_maken_de_wijk.domain.services.navigation.ForumsNavigationService
 import nl.woonwaard.wij_maken_de_wijk.ui.core.fluidresize.enableFluidContentResizer
+import nl.woonwaard.wij_maken_de_wijk.ui.core.hideKeyboard
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_CATEGORIES
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.databinding.ActivityCreatePostBinding
 import org.koin.android.ext.android.inject
@@ -91,13 +91,5 @@ class CreatePostActivity : AppCompatActivity() {
 
         if(intent != null)
             viewModel.categories.postValue(intent.getStringArrayExtra(EXTRA_CATEGORIES)?.toSet())
-    }
-
-    private fun hideKeyboard() {
-        currentFocus?.clearFocus()
-
-        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        val view = currentFocus ?: View(this)
-        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

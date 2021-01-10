@@ -52,4 +52,5 @@
     <string name="repeat_password">Herhaal wachtwoord</string>
     <string name="not_identical">Niet hetzelfde</string>
     <string name="invitation_received">Uitnodiging ontvangen?</string>
+    <string name="copy">Kopiëren</string>
 </resources>

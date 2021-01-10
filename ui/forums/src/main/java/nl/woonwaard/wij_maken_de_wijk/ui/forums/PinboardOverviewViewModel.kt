@@ -1,11 +1,13 @@
 package nl.woonwaard.wij_maken_de_wijk.ui.forums
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelAndJoin
+import kotlinx.coroutines.launch
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 import nl.woonwaard.wij_maken_de_wijk.domain.services.CrashReporter
 import nl.woonwaard.wij_maken_de_wijk.domain.services.data.PostsRepository
@@ -64,6 +66,32 @@ class PinboardOverviewViewModel(
             mutablePosts.postValue(posts.filter { !it.deleted && (categories == null || it.category in categories) }.toSet())
             mutableIsLoading.postValue(false)
             job = null
+        }
+    }
+
+    fun addVote(vote: String, post: Post) = addVote(vote, post.id)
+
+    fun addVote(vote: String, postId: String) {
+        mutablePosts.postValue(posts.value?.map {
+            if(it.id == postId) it.copy(vote = vote)
+            else it
+        }?.toSet() ?: emptySet())
+
+        viewModelScope.launch {
+            postsRepository.addVote(vote, postId)
+        }
+    }
+
+    fun removeVote(post: Post) = removeVote(post.id)
+
+    fun removeVote(postId: String) {
+        mutablePosts.postValue(posts.value?.map {
+            if(it.id == postId) it.copy(vote = null)
+            else it
+        }?.toSet() ?: emptySet())
+
+        viewModelScope.launch {
+            postsRepository.addVote("", postId)
         }
     }
 }

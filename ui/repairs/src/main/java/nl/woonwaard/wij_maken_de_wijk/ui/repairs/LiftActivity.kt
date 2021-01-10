@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import nl.woonwaard.wij_maken_de_wijk.ui.repairs.databinding.ActivityCentralHeatingBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.repairs.databinding.ActivityLiftBinding
 
 class LiftActivity : AppCompatActivity() {

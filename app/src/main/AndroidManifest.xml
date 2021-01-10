@@ -33,11 +33,13 @@
 
         <activity
             android:name=".ui.authentication.InviteScreenActivity"
+            android:exported="false"
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".ui.authentication.LoginActivity"
+            android:exported="false"
             android:label="@string/login"
             android:parentActivityName=".ui.authentication.InviteScreenActivity"
             android:resizeableActivity="true"
@@ -46,6 +48,7 @@
 
         <activity
             android:name=".ui.authentication.RegistrationActivity"
+            android:exported="false"
             android:label="@string/signup"
             android:parentActivityName=".ui.authentication.InviteScreenActivity"
             android:resizeableActivity="true"
@@ -54,12 +57,14 @@
 
         <activity
             android:name=".ui.main.MainActivity"
+            android:exported="false"
             android:label="@string/start"
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".ui.neighborhood_mediation.NeighborhoodMediationActivity"
+            android:exported="false"
             android:label="@string/neighborhood_mediation"
             android:parentActivityName=".ui.main.MainActivity"
             android:resizeableActivity="true"
@@ -67,6 +72,7 @@
 
         <activity
             android:name=".ui.repairs.RepairsOverviewActivity"
+            android:exported="false"
             android:label="@string/repairs"
             android:parentActivityName=".ui.main.MainActivity"
             android:resizeableActivity="true"
@@ -74,6 +80,7 @@
 
         <activity
             android:name=".ui.repairs.CentralHeatingActivity"
+            android:exported="false"
             android:label="@string/central_heating"
             android:parentActivityName=".ui.repairs.RepairsOverviewActivity"
             android:resizeableActivity="true"
@@ -81,6 +88,7 @@
 
         <activity
             android:name=".ui.repairs.GlassActivity"
+            android:exported="false"
             android:label="@string/glass"
             android:parentActivityName=".ui.repairs.RepairsOverviewActivity"
             android:resizeableActivity="true"
@@ -88,6 +96,7 @@
 
         <activity
             android:name=".ui.repairs.LiftActivity"
+            android:exported="false"
             android:label="@string/lift"
             android:parentActivityName=".ui.repairs.RepairsOverviewActivity"
             android:resizeableActivity="true"
@@ -95,6 +104,7 @@
 
         <activity
             android:name=".ui.repairs.CleaningActivity"
+            android:exported="false"
             android:label="@string/cleaning"
             android:parentActivityName=".ui.repairs.RepairsOverviewActivity"
             android:resizeableActivity="true"
@@ -102,6 +112,7 @@
 
         <activity
             android:name=".ui.repairs.GreenMaintenanceActivity"
+            android:exported="false"
             android:label="@string/green_maintenance"
             android:parentActivityName=".ui.repairs.RepairsOverviewActivity"
             android:resizeableActivity="true"
@@ -109,6 +120,7 @@
 
         <activity
             android:name=".ui.repairs.EmergencyActivity"
+            android:exported="false"
             android:label="@string/emergency_repairs"
             android:parentActivityName=".ui.repairs.RepairsOverviewActivity"
             android:resizeableActivity="true"
@@ -116,13 +128,39 @@
 
         <activity
             android:name=".ui.settings.SettingsActivity"
+            android:exported="false"
             android:label="@string/settings"
             android:parentActivityName=".ui.main.MainActivity"
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
+            android:name=".ui.settings.ChangeEmailActivity"
+            android:exported="false"
+            android:label="@string/change_email"
+            android:parentActivityName=".ui.settings.SettingsActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.settings.ChangePasswordActivity"
+            android:exported="false"
+            android:label="@string/change_password"
+            android:parentActivityName=".ui.settings.SettingsActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.settings.GenerateCodeActivity"
+            android:exported="false"
+            android:label="@string/create_invite_code"
+            android:parentActivityName=".ui.settings.SettingsActivity"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
             android:name=".ui.forums.PinboardOverviewActivity"
+            android:exported="false"
             android:label="@string/pinboard"
             android:parentActivityName=".ui.main.MainActivity"
             android:resizeableActivity="true"
@@ -147,6 +185,7 @@
 
         <activity
             android:name=".ui.forums.CreatePostActivity"
+            android:exported="false"
             android:parentActivityName=".ui.forums.PinboardOverviewActivity"
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionBar"

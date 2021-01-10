@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="new_email">New e-mail</string>
+    <string name="old_email">Old e-mail</string>
+    <string name="create_invite_code">Create invite code</string>
+    <string name="new_password">New password</string>
+    <string name="old_password">Old password</string>
+    <string name="location">Location</string>
+    <string name="test_location">Test location</string>
+    <string name="van_de_veldelaan" translatable="false">Van de Veldelaan</string>
+    <string name="dillenburgstraat" translatable="false">Dillenburgstraat</string>
+    <string name="house_number">House number</string>
+    <string name="hallway">Hallway</string>
+    <string name="hallway_help_text">One or two digits or letters, ex. 1A, 2B, 3, A</string>
+    <string name="house_number_help_text">One to four digits or letters, ex. 123A, 6B, 45</string>
+</resources>

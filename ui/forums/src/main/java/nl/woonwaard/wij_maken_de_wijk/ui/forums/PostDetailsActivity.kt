@@ -8,6 +8,7 @@ import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
 import nl.woonwaard.wij_maken_de_wijk.domain.utils.getSerializableArrayExtra
 import nl.woonwaard.wij_maken_de_wijk.ui.core.fluidresize.enableFluidContentResizer
+import nl.woonwaard.wij_maken_de_wijk.ui.core.hideKeyboard
 import nl.woonwaard.wij_maken_de_wijk.ui.core.terminateApplication
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_COMMENTS
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_FROM_NOTIFICATION
@@ -29,7 +30,13 @@ class PostDetailsActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        val adapter = PostDetailsAdapter(viewModel.post, viewModel.comments, viewModel.currentUser)
+        val adapter = PostDetailsAdapter(
+            viewModel.post,
+            viewModel.comments,
+            viewModel::deleteComment,
+            viewModel::reportComment,
+            viewModel.currentUser
+        )
 
         binding.content.recyclerView.adapter = adapter
 
@@ -38,6 +45,7 @@ class PostDetailsActivity : AppCompatActivity() {
         }
 
         binding.content.sendButton.setOnClickListener {
+            hideKeyboard()
             viewModel.addComment(binding.content.commentInputField.text.toString())
             binding.content.commentInputField.setText("")
         }
@@ -87,6 +95,7 @@ class PostDetailsActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.action_delete_post -> viewModel.deletePost()
+            R.id.action_report_post -> viewModel.reportPost()
             else -> return super.onOptionsItemSelected(item)
         }
 

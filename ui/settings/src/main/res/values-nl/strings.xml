@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="new_email">Nieuwe e-mail</string>
+    <string name="old_email">Oude e-mail</string>
+    <string name="test_location">Test locatie</string>
+    <string name="location">Locatie</string>
+    <string name="old_password">Oud wachtwoord</string>
+    <string name="new_password">Nieuw wachtwoord</string>
+    <string name="create_invite_code">Registratiecode aanmaken</string>
+    <string name="house_number">Huisnummer</string>
+    <string name="hallway">Gang</string>
+    <string name="hallway_help_text">Eén of twee cijfers of letters, bijv. 1A, 2B, 3, A</string>
+    <string name="house_number_help_text">Eén tot vier cijfers of letters, bijv. 123A, 6B, 45</string>
+</resources>

@@ -13,5 +13,8 @@ data class User(
     val deleted: Boolean
 ) : java.io.Serializable {
     val nameWithLocation: String
-        get() = "$name ($houseNumber)"
+        get() = if(houseNumber.isEmpty()) name else "$name ($houseNumber)"
+
+    val isAdmin: Boolean
+        get() = role == "admin"
 }
