@@ -42,6 +42,10 @@ class PostDetailsViewModel(
     val canBeDeleted: Boolean
         get() = post.value?.deleted != true && (accountManager.user == post.value?.author || accountManager.user?.isAdmin ?: false)
 
+    fun setCurrentUser(user: User) {
+        accountManager.user = accountManager.user ?: user
+    }
+
     fun loadPostData(postId: String) {
         // Don't load new post data if we're already doing so
         if(isLoading.value == true) return

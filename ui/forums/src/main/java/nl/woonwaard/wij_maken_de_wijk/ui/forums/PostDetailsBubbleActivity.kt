@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
+import nl.woonwaard.wij_maken_de_wijk.domain.models.User
 import nl.woonwaard.wij_maken_de_wijk.domain.utils.getSerializableArrayExtra
 import nl.woonwaard.wij_maken_de_wijk.ui.core.fluidresize.enableFluidContentResizer
 import nl.woonwaard.wij_maken_de_wijk.ui.core.hideKeyboard
@@ -25,6 +26,26 @@ class PostDetailsBubbleActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         enableFluidContentResizer()
+
+        viewModel.isFromNotification = intent.getBooleanExtra(EXTRA_FROM_NOTIFICATION, false)
+
+        val currentUser = intent.getSerializableExtra(ForumsNavigationServiceImplementation.EXTRA_CURRENT_USER) as? User
+
+        if(currentUser != null)
+            viewModel.setCurrentUser(currentUser)
+
+        val post = intent.getSerializableExtra(EXTRA_POST) as? Post
+        if(post != null) {
+            val comments = intent.getSerializableArrayExtra(EXTRA_COMMENTS)
+            if(comments.isNotEmpty()) {
+                viewModel.loadPostData(post, comments.mapNotNull {
+                    it as? Comment
+                }.toSet())
+            } else viewModel.loadPostData(post)
+        } else {
+            val postId = intent.getStringExtra(EXTRA_POST_ID)
+            if(postId != null) viewModel.loadPostData(postId)
+        }
 
         val adapter = PostDetailsAdapter(
             viewModel.post,
@@ -59,21 +80,6 @@ class PostDetailsBubbleActivity : AppCompatActivity() {
 
         viewModel.comments.observe(this) {
             adapter.notifyDataSetChanged()
-        }
-
-        viewModel.isFromNotification = intent.getBooleanExtra(EXTRA_FROM_NOTIFICATION, true)
-
-        val post = intent.getSerializableExtra(EXTRA_POST) as? Post
-        if(post != null) {
-            val comments = intent.getSerializableArrayExtra(EXTRA_COMMENTS)
-            if(comments.isNotEmpty()) {
-                viewModel.loadPostData(post, comments.mapNotNull {
-                    it as? Comment
-                }.toSet())
-            } else viewModel.loadPostData(post)
-        } else {
-            val postId = intent.getStringExtra(EXTRA_POST_ID)
-            if(postId != null) viewModel.loadPostData(postId)
         }
     }
 

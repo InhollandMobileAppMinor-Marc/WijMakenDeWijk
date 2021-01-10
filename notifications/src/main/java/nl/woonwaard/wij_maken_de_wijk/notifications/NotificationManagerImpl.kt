@@ -44,13 +44,23 @@ class NotificationManagerImpl(private val context: Context) : NotificationManage
     }
 
     private fun sendNotification(notification: Notification) {
-        val postDetailsIntent = forumsNavigationService.getPostDetailsIntent(notification.post, fromNotification = true)
+        val selfUser = notification.post.author
+
+        val postDetailsIntent = forumsNavigationService.getPostDetailsIntent(
+            notification.post,
+            fromNotification = true,
+            currentUser = selfUser
+        )
             .setAction(Intent.ACTION_VIEW)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY)
 
         val postDetailsPendingIntent = PendingIntent.getActivity(context, notification.id.hashCode(), postDetailsIntent, PendingIntent.FLAG_CANCEL_CURRENT)
 
-        val postDetailsBubbleIntent = forumsNavigationService.getPostDetailsBubbleIntent(notification.post, fromNotification = true)
+        val postDetailsBubbleIntent = forumsNavigationService.getPostDetailsBubbleIntent(
+            notification.post,
+            fromNotification = true,
+            currentUser = selfUser
+        )
             .setAction(Intent.ACTION_VIEW)
             .setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY)
 
@@ -67,8 +77,6 @@ class NotificationManagerImpl(private val context: Context) : NotificationManage
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             createNotificationChannel(notificationManager)
-
-        val selfUser = notification.post.author
 
         var style = NotificationCompat.MessagingStyle(selfUser.asPerson)
             .setGroupConversation(true)
