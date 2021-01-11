@@ -7,7 +7,7 @@ import nl.woonwaard.wij_maken_de_wijk.domain.models.User
 interface AccountManager {
     val token: String?
 
-    val user: User?
+    var user: User?
 
     val isLoggedIn: Boolean
 

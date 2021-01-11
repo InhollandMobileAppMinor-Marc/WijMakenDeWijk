@@ -6,11 +6,13 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Comment
 import nl.woonwaard.wij_maken_de_wijk.domain.models.Post
+import nl.woonwaard.wij_maken_de_wijk.domain.models.User
 import nl.woonwaard.wij_maken_de_wijk.domain.utils.getSerializableArrayExtra
 import nl.woonwaard.wij_maken_de_wijk.ui.core.fluidresize.enableFluidContentResizer
 import nl.woonwaard.wij_maken_de_wijk.ui.core.hideKeyboard
 import nl.woonwaard.wij_maken_de_wijk.ui.core.terminateApplication
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_COMMENTS
+import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_CURRENT_USER
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_FROM_NOTIFICATION
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_POST
 import nl.woonwaard.wij_maken_de_wijk.ui.forums.ForumsNavigationServiceImplementation.Companion.EXTRA_POST_ID
@@ -29,6 +31,26 @@ class PostDetailsActivity : AppCompatActivity() {
         enableFluidContentResizer()
 
         setSupportActionBar(binding.toolbar)
+
+        viewModel.isFromNotification = intent.getBooleanExtra(EXTRA_FROM_NOTIFICATION, false)
+
+        val currentUser = intent.getSerializableExtra(EXTRA_CURRENT_USER) as? User
+
+        if(currentUser != null)
+            viewModel.setCurrentUser(currentUser)
+
+        val post = intent.getSerializableExtra(EXTRA_POST) as? Post
+        if(post != null) {
+            val comments = intent.getSerializableArrayExtra(EXTRA_COMMENTS)
+            if(comments.isNotEmpty()) {
+                viewModel.loadPostData(post, comments.mapNotNull {
+                    it as? Comment
+                }.toSet())
+            } else viewModel.loadPostData(post)
+        } else {
+            val postId = intent.getStringExtra(EXTRA_POST_ID)
+            if(postId != null) viewModel.loadPostData(postId)
+        }
 
         val adapter = PostDetailsAdapter(
             viewModel.post,
@@ -66,23 +88,8 @@ class PostDetailsActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
         }
 
-        viewModel.isFromNotification = intent.getBooleanExtra(EXTRA_FROM_NOTIFICATION, false)
-
         if(!viewModel.isFromNotification) {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        }
-
-        val post = intent.getSerializableExtra(EXTRA_POST) as? Post
-        if(post != null) {
-            val comments = intent.getSerializableArrayExtra(EXTRA_COMMENTS)
-            if(comments.isNotEmpty()) {
-                viewModel.loadPostData(post, comments.mapNotNull {
-                    it as? Comment
-                }.toSet())
-            } else viewModel.loadPostData(post)
-        } else {
-            val postId = intent.getStringExtra(EXTRA_POST_ID)
-            if(postId != null) viewModel.loadPostData(postId)
         }
     }
 
