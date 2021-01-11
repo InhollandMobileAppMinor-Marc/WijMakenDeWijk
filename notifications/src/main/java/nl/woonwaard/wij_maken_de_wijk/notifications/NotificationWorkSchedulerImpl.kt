@@ -15,7 +15,7 @@ class NotificationWorkSchedulerImpl(
     }
 
     override fun schedule() {
-        val workRequest = PeriodicWorkRequest.Builder(NotificationWorker::class.java, 15, TimeUnit.MINUTES)
+        val workRequest = PeriodicWorkRequest.Builder(NotificationWorker::class.java, 8, TimeUnit.HOURS)
             .setInitialDelay(15, TimeUnit.SECONDS)
             .build()
 
