@@ -69,7 +69,7 @@ class ChangeEmailActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        viewModel.clear()
+        viewModel.clearRunningJobs()
         super.onDestroy()
     }
 }

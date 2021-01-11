@@ -35,7 +35,7 @@ class ChangeEmailViewModel(
 
     fun isEmailCorrect(email: String) = emailRegExp.toRegex().matches(email)
 
-    fun clear() {
+    fun clearRunningJobs() {
         changeEmailResult.postValue(null)
 
         viewModelScope.launch {

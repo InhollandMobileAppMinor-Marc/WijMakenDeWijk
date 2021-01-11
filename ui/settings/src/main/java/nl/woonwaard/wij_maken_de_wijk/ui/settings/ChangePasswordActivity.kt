@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import nl.woonwaard.wij_maken_de_wijk.ui.core.fluidresize.enableFluidContentResizer
 import nl.woonwaard.wij_maken_de_wijk.ui.core.hideKeyboard
-import nl.woonwaard.wij_maken_de_wijk.ui.settings.databinding.ActivityChangeEmailBinding
 import nl.woonwaard.wij_maken_de_wijk.ui.settings.databinding.ActivityChangePasswordBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -70,7 +69,7 @@ class ChangePasswordActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        viewModel.clear()
+        viewModel.clearRunningJobs()
         super.onDestroy()
     }
 }
