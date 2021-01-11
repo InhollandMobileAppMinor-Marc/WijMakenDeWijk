@@ -25,7 +25,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val weMakeTheDistrictModule = module {
-    single<CrashReporter> { FirebaseCrashReporter }
+    single<CrashReporter> { FirebaseCrashReporter() }
 
     single {
         WmdwApi(get(), get())

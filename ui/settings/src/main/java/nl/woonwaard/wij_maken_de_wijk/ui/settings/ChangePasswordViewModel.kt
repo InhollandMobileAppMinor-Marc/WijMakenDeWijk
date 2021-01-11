@@ -39,7 +39,7 @@ class ChangePasswordViewModel(
                 password.any { it.isLetter() && it.isLowerCase() } &&
                 password.any { it.isLetter() && it.isUpperCase() }
 
-    fun clear() {
+    fun clearRunningJobs() {
         changePasswordResult.postValue(null)
 
         viewModelScope.launch {
